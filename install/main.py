@@ -15,17 +15,12 @@ def main():
     act_names = ban.act_name_list() + notice.act_name_list()
     act_details = ban.act_list() + notice.act_list()
     
-    print(f"rec_name:{rec_names}")
-    print(f"rec_details:{rec_details}")
-    print(f"act_name:{act_names}")
-    print(f"act_details:{act_details}")
-    
     #注册自定义识别器
-    for name,detail in zip(rec_names,rec_details):
+    for (name,detail) in zip(rec_names,rec_details):
         Toolkit.pi_register_custom_recognition(name,detail)
     
     #注册自定义动作
-    for name,detail in zip(act_names,act_details):
+    for (name,detail) in zip(act_names,act_details):
         Toolkit.pi_register_custom_action(name,detail)
 
     # 启动 MaaPiCli
