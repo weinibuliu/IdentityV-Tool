@@ -22,9 +22,7 @@ def main():
     #注册自定义动作
     for (name,detail) in zip(act_names,act_details):
         Toolkit.pi_register_custom_action(name,detail)
-        
-    Toolkit.pi_register_custom_action("Desktop_notice",notice.Desktop_notice())
-    Toolkit.pi_register_custom_action("Email_notice",notice.Email_notice())
+
     # 启动 MaaPiCli
     Toolkit.pi_run_cli(f"{main_path}/res", f"{main_path}/debug", False)
 
