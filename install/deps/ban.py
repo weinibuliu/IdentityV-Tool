@@ -21,10 +21,6 @@ def act_name_list() -> list:
 def act_list() -> list:
     return [Ban()]
 
-def custom_action_infos():
-    act_dict = {"Ban": Ban()}
-    return act_dict
-
 def get_roi_base_on_state(roi_state:str):
     match roi_state:
         case "PC16_9":
