@@ -1,0 +1,87 @@
+{
+    "fight_点击书": {
+        "recognition": "TemplateMatch",
+        "template": "fight//点击书.png",
+        "roi": [
+            1175,
+            490,
+            60,
+            50
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "fight_点击匹配": {
+        "recognition": "OCR",
+        "expected": [
+            "日记推理",
+            "推理",
+            "匹配"
+        ],
+        "roi": [
+            560,
+            500,
+            165,
+            85
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "fight_点击排位": {
+        "recognition": "OCR",
+        "expected": [
+            "开启"
+        ],
+        "roi": [
+            450,
+            200,
+            180,
+            80
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "fight_点击求生者": {
+        "recognition": "TemplateMatch",
+        "template": "fight//点击求生者",
+        "roi": [
+            340,
+            165,
+            95,
+            95
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "fight_点击监管者": {
+        "recognition": "TemplateMatch",
+        "template": "fight//点击监管者",
+        "roi": [
+            840,
+            155,
+            85,
+            85
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "fight_开始匹配": {
+        "recognition": "OCR",
+        "expected": [
+            "开始",
+            "案件",
+            "还原"
+        ],
+        "roi": [
+            555,
+            635,
+            180,
+            45
+        ],
+        "action": "Click",
+        "target": true,
+        "next": [
+            "Start"
+        ]
+    }
+}
