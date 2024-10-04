@@ -47,9 +47,9 @@ class Fight(CustomAction):
                  times_limit:bool=False,limit_times:int=0):
             
             def fight_main(character:str=character):
-                fight_start_time = time()
                 match character:
                     case "歌剧演员":
+                        fight_start_time = time()
                         fight_now_time = time()
                         time_diff = fight_now_time - fight_start_time
                         
@@ -86,7 +86,7 @@ class Fight(CustomAction):
                     context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
                 context.run_pipeline("fight_切换角色")
                 
-            fight_main()    
+            fight_main(character)    
         
         main(model,character)
         
