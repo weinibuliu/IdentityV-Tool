@@ -19,10 +19,10 @@ def rec_name_list() -> list[str]:
 def rec_list() -> list:
     return []
 def act_name_list() -> list[str]:
-    return ["Fight","o_s_main"]
+    return ["Fight","o_s_round"]
 def act_list() -> list:
-    o_s_main = o_s.o_s_main
-    return [Fight(),o_s_main()]
+    o_s_round = o_s.o_s_round
+    return [Fight(),o_s_round()]
 
 def get_roi_base_on_state(roi_state:str):
     match roi_state:
