@@ -16,11 +16,11 @@ def main():
     act_details = ban.act_list() + notice.act_list()
     
     #注册自定义识别器
-    for (name,detail) in zip(rec_names,rec_details):
+    for name,detail in zip(rec_names,rec_details):
         Toolkit.pi_register_custom_recognition(name,detail)
     
     #注册自定义动作
-    for (name,detail) in zip(act_names,act_details):
+    for name,detail in zip(act_names,act_details):
         Toolkit.pi_register_custom_action(name,detail)
 
     # 启动 MaaPiCli

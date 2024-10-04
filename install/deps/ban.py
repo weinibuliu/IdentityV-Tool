@@ -12,6 +12,7 @@ from .infos import ban_info
 #获取路径
 main_path = Path.cwd()
 
+#传出 custom 信息
 def rec_name_list() -> list:
     return ["Get_map","Get_player","Get_ban_info"]
 def rec_list() -> list:
@@ -229,8 +230,7 @@ class Ban(CustomAction):
                             "recognition": "TemplateMatch",
                             "template": f"characters//{ban1}.png",
                             "roi": ban1_roi,
-                            "action": "Click",
-                            "next": []}})
+                            "action": "Click"}})
                 context.run_pipeline("Ban1")
             else:
                 context.override_pipeline({"Ban1":{

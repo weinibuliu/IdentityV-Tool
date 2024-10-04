@@ -11,6 +11,8 @@ from .infos import notice_info
 
 #获取路径
 main_path = Path.cwd()
+
+#传出 custom 信息
 def rec_name_list() -> list:
     return []
 def rec_list() -> list:
@@ -26,9 +28,7 @@ class Desktop_notice(CustomAction):
         title = infos["Title"]
         message = infos["Message"]
 
-        notification.notify(title = title,
-                     message = message,
-                     timeout = 8)
+        notification.notify(title = title,message = message,timeout = 8)
         
         return True
 
