@@ -17,9 +17,9 @@ class Move(CustomAction):
                     context.override_pipeline({"移动":{"end": [75,515,10,10], "duration": duration}})
                 case _:
                     raise (f"Class Error:{__class__.__name__},please contact to the developers.")
+            context.run_pipeline("移动")
 
         direction = randint(0,3)
         move(direction,10)
-        context.run_pipeline("移动")
-        
+
         return True
