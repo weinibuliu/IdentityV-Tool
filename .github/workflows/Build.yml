@@ -142,7 +142,7 @@ jobs:
 
     - name: Move deps to install
       run: |
-        mv ./deps/bin/* .\install\res
+        mv ./deps/bin/* ./install/res
         mv ./deps/share/MaaAgentBinary ./install/res
         cp ./README.md ./install
         cp ./LICENSE ./install
