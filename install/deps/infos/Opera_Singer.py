@@ -25,6 +25,6 @@ class o_s_round(CustomAction):
         context.run_pipeline("歌剧演员_影跃")
         sleep(1)
         context.run_pipeline("歌剧演员_普攻")
-        sleep(2)
+        sleep(1.2)
         
         return True

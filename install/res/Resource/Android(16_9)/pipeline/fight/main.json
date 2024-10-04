@@ -226,6 +226,15 @@
         ],
         "inverse": true
     },
+    "fight_打开设置": {
+        "action": "Click",
+        "target": [
+            5,
+            15,
+            30,
+            30
+        ]
+    },
     "fight_投降": {
         "recognition": "OCR",
         "expected": [
@@ -262,15 +271,6 @@
         "action": "Click",
         "target": true,
         "post_delay": 6000
-    },
-    "fight_打开设置": {
-        "action": "Click",
-        "target": [
-            5,
-            15,
-            30,
-            30
-        ]
     },
     "fight_点击个人名片": {
         "recognition": "TemplateMatch",

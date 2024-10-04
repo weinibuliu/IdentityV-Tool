@@ -49,9 +49,9 @@ class Fight(CustomAction):
             def fight_main(character:str=character):
                 fight_start_time = time()
                 time_diff = 0
-                
                 while time_diff < 240:
-                    context.run_pipeline("歌剧演员_移动_10s")
+                    context.override_pipeline({""})
+                    context.run_action("歌剧演员_自定义移动")
                     a_round_times = randint(5,10)
                     for i in range(a_round_times):
                         context.run_pipeline("歌剧演员_循环")
@@ -60,7 +60,7 @@ class Fight(CustomAction):
                     fight_now_time = time()
                     time_diff = fight_now_time - fight_start_time
                     
-                context.run_pipeline("fight_投降")
+                context.run_pipeline("fight_打开设置")
 
             
             def raedy(model:str=model,character:str=character) -> None:
