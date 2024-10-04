@@ -62,9 +62,9 @@ class Fight(CustomAction):
                                 if fight_now_time - fight_start_time >=240:
                                     break
                             fight_now_time = time()
+                        context.run_pipeline("fight_投降")
                     case _:
                         raise (f"Class Error:{__class__.__name__},please contact to the developers.")
-                context.run_pipeline("fight_投降")
             
             def raedy(model:str=model,character:str=character) -> None:
                 context.run_pipeline("fight_点击书")
