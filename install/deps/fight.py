@@ -41,8 +41,6 @@ class Fight(CustomAction):
         model = "匹配模式"
         character = "歌剧演员"
         
-        main(model,character)
-        
         def main(model:str,character:str,desktop_notice:bool=False,email_notice:bool=False,
                  limit_reputation:int=75,up2weeklylimit:bool=False,
                  time_limit:bool=False,limit_time:int=0,
@@ -98,6 +96,8 @@ class Fight(CustomAction):
                 else:
                     context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
                 context.run_pipeline("fight_切换角色")
+                
+        main(model,character)
         
         return True
     
