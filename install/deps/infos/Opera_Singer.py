@@ -19,6 +19,8 @@ class o_s_move(CustomAction):
                     raise (f"Class Error:{__class__.__name__},please contact to the developers.")
         direction = randint(0,3)
         move(direction,10)
+        
+        return True
 
 class o_s_round(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
