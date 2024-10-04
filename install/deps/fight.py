@@ -22,8 +22,8 @@ def rec_list() -> list:
 def act_name_list() -> list[str]:
     return ["Fight","Move","OS_round"]
 def act_list() -> list:
-    OS_round = Opera_Singer.OS_round
     Move = common.Move
+    OS_round = Opera_Singer.OS_round
     return [Fight(),Move(),OS_round()]
 
 def get_roi_base_on_state(roi_state:str):
@@ -44,8 +44,8 @@ class Fight(CustomAction):
         character = "歌剧演员"
         
         def main(model:str,character:str,desktop_notice:bool=False,email_notice:bool=False,
-                 limit_reputation:int=75,up2weeklylimit:bool=False,
-                 time_limit:bool=False,limit_time:int=0,
+                 limit_reputation:int=75,up_weekly_limit:bool=False,
+                 time_limit:bool=False,limit_time:int|float=0,
                  times_limit:bool=False,limit_times:int=0):
             
             def fight_main(character:str=character):
@@ -53,9 +53,11 @@ class Fight(CustomAction):
                 
                 time_diff = 0
                 while time_diff < 240:
+                    print("Debugge:Pre_Move")
                     context.run_pipeline("自定义移动")
+                    print("Debugge:Move")
                     
-                    a_round_times = randint(7,10)
+                    a_round_times = randint(6,10)
                     for i in range(a_round_times):
                         context.run_pipeline("歌剧演员_循环")
                         i += 1
@@ -63,7 +65,6 @@ class Fight(CustomAction):
                     fight_now_time = time()
                     
                     time_diff = fight_now_time - fight_start_time
-                    
                 context.run_pipeline("fight_打开设置")
 
             
