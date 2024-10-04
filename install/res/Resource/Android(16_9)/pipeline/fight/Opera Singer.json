@@ -49,6 +49,6 @@
     },
     "歌剧演员_循环": {
         "action": "Custom",
-        "custom_action": "o_s_round"
+        "custom_action": "OS_round"
     }
 }
