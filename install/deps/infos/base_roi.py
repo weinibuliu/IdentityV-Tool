@@ -24,6 +24,7 @@ class PC16_9:
         
         roi_getmap = [70,80,120,25]
         roi_getplayer = [250,45,100,40]
+        roi_getreputation = [0,0,0,0]
         
 class Android16_9:
         Page_L_1 = [235,140,150,150] 
@@ -51,3 +52,5 @@ class Android16_9:
         
         roi_getmap = [75,45,120,40]
         roi_getplayer = [270,10,90,40]
+        
+        roi_getreputation = [535,445,75,35]

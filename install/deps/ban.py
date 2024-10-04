@@ -13,11 +13,11 @@ from .infos import ban_info
 main_path = Path.cwd()
 
 #传出 custom 信息
-def rec_name_list() -> list:
+def rec_name_list() -> list[str]:
     return ["Get_map","Get_player","Get_ban_info"]
 def rec_list() -> list:
     return [Get_map(),Get_player(),Get_ban_info()]
-def act_name_list() -> list:
+def act_name_list() -> list[str]:
     return ["Ban"]
 def act_list() -> list:
     return [Ban()]
@@ -98,7 +98,7 @@ class Get_ban_info(CustomRecognition):
         map_info = infos["map_info"]
         player_info = infos["player_info"]
 
-        with open (f"{main_path}/ban_config.json","r",encoding="utf-8") as f:
+        with open (f"{main_path}/config/ban_config.json","r",encoding="utf-8") as f:
             data = load(f)[player_info]
  
             ban_details = data[map_info]

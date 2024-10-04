@@ -1,4 +1,68 @@
 {
+    "fight_登录后界面检测": {
+        "next": [
+            "fight_登录后界面检测完成"
+        ],
+        "interrupt": [
+            "退出活动公告",
+            "退出首充活动",
+            "退出新手活动"
+        ]
+    },
+    "fight_登录后界面检测完成": {
+        "recognition": "TemplateMatch",
+        "template": "fight//点击书.png",
+        "roi": [
+            1175,
+            490,
+            60,
+            50
+        ],
+        "next": [
+            "fight_start"
+        ]
+    },
+    "fight_start": {
+        "action": "Custom",
+        "custom_action": "Fight",
+        "custom_action_param": {}
+    },
+    "退出活动公告": {
+        "recognition": "TemplateMatch",
+        "template": "fight//退出活动公告.png",
+        "roi": [
+            20,
+            20,
+            70,
+            60
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "退出首充活动": {
+        "recognition": "TemplateMatch",
+        "template": "fight//退出首充活动.png",
+        "roi": [
+            20,
+            20,
+            70,
+            60
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "退出新手活动": {
+        "recognition": "TemplateMatch",
+        "template": "fight//退出新手活动.png",
+        "roi": [
+            20,
+            15,
+            55,
+            55
+        ],
+        "action": "Click",
+        "target": true
+    },
     "fight_点击书": {
         "recognition": "TemplateMatch",
         "template": "fight//点击书.png",
@@ -11,7 +75,7 @@
         "action": "Click",
         "target": true
     },
-    "fight_点击匹配": {
+    "fight_匹配模式": {
         "recognition": "OCR",
         "expected": [
             "日记推理",
@@ -27,7 +91,7 @@
         "action": "Click",
         "target": true
     },
-    "fight_点击排位": {
+    "fight_排位模式": {
         "recognition": "OCR",
         "expected": [
             "开启"
@@ -37,18 +101,6 @@
             200,
             180,
             80
-        ],
-        "action": "Click",
-        "target": true
-    },
-    "fight_点击求生者": {
-        "recognition": "TemplateMatch",
-        "template": "fight//点击求生者",
-        "roi": [
-            340,
-            165,
-            95,
-            95
         ],
         "action": "Click",
         "target": true
@@ -83,5 +135,183 @@
         "next": [
             "Start"
         ]
+    },
+    "fight_切换角色": {
+        "recognition": "OCR",
+        "expected": [
+            "准备开始",
+            "准备",
+            "开始"
+        ],
+        "roi": [
+            995,
+            630,
+            155,
+            40
+        ],
+        "action": "Click",
+        "target": [
+            0,
+            520,
+            50,
+            160
+        ],
+        "next": [
+            "fight_切换角色_2"
+        ]
+    },
+    "fight_切换角色_2": {
+        "recognition": "OCR",
+        "expected": [
+            "切换角色",
+            "切换",
+            "角色"
+        ],
+        "roi": [
+            220,
+            200,
+            115,
+            45
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "fight_选择角色": {
+        "recognition": "TemplateMatch",
+        "template": "ban//charaters//厂长.png",
+        "roi": [
+            185,
+            110,
+            915,
+            515
+        ],
+        "action": "Click",
+        "target": true,
+        "post_delay": 1500,
+        "interrupt": [
+            "下一页"
+        ],
+        "next": [
+            "fight_准备开始"
+        ]
+    },
+    "fight_准备开始": {
+        "recognition": "OCR",
+        "expected": [
+            "准备开始",
+            "准备",
+            "开始"
+        ],
+        "roi": [
+            1010,
+            630,
+            115,
+            40
+        ],
+        "action": "Click",
+        "target": true,
+        "next": [
+            "fight_等待加载"
+        ]
+    },
+    "fight_等待加载": {
+        "timeout": 20000,
+        "recognition": "TemplateMatch",
+        "template": "fight//等待加载.png",
+        "roi": [
+            0,
+            0,
+            100,
+            100
+        ],
+        "inverse": true
+    },
+    "fight_投降": {
+        "recognition": "OCR",
+        "expected": [
+            "投降",
+            "投",
+            "降"
+        ],
+        "roi": [
+            1080,
+            565,
+            75,
+            55
+        ],
+        "action": "Click",
+        "target": true,
+        "post_delay": 800,
+        "next": [
+            "fight_确定投降"
+        ]
+    },
+    "fight_确定投降": {
+        "recognition": "OCR",
+        "expected": [
+            "确定",
+            "确",
+            "定"
+        ],
+        "roi": [
+            745,
+            380,
+            100,
+            65
+        ],
+        "action": "Click",
+        "target": true,
+        "post_delay": 6000
+    },
+    "fight_打开设置": {
+        "action": "Click",
+        "target": [
+            5,
+            15,
+            30,
+            30
+        ]
+    },
+    "fight_点击个人名片": {
+        "recognition": "TemplateMatch",
+        "template": "fight//个人名片.png",
+        "roi": [
+            990,
+            20,
+            70,
+            55
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "fight_点击我的战斗": {
+        "recognition": "OCR",
+        "expected": [
+            "我的战斗",
+            "战斗"
+        ],
+        "roi": [
+            0,
+            190,
+            140,
+            50
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "fight_检测人品值": {
+        "recognition": "Custom",
+        "custom_recognition": "Check_reputation",
+        "custom_recognition_param": {}
+    },
+    "fight_人品值低_桌面提醒": {
+        "next": [
+            "fight_人品值低_邮件提醒"
+        ]
+    },
+    "fight_人品值低_邮件提醒": {},
+    "战斗测试": {
+        "action": "Custom",
+        "custom_action": "Fight"
     }
 }

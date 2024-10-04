@@ -1,1 +1,70 @@
-{}
+{
+    "歌剧演员_移动_10s": {
+        "action": "Swipe",
+        "begin": [
+            175,
+            515,
+            10,
+            10
+        ],
+        "end": [
+            175,
+            415,
+            10,
+            10
+        ],
+        "duration": 10000
+    },
+    "歌剧演员_影跃": {
+        "recognition": "ColorMatch",
+        "method": 4,
+        "lower": [
+            180,
+            185,
+            190
+        ],
+        "upper": [
+            190,
+            195,
+            200
+        ],
+        "count": 10,
+        "order_by": "Random",
+        "roi": [
+            1040,
+            415,
+            110,
+            105
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "歌剧演员_普攻": {
+        "recognition": "ColorMatch",
+        "method": 4,
+        "lower": [
+            190,
+            200,
+            205
+        ],
+        "upper": [
+            200,
+            210,
+            215
+        ],
+        "count": 10,
+        "order_by": "Random",
+        "roi": [
+            1105,
+            580,
+            110,
+            85
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "歌剧演员_循环": {
+        "action": "Custom",
+        "custom_action": "o_s_round"
+    }
+}

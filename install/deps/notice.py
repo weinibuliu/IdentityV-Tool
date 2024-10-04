@@ -13,11 +13,11 @@ from .infos import notice_info
 main_path = Path.cwd()
 
 #传出 custom 信息
-def rec_name_list() -> list:
+def rec_name_list() -> list[str]:
     return []
 def rec_list() -> list:
     return []
-def act_name_list() -> list:
+def act_name_list() -> list[str]:
     return ["Desktop_notice","Email_notice"]
 def act_list() -> list:
     return [Desktop_notice(),Email_notice()]
@@ -38,7 +38,7 @@ class Email_notice(CustomAction):
         Title = email_details["Title"]
         Body = email_details["Body"]
 
-        with open (f"{main_path}/email_config.json","r",encoding="utf-8") as f:
+        with open (f"{main_path}/config/email_config.json","r",encoding="utf-8") as f:
             email_config = load(f)["email_config"]
             sender = str(email_config["Send_Address"])
             sender_password = str(email_config["Send_Password"])
