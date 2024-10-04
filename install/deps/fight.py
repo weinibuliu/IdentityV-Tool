@@ -53,7 +53,6 @@ class Fight(CustomAction):
                 time_diff = 0
                 while time_diff < 240:
                     context.run_pipeline("歌剧演员_自定义移动")
-                    context.run_action("歌剧演员_移动")
                     
                     a_round_times = randint(5,10)
                     for i in range(a_round_times):
