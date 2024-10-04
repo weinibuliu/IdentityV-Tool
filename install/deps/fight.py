@@ -51,7 +51,9 @@ class Fight(CustomAction):
                 match character:
                     case "歌剧演员":
                         fight_now_time = time()
-                        while fight_now_time - fight_start_time >=240:
+                        time_diff = fight_now_time - fight_start_time
+                        
+                        while time_diff >= 240:
                             context.run_pipeline("歌剧演员_移动_10s")
                             a_round_times = randint(5,10)
                             for i in range(a_round_times):
