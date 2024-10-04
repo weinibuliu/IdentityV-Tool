@@ -46,20 +46,6 @@ class Fight(CustomAction):
                  time_limit:bool=False,limit_time:int=0,
                  times_limit:bool=False,limit_times:int=0):
             
-            fight_main()
-            
-            def up2weeklylimit(enable:bool=up2weeklylimit):
-                pass
-            
-            def time_limit(enable:bool=time_limit,detail:int|float=limit_time) -> None:
-                if enable == False:
-                    return None
-                elif enable == True:
-                    fight_main()
-                    
-            def times_limit(enable:bool=times_limit,detail:int=limit_times):
-                pass
-            
             def fight_main(character:str=character):
                 fight_start_time = time()
                 match character:
@@ -97,6 +83,8 @@ class Fight(CustomAction):
                     context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
                 context.run_pipeline("fight_切换角色")
                 
+            fight_main()    
+        
         main(model,character)
         
         return True
