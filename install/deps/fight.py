@@ -8,7 +8,8 @@ from maa.custom_action import CustomAction
 from maa.custom_recognition import CustomRecognition
 
 from .infos import base_roi
-from .infos import Opera_Singer as o_s
+from .infos import Opera_Singer
+from .infos import common
 
 #获取路径
 main_path = Path.cwd()
@@ -19,11 +20,11 @@ def rec_name_list() -> list[str]:
 def rec_list() -> list:
     return []
 def act_name_list() -> list[str]:
-    return ["Fight","o_s_move","o_s_round"]
+    return ["Fight","Move","OS_round"]
 def act_list() -> list:
-    o_s_round = o_s.o_s_round
-    o_s_move = o_s.o_s_move
-    return [Fight(),o_s_move(),o_s_round()]
+    OS_round = Opera_Singer.OS_round
+    Move = common.Move
+    return [Fight(),Move(),OS_round()]
 
 def get_roi_base_on_state(roi_state:str):
     match roi_state:
@@ -52,9 +53,9 @@ class Fight(CustomAction):
                 
                 time_diff = 0
                 while time_diff < 240:
-                    context.run_pipeline("歌剧演员_自定义移动")
+                    context.run_pipeline("自定义移动")
                     
-                    a_round_times = randint(5,10)
+                    a_round_times = randint(7,10)
                     for i in range(a_round_times):
                         context.run_pipeline("歌剧演员_循环")
                         i += 1

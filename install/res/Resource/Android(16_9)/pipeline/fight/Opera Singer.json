@@ -1,24 +1,4 @@
 {
-    "歌剧演员_移动": {
-        "action": "Swipe",
-        "begin": [
-            175,
-            515,
-            10,
-            10
-        ],
-        "end": [
-            175,
-            415,
-            10,
-            10
-        ],
-        "duration": 10000
-    },
-    "歌剧演员_自定义移动": {
-        "action": "Custom",
-        "custom_action": "o_s_move"
-    },
     "歌剧演员_影跃": {
         "recognition": "ColorMatch",
         "method": 4,
