@@ -79,11 +79,6 @@ jobs:
         cp .\README.md .\install
         cp .\LICENSE .\install
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.12.4'
-
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
