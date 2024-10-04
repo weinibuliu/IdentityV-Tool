@@ -143,8 +143,8 @@ jobs:
 
     - name: Move deps to install
       run: |
-        move .\deps\bin\* .\install\res
-        move .\deps\share\MaaAgentBinary .\install\res
+        mv .\deps\bin\* .\install\res
+        mv .\deps\share\MaaAgentBinary .\install\res
         cp .\README.md .\install
         cp .\LICENSE .\install
 
@@ -169,7 +169,7 @@ jobs:
       run: |
         cd .\install\
         python build.py
-        move .\dist\IdentityV_Tool.exe .\
+        mv .\dist\IdentityV_Tool.exe .\
 
     - name: Get current commit ID
       run: |
