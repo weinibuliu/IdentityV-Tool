@@ -59,8 +59,9 @@ class Fight(CustomAction):
                         i += 1
                         fight_now_time = time()
                     fight_now_time = time()
+                    time_diff = fight_now_time - fight_start_time
                     
-                context.run_pipeline("fight_投降")
+                #context.run_pipeline("fight_投降")
 
             
             def raedy(model:str=model,character:str=character) -> None:
