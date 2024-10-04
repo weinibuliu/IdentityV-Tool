@@ -50,13 +50,14 @@ class Fight(CustomAction):
                 fight_start_time = time()
                 match character:
                     case "歌剧演员":
+                        fight_now_time = time()
                         while fight_now_time - fight_start_time >=240:
                             context.run_pipeline("歌剧演员_移动_10s")
                             a_round_times = randint(5,10)
                             for i in range(a_round_times):
                                 context.run_pipeline("歌剧演员_循环")
                                 i += 1
-                                now_time = time()
+                                fight_now_time = time()
                                 
                                 if fight_now_time - fight_start_time >=240:
                                     break
