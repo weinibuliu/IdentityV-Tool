@@ -53,9 +53,7 @@ class Fight(CustomAction):
                 
                 time_diff = 0
                 while time_diff < 240:
-                    print("Debugge:Pre_Move")
-                    context.run_pipeline("自定义移动")
-                    print("Debugge:Move")
+                    context.run_pipeline("随机移动")
                     
                     a_round_times = randint(6,10)
                     for i in range(a_round_times):

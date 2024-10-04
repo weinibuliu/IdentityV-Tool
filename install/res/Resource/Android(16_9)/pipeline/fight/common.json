@@ -1,21 +1,5 @@
 {
-    "移动": {
-        "action": "Swipe",
-        "begin": [
-            175,
-            515,
-            10,
-            10
-        ],
-        "end": [
-            175,
-            415,
-            10,
-            10
-        ],
-        "duration": 10000
-    },
-    "自定义移动": {
+    "随机移动": {
         "action": "Custom",
         "custom_action": "Move"
     }
