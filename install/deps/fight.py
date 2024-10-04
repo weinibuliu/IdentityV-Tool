@@ -39,8 +39,11 @@ class Fight(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         with open (f"{main_path}/config/fight_config.json") as f:
             data = load(f)
-        model = data["模式"]
-        character = data["使用角色"]
+        #model = data["模式"]
+        #character = data["使用角色"]
+        
+        model = "匹配模式"
+        character = "歌剧演员"
         
         main(model,character)
         
