@@ -58,15 +58,19 @@ class Fight(CustomAction):
                         context.run_pipeline("歌剧演员_获取普攻位置")
                         while time_diff < 238:
                             context.run_pipeline("随机移动")
-                            a_round_times = randint(6,10)
+                            a_round_times = randint(10,20)
                             for i in range(a_round_times):
                                 context.run_pipeline("歌剧演员_循环")
                                 i += 1
                                 fight_now_time = time()
                             fight_now_time = time()
                             context.run_pipeline("随机视角移动")
+                            if context.run_recognition("fight_赛后_继续_仅识别").best_result.text == "继续":
+                                break
                             time_diff = fight_now_time - fight_start_time
-                        context.run_pipeline("fight_打开设置")
+                        if time_diff >= 238:
+                            context.run_pipeline("fight_打开设置")
+                        context.run_pipeline("fight_赛后_继续")
                     case _:
                         raise (f"Class Error:{__class__.__name__},please contact to the developers.")
 
@@ -79,13 +83,8 @@ class Fight(CustomAction):
                 context.run_pipeline("Start")
                 if model == "排位模式":
                     context.run_pipeline("确认禁用")
-                if character == "厂长":
-                    context.override_pipeline({"fight_选择角色":{"template": ["characters//厂长.png",
-                                                                "characters//厂长_月亮脸.png",
-                                                                "characters//厂长_木偶比利.png",
-                                                                "characters//厂长_地狱感知.png"]}})
-                else:
-                    context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
+   
+                context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
                 context.run_pipeline("fight_切换角色")
                 
             fight_main(character)    

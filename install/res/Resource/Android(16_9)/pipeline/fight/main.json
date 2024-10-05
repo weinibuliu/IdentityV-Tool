@@ -272,6 +272,56 @@
         "target": true,
         "post_delay": 6000
     },
+    "fight_赛后_继续_仅识别": {
+        "timeout": 2000,
+        "recognition": "OCR",
+        "expected": [
+            "继续"
+        ],
+        "roi": [
+            585,
+            635,
+            115,
+            55
+        ],
+        "only_rec": true
+    },
+    "fight_赛后_继续": {
+        "recognition": "OCR",
+        "expected": [
+            "继续",
+            "继",
+            "续"
+        ],
+        "roi": [
+            585,
+            635,
+            115,
+            55
+        ],
+        "action": "Click",
+        "target": true,
+        "next": [
+            "fight_赛后_返回大厅"
+        ]
+    },
+    "fight_赛后_返回大厅": {
+        "recognition": "OCR",
+        "expected": [
+            "返回",
+            "大厅"
+        ],
+        "roi": [
+            590,
+            640,
+            100,
+            50
+        ],
+        "action": "Click",
+        "next": [
+            "fight_等待加载"
+        ]
+    },
     "fight_点击个人名片": {
         "recognition": "TemplateMatch",
         "template": "fight//个人名片.png",

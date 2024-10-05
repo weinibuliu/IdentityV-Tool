@@ -29,14 +29,14 @@ class Vision_move(CustomAction):
         def move(direction:int,duration:int):
             match direction:
                 case 0: #向左移动视角
-                    context.override_pipeline({"基础视角移动":{"end": [570,255,10,10], "duration": duration}})
+                    context.override_pipeline({"基础视角移动":{"end": [470,255,10,10], "duration": duration}})
                 case 1 : #向右移动视角
-                    context.override_pipeline({"基础视角移动":{"end": [770,255,10,10], "duration": duration}})
+                    context.override_pipeline({"基础视角移动":{"end": [870,255,10,10], "duration": duration}})
                 case _:
                     raise (f"Class Error:{__class__.__name__},please contact to the developers.")
             context.run_pipeline("基础视角移动")
 
         direction = randint(0,1)
-        move(direction,2000)
+        move(direction,3000)
         
         return True
