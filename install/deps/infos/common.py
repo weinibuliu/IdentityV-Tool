@@ -5,20 +5,21 @@ from maa.custom_action import CustomAction
 
 class Move(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult | bool:
-        def move(direction:int=0):
+        def move(direction:int=0,duration:int=10000):
             match direction:
                 case 0: #向前移动
-                    context.run_pipeline("移动_向前")
+                    context.override_pipeline({"基础移动":{"end": [175,415,10,10], "duration": duration}})
                 case 1: #向右移动
-                    context.run_pipeline("移动_向右")
+                    context.override_pipeline({"基础移动":{"end": [275,515,10,10], "duration": duration}})
                 case 2: #向后移动
-                    context.run_pipeline("移动_向后")
+                    context.override_pipeline({"基础移动":{"end": [175,615,10,10], "duration": duration}})
                 case 3: #向左移动
-                    context.run_pipeline("移动_向左")
+                    context.override_pipeline({"基础移动":{"end": [75,515,10,10], "duration": duration}})
                 case _:
                     raise (f"Class Error:{__class__.__name__},please contact to the developers.")
-                
-        direction = randint(0,3)
-        move(direction)
+            context.run_pipeline("基础移动")
+
+        direction = randint(0,3)   
+        move(direction,10000)
 
         return True
