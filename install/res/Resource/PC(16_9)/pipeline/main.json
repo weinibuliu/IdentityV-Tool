@@ -8,6 +8,7 @@
         ]
     },
     "获取匹配时间位置": {
+        "timeout": 5000,
         "recognition": "OCR",
         "expected": [
             "普通匹配中"
