@@ -41,6 +41,8 @@ def get_roi_base_on_state(roi_state:str):
 class Fight(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         
+        context.override_pipeline({"匹配成功":{"post_delay": 7000, "next": []}})
+        
         model = "匹配模式"
         character = "歌剧演员"
 
