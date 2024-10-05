@@ -20,11 +20,12 @@ def rec_name_list() -> list[str]:
 def rec_list() -> list:
     return []
 def act_name_list() -> list[str]:
-    return ["Fight","Move","OS_round"]
+    return ["Fight","Move","Vision_move","OS_round"]
 def act_list() -> list:
     Move = common.Move
+    Vision_move = common.Vision_move
     OS_round = Opera_Singer.OS_round
-    return [Fight(),Move(),OS_round()]
+    return [Fight(),Move(),Vision_move(),OS_round()]
 
 def get_roi_base_on_state(roi_state:str):
     match roi_state:
@@ -50,22 +51,25 @@ class Fight(CustomAction):
             
             def fight_main(character:str=character):
                 fight_start_time = time()
-                
                 time_diff = 0
-                while time_diff < 240:
-                    context.run_pipeline("随机移动")
-                    
-                    a_round_times = randint(6,10)
-                    for i in range(a_round_times):
-                        context.run_pipeline("歌剧演员_循环")
-                        i += 1
-                        fight_now_time = time()
-                    fight_now_time = time()
-                    
-                    time_diff = fight_now_time - fight_start_time
-                context.run_pipeline("fight_打开设置")
+                match character:
+                    case "歌剧演员":
+                        context.run_pipeline("歌剧演员_获取影跃位置")
+                        context.run_pipeline("歌剧演员_获取普攻位置")
+                        while time_diff < 238:
+                            context.run_pipeline("随机移动")
+                            a_round_times = randint(6,10)
+                            for i in range(a_round_times):
+                                context.run_pipeline("歌剧演员_循环")
+                                i += 1
+                                fight_now_time = time()
+                            fight_now_time = time()
+                            context.run_pipeline("随机视角移动")
+                            time_diff = fight_now_time - fight_start_time
+                        context.run_pipeline("fight_打开设置")
+                    case _:
+                        raise (f"Class Error:{__class__.__name__},please contact to the developers.")
 
-            
             def raedy(model:str=model,character:str=character) -> None:
                 context.run_pipeline("fight_点击书")
                 sleep(0.5)

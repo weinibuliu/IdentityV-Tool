@@ -1,5 +1,5 @@
 {
-    "歌剧演员_影跃": {
+    "歌剧演员_获取影跃位置": {
         "recognition": "ColorMatch",
         "method": 4,
         "lower": [
@@ -20,10 +20,9 @@
             110,
             105
         ],
-        "action": "Click",
-        "target": true
+        "post_delay": 0
     },
-    "歌剧演员_普攻": {
+    "歌剧演员_获取普攻位置": {
         "recognition": "ColorMatch",
         "method": 4,
         "lower": [
@@ -44,8 +43,17 @@
             110,
             85
         ],
+        "post_delay": 0
+    },
+    "歌剧演员_影跃": {
         "action": "Click",
-        "target": true
+        "target": "歌剧演员_获取影跃位置",
+        "post_delay": 100
+    },
+    "歌剧演员_普攻": {
+        "action": "Click",
+        "target": "歌剧演员_获取普攻位置",
+        "post_delay": 100
     },
     "歌剧演员_循环": {
         "action": "Custom",

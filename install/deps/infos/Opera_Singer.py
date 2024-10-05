@@ -8,6 +8,6 @@ class OS_round(CustomAction):
         context.run_pipeline("歌剧演员_影跃")
         sleep(0.5)
         context.run_pipeline("歌剧演员_普攻")
-        sleep(1.1)
+        sleep(1)
         
         return True

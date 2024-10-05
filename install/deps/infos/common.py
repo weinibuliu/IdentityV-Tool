@@ -4,7 +4,7 @@ from maa.context import Context
 from maa.custom_action import CustomAction
 
 class Move(CustomAction):
-    def run(self, context: Context, argv: CustomAction.RunArg) -> CustomAction.RunResult | bool:
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         def move(direction:int=0,duration:int=10000):
             match direction:
                 case 0: #向前移动
@@ -22,4 +22,21 @@ class Move(CustomAction):
         direction = randint(0,3)   
         move(direction,10000)
 
+        return True
+    
+class Vision_move(CustomAction):
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        def move(direction:int,duration:int):
+            match direction:
+                case 0: #向左移动视角
+                    context.override_pipeline({"基础视角移动":{"end": [570,255,10,10], "duration": duration}})
+                case 1 : #向右移动视角
+                    context.override_pipeline({"基础视角移动":{"end": [770,255,10,10], "duration": duration}})
+                case _:
+                    raise (f"Class Error:{__class__.__name__},please contact to the developers.")
+            context.run_pipeline("基础视角移动")
+
+        direction = randint(0,1)
+        move(direction,2000)
+        
         return True

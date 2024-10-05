@@ -8,8 +8,21 @@
             10
         ]
     },
+    "基础视角移动": {
+        "action": "Swipe",
+        "begin": [
+            670,
+            255,
+            10,
+            10
+        ]
+    },
     "随机移动": {
         "action": "Custom",
         "custom_action": "Move"
+    },
+    "随机视角移动": {
+        "action": "Custom",
+        "custom_action": "Vision_move"
     }
 }
