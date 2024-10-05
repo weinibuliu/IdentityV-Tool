@@ -65,7 +65,7 @@ class Fight(CustomAction):
                                 fight_now_time = time()
                             fight_now_time = time()
                             context.run_pipeline("随机视角移动")
-                            if context.run_recognition("fight_赛后_继续_仅识别").best_result.text == "继续":
+                            if context.run_recognition("fight_赛后_继续_仅识别",argv.image,{}).best_result.text == "继续":
                                 break
                             time_diff = fight_now_time - fight_start_time
                         if time_diff >= 238:
