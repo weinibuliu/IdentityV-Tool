@@ -55,6 +55,6 @@ PyInstaller.__main__.run([
     f'--add-data={add_data_param2}',
     f'--add-data={add_data_param3}',
     '--hidden-import=plyer.platforms.win.notification', #处理 Plyer 在 Windows 平台的实现
-    '--clean',
-    '--uac-admin' #为应用申请管理员权限
+    '--clean'
+    #'--uac-admin' #为应用申请管理员权限
 ])
