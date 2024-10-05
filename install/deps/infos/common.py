@@ -9,19 +9,16 @@ class Move(CustomAction):
             match direction:
                 case 0: #向前移动
                     context.override_pipeline({"基础移动":{"end": [175,415,10,10], "duration": duration}})
-                    context.run_pipeline("基础移动")
                 case 1: #向右移动
                     context.override_pipeline({"基础移动":{"end": [275,515,10,10], "duration": duration}})
-                    context.run_pipeline("基础移动")
                 case 2: #向后移动
                     context.override_pipeline({"基础移动":{"end": [175,615,10,10], "duration": duration}})
-                    context.run_pipeline("基础移动")
                 case 3: #向左移动
                     context.override_pipeline({"基础移动":{"end": [75,515,10,10], "duration": duration}})
-                    context.run_pipeline("基础移动")
                 case _:
                     raise (f"Class Error:{__class__.__name__},please contact to the developers.")
         direction = randint(0,3)   
         move(direction,10)
+        context.run_pipeline("基础移动")
 
         return True
