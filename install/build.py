@@ -1,3 +1,5 @@
+#该脚本在 Windows 下编译通过， Linux 与 MacOS 平台暂未测试。
+
 import PyInstaller.__main__
 import os
 import site
@@ -56,5 +58,5 @@ PyInstaller.__main__.run([
     f'--add-data={add_data_param3}',
     '--hidden-import=plyer.platforms.win.notification', #处理 Plyer 在 Windows 平台的实现
     '--clean'
-    #'--uac-admin' #为应用申请管理员权限
+    #'--uac-admin' #为应用申请管理员权限，因主分支迁移至 Android 模拟器，现废弃
 ])

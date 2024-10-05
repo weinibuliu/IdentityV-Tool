@@ -94,6 +94,8 @@ class Fight(CustomAction):
             ready()
             fight_main()    
 
+        main()
+        
         return True
     
 class Check_reputation(CustomRecognition):

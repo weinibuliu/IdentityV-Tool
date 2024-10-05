@@ -1,7 +1,7 @@
 {
     "fight_登录后界面检测": {
         "next": [
-            "fight_登录后界面检测完成"
+            "fight_登录后界面检测成功"
         ],
         "interrupt": [
             "退出活动公告",
@@ -9,7 +9,7 @@
             "退出新手活动"
         ]
     },
-    "fight_登录后界面检测完成": {
+    "fight_登录后界面检测成功": {
         "recognition": "TemplateMatch",
         "template": "fight//点击书.png",
         "roi": [
