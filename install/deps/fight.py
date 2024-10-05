@@ -67,8 +67,6 @@ class Fight(CustomAction):
                                 time_diff = fight_now_time - fight_start_time
                                 if time_diff >= 238:
                                     break
-                                
-                            print(context.run_pipeline("fight_赛后_继续_仅识别").nodes)
 
                             fight_now_time = time()
                             time_diff = fight_now_time - fight_start_time
