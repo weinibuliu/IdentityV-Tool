@@ -20,12 +20,12 @@ def rec_name_list() -> list[str]:
 def rec_list() -> list:
     return []
 def act_name_list() -> list[str]:
-    return ["Fight","Move","Vision_move","Thumb_ups","OS_round"]
+    return ["Fight","Move","Vision_move","Thumb_ups"] + ["Check_weekly"] + ["OS_round"]
 def act_list() -> list:
     Move = common.Move
     Vision_move = common.Vision_move
     OS_round = Opera_Singer.OS_round
-    return [Fight(),Move(),Vision_move(),Thumb_ups(),OS_round()]
+    return [Fight(),Move(),Vision_move(),Thumb_ups()] + [Check_weekly()] + [OS_round()]
 
 def get_roi_base_on_state(roi_state:str):
     match roi_state:
@@ -41,13 +41,31 @@ def get_roi_base_on_state(roi_state:str):
 class Fight(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
 
-        model = "匹配模式"
-        character = "歌剧演员"
+        model_list = "匹配模式"
+        character_list = "歌剧演员"
+        with open(f"{main_path}/config/fight_config.json","r",encoding="utf-8") as f:
+            data = load(f)
+            
+            character_list = list(data["角色队列"])
+            character_list_random = bool(data["角色队列乱序"])
+            model_list = list(data["模式队列"])
+            model_list_random = bool(["模式队列乱序"])
+            thumbs_up = bool(data["启用赛后点赞"])
+            desktop_notice = bool(data["启用桌面通知"])
+            email_notice = bool(data["启用邮件通知"])
 
+            data = data["停止相关设置"]
+            up_weekly = bool(data["启用周上限限制"])
+            limit_reputation = int(data["最低人品值"])
+            time_limit = bool(data["启用时间限制"])
+            limit_time = int or float(data["限制时间"])
+            times_limit = bool(data["启用次数限制"])
+            limit_times = int(data["限制次数"])
+
+        context.override_pipeline({"fight_检测人品值": {"custom_recognition_param": {"lowest" : limit_reputation}}})
         context.override_pipeline({"匹配成功":{"post_delay": 7000, "next": []}})
-        context.override_pipeline({"fight_点赞": {"custom_action_param": {"model": model}}})
 
-        def fight_main(character:str=character):
+        def fight_main(character:str):
             fight_start_time = time()
             time_diff = 0
             match character:
@@ -73,31 +91,56 @@ class Fight(CustomAction):
                         fight_now_time = time()
                         time_diff = fight_now_time - fight_start_time
                         context.run_pipeline("随机视角移动")
-                        
-                    if time_diff >= 235:
-                        context.run_pipeline("fight_打开设置")
-                    context.run_pipeline("fight_赛后_继续")
+
                 case _:
                     raise (f"Class Error:{__class__.__name__},please contact to the developers.")
+                
+            if time_diff >= 235:
+                context.run_pipeline("fight_打开设置")
+                context.run_pipeline("fight_赛后_继续")
 
-        def ready(model:str=model,character:str=character) -> None:
+        def ready(model:str,character:str) -> None:
             context.run_pipeline("fight_点击书")
             sleep(0.5)
             context.run_pipeline(f"fight_{model}")
             sleep(0.5)
-            context.run_pipeline("fight_点击监管者")
-            sleep(0.5)
-            context.run_pipeline("fight_开始匹配")
+            if model == "匹配模式" or model == "排位模式":
+                context.run_pipeline("fight_点击监管者")
+                sleep(0.5)
+                context.run_pipeline("fight_开始匹配")
+                if model == "排位模式":
+                    context.run_pipeline("确认禁用")
+                context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
+                context.run_pipeline("fight_切换角色")
 
-            if model == "排位模式":
-                context.run_pipeline("确认禁用")
+            elif model == "捉迷藏":
+                pass
 
-            context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
-            context.run_pipeline("fight_切换角色")
+            else:
+                raise (f"Class Error:{__class__.__name__},please contact to the developers.")
 
-        def main(model:str,character:str,thumbs_up:bool=True):
-            ready()
-            fight_main()    
+        def main(desktop_notice:bool=desktop_notice,email_notice:bool=email_notice,
+                 model_list:list=model_list,model_list_random:bool=model_list_random,
+                 character_list:list=character_list,character_list_random:bool=character_list_random,
+                 thumbs_up:bool=thumbs_up,
+                 limit_reputation:int=limit_reputation,up_weekly:bool=up_weekly,
+                 time_limit:bool=time_limit,limit_time:int|float=limit_time,
+                 times_limit:bool=times_limit,limit_times:int=limit_times,
+                 ):
+
+            def list_ramdon(m_list_random:bool=model_list_random,c_list_random:bool=character_list_random):
+                if m_list_random == True:
+                    shuffle(model_list)
+                if c_list_random == True:
+                    shuffle(character_list)
+
+            list_ramdon()
+            for model,character in zip(model_list,character_list):
+                context.override_pipeline({"fight_点赞": {"custom_action_param": {"model": model}}})
+                ready(model)
+                fight_main(character)
+                if thumbs_up == False:
+                    context.override_pipeline({"fight_赛后_继续": {"next": ["fight_赛后_返回大厅"]}})
 
         main()
         
@@ -106,10 +149,9 @@ class Fight(CustomAction):
 class Thumb_ups(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         model = loads[argv.custom_action_param]["model"]
-
-        gamer_list = list[1,2,3,4]
-        shuffle(gamer_list)
         if model == "匹配模式":
+            gamer_list = list[1,2,3,4]
+            shuffle(gamer_list)
             for i in gamer_list:
                 match i:
                     case 1:
@@ -122,7 +164,20 @@ class Thumb_ups(CustomAction):
                         context.override_pipeline({f"{model}点赞":{"roi": [1075,490,45,45]}})
                     case _:
                         raise (f"Class Error:{__class__.__name__},please contact to the developers.")
-                context.run_pipeline(f"{model}点赞")
+                context.run_pipeline(f"{model}点赞")   
+        elif model == "捉迷藏":
+            gamer_list = list[1,2]
+            shuffle(gamer_list)
+            for i in gamer_list:
+                match i:
+                    case 1:
+                        pass
+                    case 2:
+                        pass
+                    case _:
+                        raise (f"Class Error:{__class__.__name__},please contact to the developers.")
+        else:
+            raise (f"Class Error:{__class__.__name__},please contact to the developers.")
 
         return True
 
@@ -131,8 +186,7 @@ class Check_reputation(CustomRecognition):
         roi_state = loads(argv.custom_recognition_param)["roi_state"]
         roi = get_roi_base_on_state(roi_state)
         
-        with open (f"{main_path}/config/fight_config.json") as f:
-            lowest = load(f)["信誉分阈值"]
+        lowest = loads(argv.custom_recognition_param)["lowest"]
 
         Get_reputation_pipe = {"Get_reputation":{
             "timeout": 3000,
@@ -144,7 +198,12 @@ class Check_reputation(CustomRecognition):
         rec_result = context.run_recognition("Get_reputation",argv.image,pipeline_override = Get_reputation_pipe)
         rec_result = rec_result.best_result.text
 
-        if rec_result < lowest:
+        if rec_result <= lowest:
             context.override_pipeline({"fight_检测人品值": {"next":["fight_人品值低_桌面提醒"]}})
 
         return super().analyze(context, argv)
+    
+class Check_weekly(CustomRecognition):
+    def analyze(self, context: Context, argv: CustomRecognition.AnalyzeArg) -> None:
+        pass
+        return None
