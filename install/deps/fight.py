@@ -95,7 +95,7 @@ class Fight(CustomAction):
             context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
             context.run_pipeline("fight_切换角色")
 
-        def main():
+        def main(thumbs_up:bool=True):
             ready()
             fight_main()    
 
