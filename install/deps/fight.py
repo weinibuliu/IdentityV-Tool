@@ -83,8 +83,9 @@ class Fight(CustomAction):
             context.run_pipeline(f"fight_{model}")
             sleep(0.5)
             context.run_pipeline("fight_点击监管者")
+            sleep(0.5)
             context.run_pipeline("fight_开始匹配")
-            context.run_pipeline("Start")
+
             if model == "排位模式":
                 context.run_pipeline("确认禁用")
 
