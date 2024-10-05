@@ -132,9 +132,27 @@
         ],
         "action": "Click",
         "target": true,
+        "post_delay": 0,
         "next": [
             "Start"
+        ],
+        "interrupt": [
+            "fight_拒绝更换阵营"
         ]
+    },
+    "fight_拒绝更换阵营": {
+        "recognition": "OCR",
+        "expected": [
+            "否"
+        ],
+        "roi": [
+            755,
+            395,
+            75,
+            40
+        ],
+        "action": "Click",
+        "target": true
     },
     "fight_切换角色": {
         "recognition": "OCR",

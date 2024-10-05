@@ -82,6 +82,7 @@ class Fight(CustomAction):
             sleep(0.5)
             context.run_pipeline(f"fight_{model}")
             sleep(0.5)
+            context.run_pipeline("fight_点击监管者")
             context.run_pipeline("fight_开始匹配")
             context.run_pipeline("Start")
             if model == "排位模式":
