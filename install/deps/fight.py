@@ -43,62 +43,57 @@ class Fight(CustomAction):
         
         model = "匹配模式"
         character = "歌剧演员"
-        
-        def main(model:str,character:str,desktop_notice:bool=False,email_notice:bool=False,
-                 limit_reputation:int=75,up_weekly_limit:bool=False,
-                 time_limit:bool=False,limit_time:int|float=0,
-                 times_limit:bool=False,limit_times:int=0):
-            
-            def fight_main(character:str=character):
-                fight_start_time = time()
-                time_diff = 0
-                match character:
-                    case "歌剧演员":
-                        context.run_pipeline("歌剧演员_获取影跃位置")
-                        context.run_pipeline("歌剧演员_获取普攻位置")
-                        while time_diff < 235:
-                            context.run_pipeline("随机移动")
-                            context.run_pipeline("随机视角移动")
 
-                            for i in range(randint(10,20)):
-                                context.run_pipeline("歌剧演员_循环")
-                                i += 1
-                                fight_now_time = time()
-                                time_diff = fight_now_time - fight_start_time
-                                if time_diff >= 235:
-                                    break
+        def fight_main(character:str=character):
+            fight_start_time = time()
+            time_diff = 0
+            match character:
+                case "歌剧演员":
+                    context.run_pipeline("歌剧演员_获取影跃位置")
+                    context.run_pipeline("歌剧演员_获取普攻位置")
+                    while time_diff < 235:
+                        context.run_pipeline("随机移动")
+                        context.run_pipeline("随机视角移动")
 
-                            check_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image).best_result.text
-                            if check_statu == "继续":
-                                break
-                            
+                        for i in range(randint(10,20)):
+                            context.run_pipeline("歌剧演员_循环")
+                            i += 1
                             fight_now_time = time()
                             time_diff = fight_now_time - fight_start_time
-                            context.run_pipeline("随机视角移动")
-                            
-                        if time_diff >= 235:
-                            context.run_pipeline("fight_打开设置")
-                        context.run_pipeline("fight_赛后_继续")
-                    case _:
-                        raise (f"Class Error:{__class__.__name__},please contact to the developers.")
+                            if time_diff >= 235:
+                                break
 
-            def raedy(model:str=model,character:str=character) -> None:
-                context.run_pipeline("fight_点击书")
-                sleep(0.5)
-                context.run_pipeline(f"fight_{model}")
-                sleep(0.5)
-                context.run_pipeline("fight_开始匹配")
-                context.run_pipeline("Start")
-                if model == "排位模式":
-                    context.run_pipeline("确认禁用")
-   
-                context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
-                context.run_pipeline("fight_切换角色")
-                
-            fight_main(character)    
-        
-        main(model,character)
-        
+                        check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image).best_result.text
+                        if check_fight_statu == "继续":
+                            break
+                        
+                        fight_now_time = time()
+                        time_diff = fight_now_time - fight_start_time
+                        context.run_pipeline("随机视角移动")
+                        
+                    if time_diff >= 235:
+                        context.run_pipeline("fight_打开设置")
+                    context.run_pipeline("fight_赛后_继续")
+                case _:
+                    raise (f"Class Error:{__class__.__name__},please contact to the developers.")
+
+        def ready(model:str=model,character:str=character) -> None:
+            context.run_pipeline("fight_点击书")
+            sleep(0.5)
+            context.run_pipeline(f"fight_{model}")
+            sleep(0.5)
+            context.run_pipeline("fight_开始匹配")
+            context.run_pipeline("Start")
+            if model == "排位模式":
+                context.run_pipeline("确认禁用")
+
+            context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
+            context.run_pipeline("fight_切换角色")
+
+        def main():
+            ready()
+            fight_main()    
+
         return True
     
 class Check_reputation(CustomRecognition):
