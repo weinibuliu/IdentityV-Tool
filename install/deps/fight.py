@@ -106,20 +106,23 @@ class Fight(CustomAction):
 class Thumb_ups(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         model = loads[argv.custom_action_param]["model"]
-        gamer_list = shuffle([1,2,3,4])
-        for i in gamer_list:
-            match i:
-                case 1:
-                    context.override_pipeline({f"{model}点赞":{"roi": [300,490,45,45]}})
-                case 2:
-                    context.override_pipeline({f"{model}点赞":{"roi": [550,490,45,45]}})
-                case 3:
-                    context.override_pipeline({f"{model}点赞":{"roi": [805,490,45,45]}})
-                case 4:
-                    context.override_pipeline({f"{model}点赞":{"roi": [1075,490,45,45]}})
-                case _:
-                    raise (f"Class Error:{__class__.__name__},please contact to the developers.")
-            context.run_pipeline(f"{model}点赞")
+
+        gamer_list = list[1,2,3,4]
+        shuffle(gamer_list)
+        if model == "匹配模式":
+            for i in gamer_list:
+                match i:
+                    case 1:
+                        context.override_pipeline({f"{model}点赞":{"roi": [300,490,45,45]}})
+                    case 2:
+                        context.override_pipeline({f"{model}点赞":{"roi": [550,490,45,45]}})
+                    case 3:
+                        context.override_pipeline({f"{model}点赞":{"roi": [805,490,45,45]}})
+                    case 4:
+                        context.override_pipeline({f"{model}点赞":{"roi": [1075,490,45,45]}})
+                    case _:
+                        raise (f"Class Error:{__class__.__name__},please contact to the developers.")
+                context.run_pipeline(f"{model}点赞")
 
         return True
 
