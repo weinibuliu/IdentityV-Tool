@@ -1,4 +1,13 @@
 {
+    "基础移动": {
+        "action": "Swipe",
+        "begin": [
+            175,
+            515,
+            10,
+            10
+        ]
+    },
     "随机移动": {
         "action": "Custom",
         "custom_action": "Move"
