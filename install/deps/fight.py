@@ -56,7 +56,7 @@ class Fight(CustomAction):
                     case "歌剧演员":
                         context.run_pipeline("歌剧演员_获取影跃位置")
                         context.run_pipeline("歌剧演员_获取普攻位置")
-                        while time_diff < 238:
+                        while time_diff < 235:
                             context.run_pipeline("随机移动")
                             context.run_pipeline("随机视角移动")
 
@@ -65,10 +65,10 @@ class Fight(CustomAction):
                                 i += 1
                                 fight_now_time = time()
                                 time_diff = fight_now_time - fight_start_time
-                                if time_diff >= 238:
+                                if time_diff >= 235:
                                     break
-                                
-                            check_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.controller.cached_image).best_result.text
+
+                            check_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image).best_result.text
                             if check_statu == "继续":
                                 break
                             
@@ -76,7 +76,7 @@ class Fight(CustomAction):
                             time_diff = fight_now_time - fight_start_time
                             context.run_pipeline("随机视角移动")
                             
-                        if time_diff >= 238:
+                        if time_diff >= 235:
                             context.run_pipeline("fight_打开设置")
                         context.run_pipeline("fight_赛后_继续")
                     case _:

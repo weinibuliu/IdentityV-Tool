@@ -273,7 +273,7 @@
         "post_delay": 6000
     },
     "fight_赛后_继续_仅识别": {
-        "timeout": 2000,
+        "timeout": 1000,
         "recognition": "OCR",
         "expected": [
             "继续"
