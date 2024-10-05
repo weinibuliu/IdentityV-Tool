@@ -58,16 +58,22 @@ class Fight(CustomAction):
                         context.run_pipeline("歌剧演员_获取普攻位置")
                         while time_diff < 238:
                             context.run_pipeline("随机移动")
-                            a_round_times = randint(10,20)
-                            for i in range(a_round_times):
+                            context.run_pipeline("随机视角移动")
+
+                            for i in range(randint(10,20)):
                                 context.run_pipeline("歌剧演员_循环")
                                 i += 1
                                 fight_now_time = time()
+                                time_diff = fight_now_time - fight_start_time
+                                if time_diff >= 238:
+                                    break
+                                
+                            print(context.run_pipeline("fight_赛后_继续_仅识别").nodes)
+
                             fight_now_time = time()
-                            context.run_pipeline("随机视角移动")
-                            if context.run_recognition("fight_赛后_继续_仅识别",argv.image,{}).best_result.text == "继续":
-                                break
                             time_diff = fight_now_time - fight_start_time
+                            context.run_pipeline("随机视角移动")
+                            
                         if time_diff >= 238:
                             context.run_pipeline("fight_打开设置")
                         context.run_pipeline("fight_赛后_继续")
