@@ -24,5 +24,20 @@
     "随机视角移动": {
         "action": "Custom",
         "custom_action": "Vision_move"
+    },
+    "匹配模式点赞": {
+        "recognition": "TemplateMatch",
+        "template": "fight//点赞.png",
+        "roi": [
+            300,
+            490,
+            45,
+            45
+        ],
+        "action": "Click",
+        "target": true,
+        "post_delay": 100,
+        "next": [],
+        "on_error": []
     }
 }

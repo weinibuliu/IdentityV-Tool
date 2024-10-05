@@ -1,7 +1,7 @@
 from json import load,loads
 from time import sleep,time
 from pathlib import Path
-from random import randint
+from random import randint,shuffle
 
 from maa.context import Context
 from maa.custom_action import CustomAction
@@ -20,12 +20,12 @@ def rec_name_list() -> list[str]:
 def rec_list() -> list:
     return []
 def act_name_list() -> list[str]:
-    return ["Fight","Move","Vision_move","OS_round"]
+    return ["Fight","Move","Vision_move","Thumb_ups","OS_round"]
 def act_list() -> list:
     Move = common.Move
     Vision_move = common.Vision_move
     OS_round = Opera_Singer.OS_round
-    return [Fight(),Move(),Vision_move(),OS_round()]
+    return [Fight(),Move(),Vision_move(),Thumb_ups(),OS_round()]
 
 def get_roi_base_on_state(roi_state:str):
     match roi_state:
@@ -40,11 +40,12 @@ def get_roi_base_on_state(roi_state:str):
 
 class Fight(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        
-        context.override_pipeline({"匹配成功":{"post_delay": 7000, "next": []}})
-        
+
         model = "匹配模式"
         character = "歌剧演员"
+
+        context.override_pipeline({"匹配成功":{"post_delay": 7000, "next": []}})
+        context.override_pipeline({"fight_点赞": {"custom_action_param": {"model": model}}})
 
         def fight_main(character:str=character):
             fight_start_time = time()
@@ -102,6 +103,26 @@ class Fight(CustomAction):
         
         return True
     
+class Thumb_ups(CustomAction):
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        model = loads[argv.custom_action_param]["model"]
+        gamer_list = shuffle([1,2,3,4])
+        for i in gamer_list:
+            match i:
+                case 1:
+                    context.override_pipeline({f"{model}点赞":{"roi": [300,490,45,45]}})
+                case 2:
+                    context.override_pipeline({f"{model}点赞":{"roi": [550,490,45,45]}})
+                case 3:
+                    context.override_pipeline({f"{model}点赞":{"roi": [805,490,45,45]}})
+                case 4:
+                    context.override_pipeline({f"{model}点赞":{"roi": [1075,490,45,45]}})
+                case _:
+                    raise (f"Class Error:{__class__.__name__},please contact to the developers.")
+            context.run_pipeline(f"{model}点赞")
+
+        return True
+
 class Check_reputation(CustomRecognition):
     def analyze(self, context: Context, argv: CustomRecognition.AnalyzeArg) -> CustomRecognition.AnalyzeResult:
         roi_state = loads(argv.custom_recognition_param)["roi_state"]

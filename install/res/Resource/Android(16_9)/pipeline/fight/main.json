@@ -322,6 +322,13 @@
         "action": "Click",
         "target": true,
         "next": [
+            "fight_点赞"
+        ]
+    },
+    "fight_点赞": {
+        "action": "Custom",
+        "custom_action": "Thumb_ups",
+        "next": [
             "fight_赛后_返回大厅"
         ]
     },
