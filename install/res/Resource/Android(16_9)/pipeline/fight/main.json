@@ -284,7 +284,9 @@
             115,
             55
         ],
-        "only_rec": true
+        "only_rec": true,
+        "on_error": [],
+        "next": []
     },
     "fight_赛后_继续": {
         "recognition": "OCR",
