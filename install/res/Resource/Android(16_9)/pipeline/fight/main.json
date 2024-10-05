@@ -134,10 +134,8 @@
         "target": true,
         "post_delay": 2000,
         "next": [
+            "fight_拒绝更换阵营",
             "获取匹配时间位置"
-        ],
-        "interrupt": [
-            "fight_拒绝更换阵营"
         ]
     },
     "fight_拒绝更换阵营": {
@@ -152,7 +150,10 @@
             40
         ],
         "action": "Click",
-        "target": true
+        "target": true,
+        "next": [
+            "获取匹配时间位置"
+        ]
     },
     "fight_切换角色": {
         "recognition": "OCR",
