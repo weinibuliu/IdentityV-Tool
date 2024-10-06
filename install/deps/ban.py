@@ -179,6 +179,7 @@ class Ban_Config_Check(CustomAction):
             raise(f"Unexpected Map Error in Hunters:{error_key_list} . \nPlease check {config_path} .")
         
         #检测角色配置
+        error = {}
         for m in s_maps_list: #求生者部分
             ban1 = s_data[m]["Ban1"]
             ban2 = s_data[m]["Ban2"]
@@ -194,6 +195,7 @@ class Ban_Config_Check(CustomAction):
                 s_error_characters_dict.update(error)
                 error = {}
 
+        error = {}
         for m in h_maps_list: #监管者部分
             ban1 = h_data[m]["Ban1"]
             ban2 = h_data[m]["Ban2"]
@@ -215,6 +217,7 @@ class Ban_Config_Check(CustomAction):
             raise ValueError(f"Unexpected Characters Error!\nSurvivors:{s_error_characters_dict}\nPlease check {config_path} .")
         elif h_error_characters_dict != {}:
             raise ValueError(f"Unexpected Characters Error!\nHunters:{h_error_characters_dict}\nPlease check {config_path} .")
+            return False
 
         return True
 
