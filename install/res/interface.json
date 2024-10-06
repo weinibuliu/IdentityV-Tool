@@ -21,6 +21,7 @@
         {
             "name": "PC(16:9)",
             "path": [
+                "{PROJECT_DIR}/resource/Android(16_9)",
                 "{PROJECT_DIR}/resource/PC(16_9)"
             ]
         },
@@ -48,7 +49,7 @@
         },
         {
             "name": "Ban Config 检测测试",
-            "entry": "Check_Ban_Config"
+            "entry": "Ban_Config_Check"
         }
     ],
     "option": {
