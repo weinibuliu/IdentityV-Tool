@@ -185,13 +185,14 @@ class Ban_Config_Check(CustomAction):
 
             if ban1 not in s_list and ban2 not in s_list:
                 error = {f"{m}":{"Ban1":ban1,"Ban2":ban2}}
-                s_error_characters_dict.update(error)
             elif ban1 not in s_list:
                 error = {f"{m}":{"Ban1":ban1}}
-                s_error_characters_dict.update(error)
             elif ban2 not in s_list:
                 error = {f"{m}":{"Ban2":ban2}}
+
+            if error != {}:
                 s_error_characters_dict.update(error)
+                error = {}
 
         for m in h_maps_list: #监管者部分
             ban1 = h_data[m]["Ban1"]
