@@ -141,7 +141,7 @@ class Ban_Config_Check(CustomAction):
             if key != "求生者" and key != "监管者":
                 error_key_list.append(key)
         if error_key_list != []:
-            raise KeyError(f"Unexpected Key Error:{error_key_list},please check {config_path} .")
+            raise ValueError(f"Unexpected Key Error!\n{error_key_list},please check {config_path} .")
 
         maps_list = ban_info.ban_config_check.map_list
         s_list = ban_info.ban_config_check.survivors_list
@@ -199,20 +199,21 @@ class Ban_Config_Check(CustomAction):
 
             if ban1 not in h_list and ban2 not in h_list:
                 error = {f"{m}":{"Ban1":ban1,"Ban2":ban2}}
-                h_error_characters_dict.update(error)
             elif ban1 not in h_list:
                 error = {f"{m}":{"Ban1":ban1}}
-                h_error_characters_dict.update(error)
             elif ban2 not in h_list:
                 error = {f"{m}":{"Ban2":ban2}}
+            
+            if error !={}:
                 h_error_characters_dict.update(error)
+                error = {}
 
         if s_error_characters_dict != {} and h_error_characters_dict != {}:
-            raise ValueError(f"Unexpected Characters Error:\nSurvivors:{s_error_characters_dict}\nHunters:{h_error_characters_dict}\nPlease check {config_path} .")
+            raise ValueError(f"Unexpected Characters Error!\nSurvivors:{s_error_characters_dict}\nHunters:{h_error_characters_dict}\nPlease check {config_path} .")
         elif s_error_characters_dict !={}:
-            raise ValueError(f"Unexpected Characters Error:\nSurvivors:{s_error_characters_dict}\nPlease check {config_path} .")
+            raise ValueError(f"Unexpected Characters Error!\nSurvivors:{s_error_characters_dict}\nPlease check {config_path} .")
         elif h_error_characters_dict != {}:
-            raise ValueError(f"Unexpected Characters Error:\nHunters:{h_error_characters_dict}\nPlease check {config_path} .")
+            raise ValueError(f"Unexpected Characters Error!\nHunters:{h_error_characters_dict}\nPlease check {config_path} .")
 
         return True
 
