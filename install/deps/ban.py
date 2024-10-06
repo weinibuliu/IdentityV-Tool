@@ -18,9 +18,9 @@ def rec_name_list() -> list[str]:
 def rec_list() -> list:
     return [Get_map(),Get_player(),Get_ban_info()]
 def act_name_list() -> list[str]:
-    return ["Ban", "Ban_Config_Check"]
+    return ["Ban"]# + ["Ban_Config_Check"]
 def act_list() -> list:
-    return [Ban(), Ban_Config_Check()]
+    return [Ban()]# + [Ban_Config_Check()]
 
 def get_roi_base_on_state(roi_state:str):
     match roi_state:
@@ -130,6 +130,7 @@ class Get_ban_info(CustomRecognition):
 class Ban_Config_Check(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         config_path = f"{main_path}/config/ban_config.json"
+
         with open(config_path,"r",encoding="utf-8") as f:
             data = dict(load(f))
 
