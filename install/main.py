@@ -13,7 +13,7 @@ def main():
     rec_names = ban.rec_name_list() + notice.rec_name_list() + fight.rec_name_list()
     rec_details = ban.rec_list() + notice.rec_list() + fight.rec_list()
 
-    act_names = ban.act_name_list() + notice.act_name_list() +# fight.act_name_list()
+    act_names = ban.act_name_list() + notice.act_name_list() #+ fight.act_name_list()
     act_details = ban.act_list() + notice.act_list() #+ fight.act_list()
 
     #注册自定义识别器
