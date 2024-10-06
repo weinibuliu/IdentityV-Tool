@@ -346,7 +346,7 @@ class Ban(CustomAction):
                     sleep(0.5)
                     context.run_pipeline("下一页")
                 case _:
-                    raise( ValueError"角色配置文件异常，请联系开发者。")
+                    raise ValueError("角色配置文件异常，请联系开发者。")
                 
             #获取 ban2 roi
             ban2_side = ban2_details["page_side"]
@@ -364,4 +364,5 @@ class Ban(CustomAction):
         else:
             raise ValueError("配置文件结构异常")
         
+        print("禁选配置校验完成")
         return True
