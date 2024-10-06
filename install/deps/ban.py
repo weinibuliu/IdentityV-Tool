@@ -129,7 +129,7 @@ class Get_ban_info(CustomRecognition):
 
 class Ban_Config_Check(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        config_path = f"{main_path}/config/ban_config.json"
+        config_path = fr"{main_path}\config\ban_config.json"
 
         with open(config_path,"r",encoding="utf-8") as f:
             data = dict(load(f))
