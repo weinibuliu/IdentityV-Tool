@@ -145,7 +145,7 @@ class Ban_Config_Check(CustomAction):
 
         maps_list = ban_info.ban_config_check.map_list
         s_list = ban_info.ban_config_check.survivors_list
-        h_list = ban_info.ban_config_check.map_list
+        h_list = ban_info.ban_config_check.hunters_list
 
         s_data = data["求生者"]
         h_data = data["监管者"]
