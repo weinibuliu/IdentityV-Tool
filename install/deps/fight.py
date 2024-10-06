@@ -1,5 +1,5 @@
 from json import load,loads
-from time import sleep,time
+from time import sleep,time,localtime,strftime
 from pathlib import Path
 from random import randint,shuffle
 
@@ -8,8 +8,8 @@ from maa.custom_action import CustomAction
 from maa.custom_recognition import CustomRecognition
 
 from .infos import base_roi
-from .infos import Opera_Singer
 from .infos import common
+from .infos import Opera_Singer
 
 #获取路径
 main_path = Path.cwd()
@@ -40,29 +40,45 @@ def get_roi_base_on_state(roi_state:str):
 
 class Fight(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-
+        current_real_time = strftime("%H:%M:%S",localtime(time()))
         model_list = "匹配模式"
         character_list = "歌剧演员"
         with open(f"{main_path}/config/fight_config.json","r",encoding="utf-8") as f:
             data = load(f)
             
-            character_list = list(data["角色队列"])
-            character_list_random = bool(data["角色队列乱序"])
-            model_list = list(data["模式队列"])
-            model_list_random = bool(["模式队列乱序"])
-            thumbs_up = bool(data["启用赛后点赞"])
-            desktop_notice = bool(data["启用桌面通知"])
-            email_notice = bool(data["启用邮件通知"])
+            base_options = data["基础设置"]
+            character_list = list(base_options["角色队列"])
+            character_list_random = bool(base_options["角色队列乱序"])
+            model_list = list(base_options["模式队列"])
+            model_list_random = bool(base_options["模式队列乱序"])
+            thumbs_up = bool(base_options["启用赛后点赞"])
+            desktop_notice = bool(base_options["启用桌面通知"])
+            email_notice = bool(base_options["启用邮件通知"])
 
-            data = data["停止相关设置"]
-            up_weekly = bool(data["启用周上限限制"])
-            limit_reputation = int(data["最低人品值"])
-            time_limit = bool(data["启用时间限制"])
-            limit_time = int or float(data["限制时间"])
-            times_limit = bool(data["启用次数限制"])
-            limit_times = int(data["限制次数"])
+            stop_options = data["停止相关设置"]
+            up_weekly = bool(stop_options["启用周上限限制"])
+            reputation_limit = int(stop_options["最低人品值"])
+            time_limit = bool(stop_options["启用时间限制"])
+            limit_time = int or float or str(stop_options["限制时间"])
+            times_limit = bool(stop_options["启用次数限制"])
+            limit_times = int(stop_options["限制次数"])
+            
+            check_options = data["检测频率设置"]
+            check_reputation_rate = check_options["检测人品值频率"]
+            check_weely_rate = check_options["检测周上限频率"]
 
-        context.override_pipeline({"fight_检测人品值": {"custom_recognition_param": {"lowest" : limit_reputation}}})
+            stop_dict = {"周上限限制": up_weekly, "时间限制": time_limit, "次数限制": times_limit}
+            del_list = []
+            for key ,value in stop_dict.items():
+                if value == False:
+                    del_list.append(key)
+            for key in del_list:
+                del stop_dict[key]
+            for key,value in ["时间限制","次数限制"],[limit_time,limit_times]:
+                if key in stop_dict.keys():
+                    stop_dict[key] = value
+
+        context.override_pipeline({"fight_检测人品值": {"custom_recognition_param": {"lowest" : reputation_limit}}})
         context.override_pipeline({"匹配成功":{"post_delay": 7000, "next": []}})
 
         def fight_main(character:str):
@@ -99,7 +115,11 @@ class Fight(CustomAction):
                 context.run_pipeline("fight_打开设置")
                 context.run_pipeline("fight_赛后_继续")
 
+        def fight_hide_main():
+            pass
+
         def ready(model:str,character:str) -> None:
+            context.override_pipeline({"检测是否进入游戏": {"next" :[], "on_error": []}})
             context.run_pipeline("fight_点击书")
             sleep(0.5)
             context.run_pipeline(f"fight_{model}")
@@ -114,7 +134,7 @@ class Fight(CustomAction):
                 context.run_pipeline("fight_切换角色")
 
             elif model == "捉迷藏":
-                pass
+                context.run_pipeline("fight_准备开始")
 
             else:
                 raise (f"Class Error:{__class__.__name__},please contact to the developers.")
@@ -123,24 +143,39 @@ class Fight(CustomAction):
                  model_list:list=model_list,model_list_random:bool=model_list_random,
                  character_list:list=character_list,character_list_random:bool=character_list_random,
                  thumbs_up:bool=thumbs_up,
-                 limit_reputation:int=limit_reputation,up_weekly:bool=up_weekly,
+                 reputation_limit:int=reputation_limit,up_weekly:bool=up_weekly,
                  time_limit:bool=time_limit,limit_time:int|float=limit_time,
                  times_limit:bool=times_limit,limit_times:int=limit_times,
-                 ):
+                 ) -> None:
 
-            def list_ramdon(m_list_random:bool=model_list_random,c_list_random:bool=character_list_random):
+
+            character_list_len = len(character_list)
+            if character_list_len == 1:
+                pass
+
+            def list_ramdon(m_list_random:bool=model_list_random,c_list_random:bool=character_list_random): #模式、角色队列乱序
                 if m_list_random == True:
                     shuffle(model_list)
                 if c_list_random == True:
                     shuffle(character_list)
 
-            list_ramdon()
-            for model,character in zip(model_list,character_list):
+            if thumbs_up == False:
+                context.override_pipeline({"fight_赛后_继续": {"next": ["fight_赛后_返回大厅"]}})
+            else:
                 context.override_pipeline({"fight_点赞": {"custom_action_param": {"model": model}}})
-                ready(model)
-                fight_main(character)
-                if thumbs_up == False:
-                    context.override_pipeline({"fight_赛后_继续": {"next": ["fight_赛后_返回大厅"]}})
+
+
+            while True:
+                list_ramdon()
+                for character in character_list:
+                    for model in model_list:
+                        ready(model,character)
+                        if model == "匹配模式" or model == "排位模式":
+                            fight_main(character)
+                        elif model == "捉迷藏":
+                            pass
+                        else:
+                            raise (f"Class Error:{__class__.__name__},please contact to the developers.")
 
         main()
         
@@ -207,3 +242,8 @@ class Check_weekly(CustomRecognition):
     def analyze(self, context: Context, argv: CustomRecognition.AnalyzeArg) -> None:
         pass
         return None
+    
+
+class Fight_Config_Check(CustomAction):
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        return True

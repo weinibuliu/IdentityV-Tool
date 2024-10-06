@@ -1,4 +1,8 @@
 {
+    "Check_Ban_Config": {
+        "action": "Custom",
+        "custom_action": "Check_Ban_Config"
+    },
     "Start": {
         "rate_limit": 2000,
         "timeout": 25000,
@@ -11,7 +15,10 @@
         "timeout": 6000,
         "recognition": "OCR",
         "expected": [
-            "普通匹配中"
+            "普通匹配中",
+            "准备",
+            "案件还原",
+            "准备案件还原"
         ],
         "post_delay": 3000,
         "next": [
@@ -66,6 +73,21 @@
         "action": "Click",
         "target": true,
         "next": [
+            "检测是否进入游戏",
+            "尝试重新获取匹配时间位置"
+        ]
+    },
+    "检测是否进入游戏": {
+        "recognition": "TemplateMatch",
+        "template": "fight//点击书.png",
+        "roi": [
+            1175,
+            490,
+            60,
+            50
+        ],
+        "inverse": true,
+        "next": [
             "匹配成功_桌面通知"
         ]
     },
@@ -87,7 +109,7 @@
         "next": [
             "获取匹配时间位置"
         ],
-        "timeout": 8000,
+        "timeout": 6000,
         "post_delay": 1000
     }
 }

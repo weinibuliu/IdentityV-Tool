@@ -54,3 +54,4 @@ class Android16_9:
         roi_getplayer = [270,10,90,40]
         
         roi_getreputation = [535,445,75,35]
+        roi_getweekly = [460,30,65,35]

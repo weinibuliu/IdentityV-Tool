@@ -47,16 +47,8 @@
             "entry": "fight_登录后界面检测"
         },
         {
-            "name": "禁用测试",
-            "entry": "检测地图状态"
-        },
-        {
-            "name": "通知测试",
-            "entry": "匹配成功_桌面通知",
-            "option": [
-                "是否启用桌面通知",
-                "是否启用邮件通知"
-            ]
+            "name": "Ban Config 检测测试",
+            "entry": "Check_Ban_Config"
         }
     ],
     "option": {

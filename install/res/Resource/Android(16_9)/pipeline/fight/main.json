@@ -105,6 +105,85 @@
         "action": "Click",
         "target": true
     },
+    "fight_捉迷藏": {
+        "recognition": "OCR",
+        "expected": [
+            "混沌纷争",
+            "混沌",
+            "纷争"
+        ],
+        "roi": [
+            675,
+            285,
+            160,
+            55
+        ],
+        "action": "Click",
+        "target": true,
+        "next": [
+            "fight_选择捉迷藏"
+        ]
+    },
+    "fight_选择捉迷藏": {
+        "recognition": "OCR",
+        "expected": [
+            "捉迷藏",
+            "捉",
+            "迷",
+            "藏"
+        ],
+        "roi": [
+            550,
+            415,
+            110,
+            45
+        ],
+        "action": "Click",
+        "target": true,
+        "next": [
+            "fight_捉迷藏_选择坏孩子"
+        ]
+    },
+    "fight_捉迷藏_选择坏孩子": {
+        "recognition": "OCR",
+        "expected": [
+            "坏孩子",
+            "坏",
+            "孩子"
+        ],
+        "roi": [
+            110,
+            210,
+            105,
+            55
+        ],
+        "action": "Click",
+        "target": true,
+        "next": [
+            "fight_捉迷藏_开始匹配"
+        ]
+    },
+    "fight_捉迷藏_开始匹配": {
+        "recognition": "OCR",
+        "expected": [
+            "开始案件",
+            "案件还原",
+            "开始",
+            "案件",
+            "还原"
+        ],
+        "roi": [
+            545,
+            585,
+            195,
+            60
+        ],
+        "action": "Click",
+        "target": true,
+        "next": [
+            "获取匹配时间位置"
+        ]
+    },
     "fight_点击监管者": {
         "recognition": "TemplateMatch",
         "template": "fight//点击监管者.png",
