@@ -1,7 +1,7 @@
 {
-    "Check_Ban_Config": {
+    "Ban_Config_Check": {
         "action": "Custom",
-        "custom_action": "Check_Ban_Config"
+        "custom_action": "Ban_Check_Config"
     },
     "Start": {
         "rate_limit": 2000,
