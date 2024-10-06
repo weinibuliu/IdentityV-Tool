@@ -29,7 +29,7 @@ def get_roi_base_on_state(roi_state:str):
         case "Android16_9":
             roi = base_roi.Android16_9
         case _:
-            raise("roi 声明参数异常，请联系开发者。")
+            raise ValueError("roi 声明参数异常，请联系开发者。")
         
     return roi
 
@@ -141,7 +141,7 @@ class Ban_Config_Check(CustomAction):
             if key != "求生者" and key != "监管者":
                 error_key_list.append(key)
         if error_key_list != []:
-            raise(f"Unexpected Key Error:{error_key_list},please check {config_path} .")
+            raise KeyError(f"Unexpected Key Error:{error_key_list},please check {config_path} .")
 
         maps_list = ban_info.ban_config_check.map_list
         s_list = ban_info.ban_config_check.survivors_list
@@ -153,10 +153,10 @@ class Ban_Config_Check(CustomAction):
         #检测地图完整性
         s_maps_list = s_data.keys()
         if set(s_maps_list) != set(maps_list):
-            raise (f"Survivors'Maps are Incomplete,please check {config_path} .")
+             raise ValueError(f"Survivors'Maps are Incomplete,please check {config_path} .")
         h_maps_list = h_data.keys()
         if set(h_maps_list) != set(maps_list):
-            raise (f"Hunters'Maps are Incomplete,please check {config_path} .")
+            raise ValueError(f"Hunters'Maps are Incomplete,please check {config_path} .")
 
         s_error_maps_list = []
         h_error_maps_list = []
@@ -208,11 +208,11 @@ class Ban_Config_Check(CustomAction):
                 h_error_characters_dict.update(error)
 
         if s_error_characters_dict != {} and h_error_characters_dict != {}:
-            raise(f"Unexpected Characters Error:\nSurvivors:{s_error_characters_dict}\nHunters:{h_error_characters_dict}\nPlease check {config_path} .")
+            raise ValueError(f"Unexpected Characters Error:\nSurvivors:{s_error_characters_dict}\nHunters:{h_error_characters_dict}\nPlease check {config_path} .")
         elif s_error_characters_dict !={}:
-            raise(f"Unexpected Characters Error:\nSurvivors:{s_error_characters_dict}\nPlease check {config_path} .")
+            raise ValueError(f"Unexpected Characters Error:\nSurvivors:{s_error_characters_dict}\nPlease check {config_path} .")
         elif h_error_characters_dict != {}:
-            raise(f"Unexpected Characters Error:\nHunters:{h_error_characters_dict}\nPlease check {config_path} .")
+            raise ValueError(f"Unexpected Characters Error:\nHunters:{h_error_characters_dict}\nPlease check {config_path} .")
 
         return True
 
@@ -244,7 +244,7 @@ class Ban(CustomAction):
                     sleep(0.5)
                     context.run_pipeline("下一页")
                 case _:
-                    raise("角色配置文件异常，请联系开发者。")
+                    raise ValueError("角色配置文件异常，请联系开发者。")
 
             if ban1 != "厂长":
                 context.override_pipeline({"Ban1":{
@@ -307,7 +307,7 @@ class Ban(CustomAction):
                     sleep(0.5)
                     context.run_pipeline("下一页")
                 case _:
-                    raise("角色配置文件异常，请联系开发者。")
+                    raise ValueError("角色配置文件异常，请联系开发者。")
 
             #获取 ban1 roi
             ban1_side = ban1_details["page_side"]
@@ -346,7 +346,7 @@ class Ban(CustomAction):
                     sleep(0.5)
                     context.run_pipeline("下一页")
                 case _:
-                    raise("角色配置文件异常，请联系开发者。")
+                    raise( ValueError"角色配置文件异常，请联系开发者。")
                 
             #获取 ban2 roi
             ban2_side = ban2_details["page_side"]
@@ -362,6 +362,6 @@ class Ban(CustomAction):
             context.run_pipeline("确认禁用")
 
         else:
-            raise("配置文件结构异常")
+            raise ValueError("配置文件结构异常")
         
         return True
