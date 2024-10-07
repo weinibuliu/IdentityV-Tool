@@ -97,12 +97,6 @@
 - **[pyinstaller](https://github.com/pyinstaller/pyinstaller)**\
   bundles a Python application and all its dependencies into a single package. 
 
-- **[action-gh-release](https://github.com/softprops/action-gh-release)**\
-  A GitHub Action for creating GitHub Releases on Linux, Windows, and macOS virtual environments.
-
-- **[Github Release Downloader](https://github.com/robinraju/release-downloader)**\
-  A Github Action to download assets from Github release. It can download specified files from both private and public repositories.
-
 ### 开发者
 感谢所有为 **IVT** 做出贡献的开发者：\
 <a href="https://github.com/weinibuliu/IdentityV-Tool/graphs/contributors">

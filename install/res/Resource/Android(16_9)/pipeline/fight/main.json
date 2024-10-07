@@ -511,7 +511,8 @@
             "记录"
         ],
         "action": "Click",
-        "target": true
+        "target": true,
+        "post_delay": 1500
     },
     "fight_点击个人名片": {
         "recognition": "TemplateMatch",
@@ -618,6 +619,6 @@
     },
     "fight_歌剧演员战斗测试": {
         "action": "Custom",
-        "custom_action": "Fight"
+        "custom_action": "Fight_Test"
     }
 }

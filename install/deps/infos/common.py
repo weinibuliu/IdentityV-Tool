@@ -20,7 +20,7 @@ class Move(CustomAction):
             context.run_pipeline("基础移动")
 
         direction = randint(0,3)   
-        move(direction,10000)
+        move(direction,8000)
 
         return True
     
@@ -37,6 +37,6 @@ class Vision_move(CustomAction):
             context.run_pipeline("基础视角移动")
 
         direction = randint(0,1)
-        move(direction,3000)
+        move(direction,1500)
         
         return True
