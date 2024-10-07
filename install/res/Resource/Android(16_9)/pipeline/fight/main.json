@@ -19,6 +19,7 @@
             60,
             50
         ],
+        "threshold": 0.9,
         "next": [
             "fight_start"
         ]
