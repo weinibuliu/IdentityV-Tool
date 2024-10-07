@@ -1,6 +1,6 @@
 <div align="center">
 
-# IdentityV_Tools (IVT)
+# IdentityV-Tools (IVT)
 
 **[快速开始](docs/zh-cn/Start/快速开始.md) | [常见问题](docs/zh-cn/Questions/常见问题.md) | [开发文档](docs/zh-cn/Bulid/开发文档.md)**
 
@@ -71,7 +71,7 @@
 ## 联系我们
 - **在本仓库中提 issue（强烈推荐！！！）**
 - **QQ群 995755294**\
-  (进群答案为本仓库地址，即 `github.com/weinibuliu/IdentityV_Tool` )
+  (进群答案为本仓库地址，即 `github.com/weinibuliu/IdentityV-Tool` )
 - 邮箱 `weinibuliu@outlook.com`
 
 ## 支持我们
@@ -105,8 +105,8 @@
 
 ### 开发者
 感谢所有为 **IVT** 做出贡献的开发者：\
-<a href="https://github.com/weinibuliu/IdentityV_Tool/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=weinibuliu/IdentityV_Tool&max=1000" />
+<a href="https://github.com/weinibuliu/IdentityV-Tool/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=weinibuliu/IdentityV-Tool&max=1000" />
 </a>
 
 ### 项目 Logo 绘制
