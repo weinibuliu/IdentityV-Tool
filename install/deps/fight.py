@@ -146,13 +146,16 @@ class Fight(CustomAction):
                 if c_list_random == True:
                     shuffle(character_list)
 
+            stop_time = int(0)
             stop_keys = list(stop_dict.keys())
             if "限制时间" in stop_keys:
                 current_time = int(time())
                 limit_time = int or float(stop_dict["限制时间"])
-                if type(limit_time) == int:
+                if limit_time == False:
+                    pass
+                elif type(limit_time) == int:
                     stop_time = int(current_time + limit_time*60)
-                if type(limit_time) == float:
+                elif type(limit_time) == float:
                     limit_time = round(limit_time,1)
                     stop_time = int(current_time + limit_time*60*60)
 
@@ -164,7 +167,6 @@ class Fight(CustomAction):
             weekly = bool(True)
             limit_time = bool(True)
 
-            stop_time = int(stop_time)
             real_time = int(time())
             fight_times_weekly = int(0)
             fight_times_reputation = int(0)
@@ -173,7 +175,7 @@ class Fight(CustomAction):
                 list_ramdon()
                 real_time = int(time())
                 for character in character_list:
-                    if real_time >= stop_time:
+                    if stop_time != False and real_time >= stop_time:
                         limit_time = False
                         break
                     if weekly == False or limit_time == False or limit_times == False:
@@ -182,7 +184,7 @@ class Fight(CustomAction):
                     for model in model_list:
                         if weekly == False or limit_times == False:
                             break
-                        if real_time >= stop_time:
+                        if stop_time != False and real_time >= stop_time:
                             limit_time = False
                             break
 
