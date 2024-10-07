@@ -276,7 +276,7 @@
     },
     "fight_选择角色": {
         "recognition": "TemplateMatch",
-        "template": "ban//charaters//厂长.png",
+        "template": "charaters//厂长.png",
         "roi": [
             185,
             110,
@@ -456,17 +456,82 @@
         "action": "Click",
         "target": true
     },
-    "fight_检测人品值": {
-        "recognition": "Custom",
-        "custom_recognition": "Check_reputation",
-        "custom_recognition_param": {}
+    "fight_检测周上限_打开骰子": {
+        "recognition": "ColorMatch",
+        "lower": [
+            120,
+            150,
+            180
+        ],
+        "upper": [
+            135,
+            165,
+            195
+        ],
+        "method": 4,
+        "count": 10,
+        "order_by": "Random",
+        "roi": [
+            650,
+            20,
+            55,
+            55
+        ],
+        "action": "Click",
+        "target": true
     },
-    "fight_人品值低_桌面提醒": {
+    "fight_检测周上限": {
+        "recognition": "OCR",
+        "roi": [
+            460,
+            30,
+            70,
+            35
+        ],
+        "only_rec": true
+    },
+    "fight_检测人品值_打开个人名片": {
+        "recognition": "ColorMatch",
+        "lower": [
+            145,
+            170,
+            190
+        ],
+        "upper": [
+            160,
+            180,
+            205
+        ],
+        "method": 4,
+        "count": 10,
+        "order_by": "Random",
+        "roi": [
+            995,
+            25,
+            55,
+            45
+        ],
+        "action": "Click",
+        "target": true,
         "next": [
-            "fight_人品值低_邮件提醒"
+            "fight_检测人品值_点击我的战斗"
         ]
     },
-    "fight_人品值低_邮件提醒": {},
+    "fight_检测人品值_点击我的战斗": {
+        "recognition": "OCR",
+        "expected": [
+            "我的战斗",
+            "战斗"
+        ],
+        "roi": [
+            10,
+            200,
+            105,
+            35
+        ],
+        "action": "Click",
+        "target": true
+    },
     "战斗测试": {
         "action": "Custom",
         "custom_action": "Fight"
