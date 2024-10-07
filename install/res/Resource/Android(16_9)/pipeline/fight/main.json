@@ -272,11 +272,13 @@
             45
         ],
         "action": "Click",
-        "target": true
+        "target": true,
+        "next": [
+            "fight_选择角色"
+        ]
     },
     "fight_选择角色": {
         "recognition": "TemplateMatch",
-        "template": "charaters//厂长.png",
         "roi": [
             185,
             110,
@@ -308,12 +310,31 @@
         ],
         "action": "Click",
         "target": true,
+        "post_delay": 2000,
+        "next": [
+            "fight_等待全体玩家准备"
+        ]
+    },
+    "fight_等待全体玩家准备": {
+        "recognition": "OCR",
+        "expected": [
+            "取消准备",
+            "准备"
+        ],
+        "roi": [
+            1010,
+            630,
+            115,
+            40
+        ],
+        "inverse": true,
+        "post_delay": 2000,
         "next": [
             "fight_等待加载"
         ]
     },
     "fight_等待加载": {
-        "timeout": 20000,
+        "timeout": 15000,
         "recognition": "TemplateMatch",
         "template": "fight//等待加载.png",
         "roi": [
