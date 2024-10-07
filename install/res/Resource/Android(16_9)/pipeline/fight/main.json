@@ -25,6 +25,17 @@
             "fight_start"
         ]
     },
+    "fight_返回大厅界面检测成功_仅检测": {
+        "recognition": "TemplateMatch",
+        "template": "fight//点击书.png",
+        "roi": [
+            1175,
+            490,
+            60,
+            50
+        ],
+        "threshold": 0.95
+    },
     "fight_start": {
         "action": "Custom",
         "custom_action": "Fight",
@@ -257,7 +268,6 @@
         "recognition": "OCR",
         "expected": [
             "准备开始",
-            "准备",
             "开始"
         ],
         "roi": [
@@ -365,6 +375,7 @@
             100,
             100
         ],
+        "post_delay": 6500,
         "inverse": true
     },
     "fight_打开设置": {
@@ -468,9 +479,39 @@
             50
         ],
         "action": "Click",
+        "post_delay": 2000,
         "next": [
-            "fight_等待加载"
+            "fight_赛后_等待加载"
         ]
+    },
+    "fight_赛后_等待加载": {
+        "timeout": 15000,
+        "recognition": "TemplateMatch",
+        "template": "fight//等待加载.png",
+        "roi": [
+            0,
+            0,
+            100,
+            100
+        ],
+        "post_delay": 2000,
+        "inverse": true,
+        "next": [
+            "fight_返回大厅界面检测成功_仅检测"
+        ],
+        "interrupt": [
+            "fight_活动_确认记录"
+        ]
+    },
+    "fight_活动_确认记录": {
+        "recognition": "OCR",
+        "expected": [
+            "确认记录",
+            "确认",
+            "记录"
+        ],
+        "action": "Click",
+        "target": true
     },
     "fight_点击个人名片": {
         "recognition": "TemplateMatch",

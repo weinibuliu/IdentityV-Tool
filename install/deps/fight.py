@@ -19,12 +19,12 @@ def rec_name_list() -> list[str]:
 def rec_list() -> list:
     return []
 def act_name_list() -> list[str]:
-    return ["Fight","Move","Vision_move","Thumb_ups"] + ["OS_round"]
+    return ["Fight","Move","Vision_move","Thumb_ups"] + ["OS_round"] + ["Fight_Test"]
 def act_list() -> list:
     Move = common.Move
     Vision_move = common.Vision_move
     OS_round = Opera_Singer.OS_round
-    return [Fight(),Move(),Vision_move(),Thumb_ups()] + [OS_round()]
+    return [Fight(),Move(),Vision_move(),Thumb_ups()] + [OS_round()] + [Fight_Test()]
 
 def get_roi_base_on_state(roi_state:str):
     match roi_state:
@@ -96,6 +96,8 @@ class Fight(CustomAction):
                         check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image).best_result.text
                         if check_fight_statu == "继续":
                             break
+                        else:
+                            pass
                         
                         fight_now_time = time()
                         time_diff = fight_now_time - fight_start_time
@@ -224,7 +226,49 @@ class Fight(CustomAction):
         main()
         
         return True
-    
+
+class Fight_Test(CustomAction):
+    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
+        def fight_main(character:str="歌剧演员"): #debug 阶默认为歌剧演员，测试结束后请去除默认值
+            fight_start_time = time()
+            time_diff = 0
+            match character:
+                case "歌剧演员":
+                    context.run_pipeline("歌剧演员_获取影跃位置")
+                    context.run_pipeline("歌剧演员_获取普攻位置")
+                    while time_diff < 235:
+                        context.run_pipeline("随机移动")
+                        context.run_pipeline("随机视角移动")
+
+                        for i in range(randint(10,20)):
+                            context.run_pipeline("歌剧演员_循环")
+                            i += 1
+                            fight_now_time = time()
+                            time_diff = fight_now_time - fight_start_time
+                            if time_diff >= 235:
+                                break
+
+                        check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image).best_result.text
+                        if check_fight_statu == "继续":
+                            break
+                        else:
+                            pass
+                        
+                        fight_now_time = time()
+                        time_diff = fight_now_time - fight_start_time
+                        context.run_pipeline("随机视角移动")
+
+                case _:
+                    raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
+                
+            if time_diff >= 235:
+                context.run_pipeline("fight_打开设置")
+                context.run_pipeline("fight_赛后_继续")
+
+        fight_main()
+        
+        return True
+ 
 class Thumb_ups(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         model = loads[argv.custom_action_param]["model"]
