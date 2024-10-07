@@ -93,11 +93,9 @@ class Fight(CustomAction):
                             if time_diff >= 235:
                                 break
 
-                        check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image).best_result.text
-                        if check_fight_statu == "继续":
+                        check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image)
+                        if check_fight_statu is not None:
                             break
-                        else:
-                            pass
                         
                         fight_now_time = time()
                         time_diff = fight_now_time - fight_start_time
@@ -248,13 +246,10 @@ class Fight_Test(CustomAction):
                             if time_diff >= 235:
                                 break
 
-                        #check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image).best_result.text
                         check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image)
                         print(check_fight_statu)
-                        if check_fight_statu == "继续":
+                        if check_fight_statu is not None:
                             break
-                        else:
-                            pass
                         
                         fight_now_time = time()
                         time_diff = fight_now_time - fight_start_time
