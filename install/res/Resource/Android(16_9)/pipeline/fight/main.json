@@ -6,6 +6,7 @@
         "interrupt": [
             "退出活动公告",
             "退出首充活动",
+            "退出灯火",
             "退出新手活动"
         ]
     },
@@ -47,6 +48,22 @@
             20,
             70,
             60
+        ],
+        "action": "Click",
+        "target": true
+    },
+    "退出灯火": {
+        "recognition": "OCR",
+        "expected": [
+            "稍后查看",
+            "稍后",
+            "查看"
+        ],
+        "roi": [
+            415,
+            390,
+            145,
+            45
         ],
         "action": "Click",
         "target": true
