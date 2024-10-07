@@ -63,7 +63,7 @@ class Fight(CustomAction):
             check_reputation_rate = check_options["检测人品值频率"]
             check_weely_rate = check_options["检测周上限频率"]
 
-            stop_dict = {"周上限限制": up_weekly, "时间限制": limit_time, "次数限制": limit_time}
+            stop_dict = {"周上限限制": up_weekly, "限制时间": limit_time, "限制次数": limit_time}
             del_list = []
             for key,value in list(stop_dict.items()):
                 if value == False:
@@ -138,8 +138,7 @@ class Fight(CustomAction):
                  thumbs_up:bool=thumbs_up,
                  reputation_limit:int=reputation_limit,up_weekly:bool=up_weekly,
                  limit_time:int|float=limit_time,limit_times:int=limit_times,
-                 check_reputation_rate = check_reputation_rate , check_weely_rate = check_weely_rate
-                 ) -> None:
+                 check_reputation_rate:int=check_reputation_rate , check_weely_rate:int=check_weely_rate):
 
             def list_ramdon(m_list_random:bool=model_list_random,c_list_random:bool=character_list_random): #模式、角色队列乱序
                 if m_list_random == True:
@@ -148,9 +147,9 @@ class Fight(CustomAction):
                     shuffle(character_list)
 
             stop_keys = list(stop_dict.keys())
-            if "时间限制" in stop_keys:
+            if "限制时间" in stop_keys:
                 current_time = int(time())
-                limit_time = int or float(stop_dict["时间限制"])
+                limit_time = int or float(stop_dict["限制时间"])
                 if type(limit_time) == int:
                     stop_time = current_time + limit_time*60
                 if type(limit_time) == float:
@@ -158,8 +157,8 @@ class Fight(CustomAction):
                     stop_time = current_time + limit_time*60*60
                 limit_time = True
 
-            if "次数限制" in stop_keys:
-                limit_time = int(stop_dict["次数限制"])
+            if "限制次数" in stop_keys:
+                limit_time = int(stop_dict["限制次数"])
             else:
                 limit_times = int(-1)
             
