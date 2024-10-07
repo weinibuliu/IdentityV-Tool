@@ -14,9 +14,9 @@ main_path = Path.cwd()
 
 #传出 custom 信息
 def rec_name_list() -> list[str]:
-    return ["Get_map","Get_player","Get_ban_info"]
+    return ["Get_Map","Get_Player","Get_Ban_Info"]
 def rec_list() -> list:
-    return [Get_map(),Get_player(),Get_ban_info()]
+    return [Get_Map(),Get_Player(),Get_Ban_Info()]
 def act_name_list() -> list[str]:
     return ["Ban"] + ["Ban_Config_Check"]
 def act_list() -> list:
@@ -43,7 +43,7 @@ def get_location_roi(side:str,location:int|str,roi_state:str) -> list[int]:
 
     return ban_roi
 
-class Get_map(CustomRecognition):
+class Get_Map(CustomRecognition):
     def analyze(self, context: Context, argv: CustomRecognition.AnalyzeArg) -> CustomRecognition.AnalyzeResult:
         roi_state = loads(argv.custom_recognition_param)["roi_state"]
         roi = get_roi_base_on_state(roi_state)
@@ -70,7 +70,7 @@ class Get_map(CustomRecognition):
 
         return CustomRecognition.AnalyzeResult(box=(),detail="")
     
-class Get_player(CustomRecognition):
+class Get_Player(CustomRecognition):
     def analyze(self, context: Context, argv: CustomRecognition.AnalyzeArg) -> CustomRecognition.AnalyzeResult:
         map_info = loads(argv.custom_recognition_param)["map_info"]
         roi_state = loads(argv.custom_recognition_param)["roi_state"]
@@ -90,7 +90,7 @@ class Get_player(CustomRecognition):
         return CustomRecognition.AnalyzeResult(box=(),detail="")
     
 
-class Get_ban_info(CustomRecognition):
+class Get_Ban_Info(CustomRecognition):
     def analyze(self, context: Context, argv: CustomRecognition.AnalyzeArg) -> CustomRecognition.AnalyzeResult:
         
         infos = loads(argv.custom_recognition_param)

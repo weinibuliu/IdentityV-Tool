@@ -1,7 +1,7 @@
 {
     "检测地图": {
         "recognition": "Custom",
-        "custom_recognition": "Get_map",
+        "custom_recognition": "Get_Map",
         "custom_recognition_param": {
             "roi_state": "PC16_9"
         },
@@ -11,14 +11,14 @@
     },
     "检测阵营": {
         "recognition": "Custom",
-        "custom_recognition": "Get_player",
+        "custom_recognition": "Get_Player",
         "next": [
             "读取禁选信息"
         ]
     },
     "读取禁选信息": {
         "recognition": "Custom",
-        "custom_recognition": "Get_ban_info",
+        "custom_recognition": "Get_Ban_Info",
         "next": [
             "禁选角色"
         ]

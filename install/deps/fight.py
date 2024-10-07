@@ -19,12 +19,13 @@ def rec_name_list() -> list[str]:
 def rec_list() -> list:
     return []
 def act_name_list() -> list[str]:
-    return ["Fight","Move","Vision_move","Thumb_ups"] + ["OS_round"] + ["Fight_Test"]
+    return ["Fight","Move","Vision_Move","Thumb_Ups"] + ["Hide_Mixed_Move_Click"] + ["OS_Round"]
 def act_list() -> list:
     Move = common.Move
-    Vision_move = common.Vision_move
-    OS_round = Opera_Singer.OS_round
-    return [Fight(),Move(),Vision_move(),Thumb_ups()] + [OS_round()] + [Fight_Test()]
+    Vision_Move = common.Vision_Move
+    Hide_Mixed_Move_Click = common.Hide_Mixed_Move_Click
+    OS_Round = Opera_Singer.OS_Round
+    return [Fight(),Move(),Vision_Move(),Thumb_Ups()] + [Hide_Mixed_Move_Click()] + [OS_Round()]
 
 def get_roi_base_on_state(roi_state:str):
     match roi_state:
@@ -71,10 +72,9 @@ class Fight(CustomAction):
             for key in del_list:
                 del stop_dict[key]
 
-        context.override_pipeline({"fight_检测人品值": {"custom_recognition_param": {"lowest" : reputation_limit}}})
         context.override_pipeline({"匹配成功":{"post_delay": 7000, "next": []}})
 
-        def fight_main(character:str="歌剧演员"): #debug 阶默认为歌剧演员，测试结束后请去除默认值
+        def fight_main(character:str):
             fight_start_time = time()
             time_diff = 0
             match character:
@@ -108,8 +108,18 @@ class Fight(CustomAction):
                 context.run_pipeline("fight_打开设置")
                 context.run_pipeline("fight_赛后_继续")
 
-        def fight_hide_main():
-            pass
+        def hide_main():
+            context.run_pipeline("fight_捉迷藏变身")
+            task_statu = None
+            task_statu = context.run_pipeline("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
+            
+            while task_statu is None:
+                context.run_pipeline("随机视角移动")
+                sleep(randint(1,3))
+                context.run_pipeline("捉迷藏移动与跳跃")
+
+            sleep(5)
+            context.run_pipeline("fight_点赞")
 
         def ready(model:str,character:str) -> None:
             context.override_pipeline({"检测是否进入游戏": {"next" :[], "on_error": []}})
@@ -197,7 +207,7 @@ class Fight(CustomAction):
                         if model == "匹配模式" or model == "排位模式":
                             fight_main(character)
                         elif model == "捉迷藏":
-                            pass
+                            hide_main()
                         else:
                             raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
 
@@ -224,79 +234,38 @@ class Fight(CustomAction):
         main()
         
         return True
-
-class Fight_Test(CustomAction):
-    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        def fight_main(character:str="歌剧演员"): #debug 阶默认为歌剧演员，测试结束后请去除默认值
-            fight_start_time = time()
-            time_diff = 0
-            match character:
-                case "歌剧演员":
-                    context.run_pipeline("歌剧演员_获取影跃位置")
-                    context.run_pipeline("歌剧演员_获取普攻位置")
-                    while time_diff < 235:
-                        context.run_pipeline("随机移动")
-                        context.run_pipeline("随机视角移动")
-
-                        for i in range(randint(10,20)):
-                            context.run_pipeline("歌剧演员_循环")
-                            i += 1
-                            fight_now_time = time()
-                            time_diff = fight_now_time - fight_start_time
-                            if time_diff >= 235:
-                                break
-
-                        check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image)
-                        print(check_fight_statu)
-                        if check_fight_statu is not None:
-                            break
-                        
-                        fight_now_time = time()
-                        time_diff = fight_now_time - fight_start_time
-                        context.run_pipeline("随机视角移动")
-
-                case _:
-                    raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
-                
-            if time_diff >= 235:
-                context.run_pipeline("fight_打开设置")
-
-            context.run_pipeline("fight_赛后_继续")
-
-        fight_main()
-        
-        return True
  
-class Thumb_ups(CustomAction):
+class Thumb_Ups(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         model = loads[argv.custom_action_param]["model"]
-        if model == "匹配模式":
+        if model == "匹配模式" or model == "排位模式":
             gamer_list = list[1,2,3,4]
             shuffle(gamer_list)
             for i in gamer_list:
                 match i:
                     case 1:
-                        context.override_pipeline({f"{model}点赞":{"roi": [300,490,45,45]}})
+                        context.override_pipeline({"常规模式点赞":{"roi": [300,490,45,45]}})
                     case 2:
-                        context.override_pipeline({f"{model}点赞":{"roi": [550,490,45,45]}})
+                        context.override_pipeline({"常规模式点赞":{"roi": [550,490,45,45]}})
                     case 3:
-                        context.override_pipeline({f"{model}点赞":{"roi": [805,490,45,45]}})
+                        context.override_pipeline({"常规模式点赞":{"roi": [805,490,45,45]}})
                     case 4:
-                        context.override_pipeline({f"{model}点赞":{"roi": [1075,490,45,45]}})
+                        context.override_pipeline({"常规模式点赞":{"roi": [1075,490,45,45]}})
                     case _:
                         raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
-                context.run_pipeline(f"{model}点赞")   
+                context.run_pipeline("常规模式点赞")   
         elif model == "捉迷藏":
             gamer_list = list[1,2]
             shuffle(gamer_list)
             for i in gamer_list:
                 match i:
                     case 1:
-                        pass
+                        context.override_pipeline({"捉迷藏点赞":{"roi": [235,170,30,35]}})
                     case 2:
-                        pass
+                        context.override_pipeline({"捉迷藏点赞":{"roi": [965,170,30,35]}})
                     case _:
                         raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
+                context.run_pipeline("捉迷藏点赞") 
         else:
             raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
 

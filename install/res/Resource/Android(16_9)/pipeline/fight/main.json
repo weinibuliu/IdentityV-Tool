@@ -214,6 +214,30 @@
             "获取匹配时间位置"
         ]
     },
+    "fight_捉迷藏变身": {
+        "recognition": "ColorMatch",
+        "lower": [
+            175,
+            180,
+            190
+        ],
+        "upper": [
+            190,
+            200,
+            200
+        ],
+        "conut": 10,
+        "order_by": "Random",
+        "roi": [
+            1180,
+            310,
+            60,
+            60
+        ],
+        "action": "Click",
+        "target": true,
+        "post_delay": 1500
+    },
     "fight_点击监管者": {
         "recognition": "TemplateMatch",
         "template": "fight//点击监管者.png",
@@ -325,7 +349,6 @@
         ]
     },
     "fight_准备开始": {
-        "timeout": 50000,
         "recognition": "OCR",
         "expected": [
             "准备开始",
@@ -348,6 +371,8 @@
         ]
     },
     "fight_等待全体玩家准备": {
+        "timeout": 50000,
+        "rate_limit": 2000,
         "recognition": "OCR",
         "expected": [
             "取消准备",
@@ -385,6 +410,10 @@
             15,
             30,
             30
+        ],
+        "post_delay": 800,
+        "next": [
+            "fight_投降"
         ]
     },
     "fight_投降": {
@@ -422,7 +451,7 @@
         ],
         "action": "Click",
         "target": true,
-        "post_delay": 6000
+        "post_delay": 6500
     },
     "fight_赛后_继续_仅识别": {
         "timeout": 1000,
@@ -461,7 +490,7 @@
     },
     "fight_点赞": {
         "action": "Custom",
-        "custom_action": "Thumb_ups",
+        "custom_action": "Thumb_Ups",
         "next": [
             "fight_赛后_返回大厅"
         ]
