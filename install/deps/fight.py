@@ -151,10 +151,10 @@ class Fight(CustomAction):
                 current_time = int(time())
                 limit_time = int or float(stop_dict["限制时间"])
                 if type(limit_time) == int:
-                    stop_time = current_time + limit_time*60
+                    stop_time = int(current_time + limit_time*60)
                 if type(limit_time) == float:
                     limit_time = round(limit_time,1)
-                    stop_time = current_time + limit_time*60*60
+                    stop_time = int(current_time + limit_time*60*60)
 
             if "限制次数" in stop_keys:
                 limit_times = int(stop_dict["限制次数"])
@@ -164,6 +164,7 @@ class Fight(CustomAction):
             weekly = bool(True)
             limit_time = bool(True)
 
+            stop_time = int(stop_time)
             real_time = int(time())
             fight_times_weekly = int(0)
             fight_times_reputation = int(0)

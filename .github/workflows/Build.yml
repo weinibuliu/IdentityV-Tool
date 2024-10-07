@@ -31,7 +31,7 @@ jobs:
         - id: set
           run: |
               is_release=${{ startsWith(github.ref, 'refs/tags/v') }}
-              is_pre_release=${{ contains(github.ref, '-alpha.') || contains(github.ref, '-beta.') || contains(github.ref, '-rc.') }}
+              is_pre_release=${{ contains(github.ref, '-alpha') || contains(github.ref, '-beta') || contains(github.ref, '-canary') || contains(github.ref, '-rc') }}
               commit_hash=$(git rev-parse --short HEAD)
 
               if $is_release; then
