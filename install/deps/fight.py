@@ -74,7 +74,7 @@ class Fight(CustomAction):
         context.override_pipeline({"fight_检测人品值": {"custom_recognition_param": {"lowest" : reputation_limit}}})
         context.override_pipeline({"匹配成功":{"post_delay": 7000, "next": []}})
 
-        def fight_main(character:str):
+        def fight_main(character:str="歌剧演员"): #debug 阶默认为歌剧演员，测试结束后请去除默认值
             fight_start_time = time()
             time_diff = 0
             match character:

@@ -1,5 +1,6 @@
 {
     "fight_登录后界面检测": {
+        "timeout": 15000,
         "next": [
             "fight_登录后界面检测成功"
         ],
@@ -19,7 +20,7 @@
             60,
             50
         ],
-        "threshold": 0.9,
+        "threshold": 0.95,
         "next": [
             "fight_start"
         ]
@@ -314,6 +315,7 @@
         ]
     },
     "fight_准备开始": {
+        "timeout": 50000,
         "recognition": "OCR",
         "expected": [
             "准备开始",
@@ -329,7 +331,9 @@
         "action": "Click",
         "target": true,
         "post_delay": 2000,
+        "rate_limit": 2000,
         "next": [
+            "fight_准备开始",
             "fight_等待全体玩家准备"
         ]
     },
@@ -337,7 +341,7 @@
         "recognition": "OCR",
         "expected": [
             "取消准备",
-            "准备"
+            "取消"
         ],
         "roi": [
             1010,
@@ -570,5 +574,9 @@
         ],
         "action": "Click",
         "target": true
+    },
+    "fight_歌剧演员战斗测试": {
+        "action": "Custom",
+        "custom_action": "Fight"
     }
 }
