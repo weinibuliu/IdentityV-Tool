@@ -531,9 +531,5 @@
         ],
         "action": "Click",
         "target": true
-    },
-    "战斗测试": {
-        "action": "Custom",
-        "custom_action": "Fight"
     }
 }

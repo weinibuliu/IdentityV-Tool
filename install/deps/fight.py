@@ -147,11 +147,6 @@ class Fight(CustomAction):
                 if c_list_random == True:
                     shuffle(character_list)
 
-            if thumbs_up == False:
-                context.override_pipeline({"fight_赛后_继续": {"next": ["fight_赛后_返回大厅"]}})
-            else:
-                context.override_pipeline({"fight_点赞": {"custom_action_param": {"model": model}}})
-
             stop_keys = list(stop_dict.keys())
             if "时间限制" in stop_keys:
                 current_time = int(time())
@@ -191,6 +186,11 @@ class Fight(CustomAction):
                         if real_time >= stop_time:
                             limit_time = False
                             break
+
+                        if thumbs_up == False:
+                            context.override_pipeline({"fight_赛后_继续": {"next": ["fight_赛后_返回大厅"]}})
+                        else:
+                            context.override_pipeline({"fight_点赞": {"custom_action_param": {"model": model}}})
 
                         ready(model,character)
                         if model == "匹配模式" or model == "排位模式":
