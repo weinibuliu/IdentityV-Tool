@@ -155,15 +155,14 @@ class Fight(CustomAction):
                 if type(limit_time) == float:
                     limit_time = round(limit_time,1)
                     stop_time = current_time + limit_time*60*60
-                limit_time = True
 
             if "限制次数" in stop_keys:
-                limit_time = int(stop_dict["限制次数"])
+                limit_times = int(stop_dict["限制次数"])
             else:
                 limit_times = int(-1)
             
             weekly = bool(True)
-            limit_time = bool(limit_time)
+            limit_time = bool(True)
 
             real_time = int(time())
             fight_times_weekly = int(0)
