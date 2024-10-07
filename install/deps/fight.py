@@ -63,7 +63,7 @@ class Fight(CustomAction):
             check_reputation_rate = check_options["检测人品值频率"]
             check_weely_rate = check_options["检测周上限频率"]
 
-            stop_dict = {"周上限限制": up_weekly, "限制时间": limit_time, "限制次数": limit_time}
+            stop_dict = {"周上限限制": up_weekly, "限制时间": limit_time, "限制次数": limit_times}
             del_list = []
             for key,value in list(stop_dict.items()):
                 if value == False:
