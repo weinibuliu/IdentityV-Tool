@@ -100,8 +100,10 @@ jobs:
         cp .\README.md .\install
         cp .\LICENSE .\install
 
-        move .\deps\bin\* .\install\res
-        move .\deps\share\MaaAgentBinary .\install\res
+        cd install
+        move .\bin\* .\install\res
+        move .\share\MaaAgentBinary\* .\install\res
+        del .\res\MaaPiCli.exe
 
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
