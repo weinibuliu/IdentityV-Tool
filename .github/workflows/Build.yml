@@ -84,7 +84,6 @@ jobs:
         mkdir install
         move .\res .\install
         move .\config .\install
-        move .\debug .\install
         move .\README.md .\install
         move .\LICENSE .\install
 
@@ -138,7 +137,6 @@ jobs:
           mkdir install
           mv ./res ./install
           mv ./config ./install
-          mv ./debug ./install
           mv ./README.md ./install
           mv ./LICENSE ./install
 
@@ -191,7 +189,6 @@ jobs:
         mkdir install
         mv ./res ./install
         mv ./config ./install
-        mv ./debug ./install
         mv ./README.md ./install
         mv ./LICENSE ./install
 
