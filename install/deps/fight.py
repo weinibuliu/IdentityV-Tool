@@ -240,7 +240,7 @@ class Thumb_Ups(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         model = loads(argv.custom_action_param)["model"]
         if model == "匹配模式" or model == "排位模式":
-            gamer_list = list[1,2,3,4]
+            gamer_list = [1,2,3,4]
             shuffle(gamer_list)
             for i in gamer_list:
                 match i:
@@ -256,7 +256,7 @@ class Thumb_Ups(CustomAction):
                         raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
                 context.run_pipeline("标准模式点赞")   
         elif model == "捉迷藏":
-            gamer_list = list[1,2]
+            gamer_list = [1,2]
             shuffle(gamer_list)
             for i in gamer_list:
                 match i:
