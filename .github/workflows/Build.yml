@@ -167,7 +167,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5.2.0
         with:
-          python-version: '3.12.4'
+          python-version: '3.12.7'
 
       - name: Install dependencies
         run: |
@@ -235,7 +235,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
       with:
-        python-version: '3.12.4'
+        python-version: '3.12.7'
 
     - name: Install dependencies
       run: |
