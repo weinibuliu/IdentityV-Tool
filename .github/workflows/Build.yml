@@ -138,7 +138,6 @@ jobs:
   Linux:
       needs: meta
       runs-on: ubuntu-latest
-      container: archlinux:base-devel
       strategy:
           matrix:
               arch: [aarch64, x86_64]
