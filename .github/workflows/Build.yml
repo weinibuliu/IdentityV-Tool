@@ -7,19 +7,21 @@ on:
     tags:
       - "v*"
     paths:
-      - "install/**"
-      - "resource/**"
-      - "deps/**"
       - ".github/**"
+      - "config/***"
+      - "deps/**"
+      - "res/**"
+      - "Dlls"
 
   pull_request:
     branches:
       - "**"
     paths:
-      - "install/**"
-      - "resource/**"
-      - "deps/**"
       - ".github/**"
+      - "config/***"
+      - "deps/**"
+      - "res/**"
+      - "Dlls"
 
 jobs:
   meta:
@@ -76,16 +78,30 @@ jobs:
       fail-fast: false
     
     steps:
+    - run: |
+        mkdir install
+
     - name: Checkout Code
       uses: actions/checkout@v4.2.1
 
-    - name: Move Res to install
+    - name: Download MaaFramework
+      uses: robinraju/release-downloader@v1.11
+      with:
+        repository: MaaXYZ/MaaFramework
+        fileName: "MAA-win-${{ matrix.arch }}*"
+        tag: "v2.1.0-beta.1"
+        out-file-path: "install"
+        extract: true
+
+    - name: Move Res and Deps to install
       run: |
-        mkdir install
         move .\res .\install
         move .\config .\install
         move .\README.md .\install
         move .\LICENSE .\install
+
+        move .\deps\bin\* .\install\res
+        move .\deps\share\MaaAgentBinary .\install\res
 
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
