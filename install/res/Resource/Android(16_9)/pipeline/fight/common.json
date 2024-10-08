@@ -42,7 +42,7 @@
     },
     "捉迷藏移动与跳跃": {
         "action": "Custom",
-        "custom_action": "Hide_Mixed_Move_Click"
+        "custom_action": "Hide_Mixed_Move_Jump"
     },
     "捉迷藏点赞": {
         "recognition": "ColorMatch",

@@ -42,17 +42,8 @@ class Vision_Move(CustomAction):
         move(direction,1500)
         
         return True
-    
-class Hide_Vision_Move(CustomAction):
-    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        return True
 
-class Hide_Jump(CustomAction):
-    def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        
-        return True
-
-class Hide_Mixed_Move_Click(CustomAction):
+class Hide_Mixed_Move_Jump(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         direction = randint(0,1)
         context.tasker.controller.post_touch_down(175,415,0,50)
