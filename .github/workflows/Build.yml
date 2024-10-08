@@ -94,7 +94,7 @@ jobs:
 
     - name: Copy DLL Files to Python Directory (Only Windows Need)
       run: |
-        echo where python
+        echo python
 
     - name: Install Dependencies
       run: |
