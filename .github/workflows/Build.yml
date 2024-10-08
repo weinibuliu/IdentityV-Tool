@@ -62,7 +62,6 @@ jobs:
               is_release=$is_release
               is_pre_release=$is_pre_release" | tee -a "$GITHUB_OUTPUT"
     outputs:
-        dep_tag: v2.1.0-beta.1
         is_release: ${{ steps.set.outputs.is_release }}
         is_pre_release: ${{ steps.set.outputs.is_pre_release }}
         tag: ${{ steps.set.outputs.tag }} # v<release version> | v<ci version>
@@ -85,7 +84,7 @@ jobs:
       with:
         repository: MaaXYZ/MaaFramework
         fileName: "MAA-win-${{ matrix.arch }}*"
-        tag: "${{ needs.meta.outputs.deps_tag }}"
+        tag: "v2.1.0-beta.1"
         out-file-path: "deps"
         extract: true
 
@@ -141,9 +140,9 @@ jobs:
       strategy:
         matrix:
             include:
-                - os: macos-13
+                - os: Macos-13
                   arch: x86_64
-                - os: macos-14
+                - os: Macos-14
                   arch: aarch64
         fail-fast: false
       runs-on: ${{ matrix.os }}
@@ -158,7 +157,7 @@ jobs:
         with:
           repository: MaaXYZ/MaaFramework
           fileName: "MAA-macos-${{ matrix.arch }}*"
-          tag: "${{ needs.meta.outputs.deps_tag }}"
+          tag: "v2.1.0-beta.1"
           out-file-path: "deps"
           extract: true
 
