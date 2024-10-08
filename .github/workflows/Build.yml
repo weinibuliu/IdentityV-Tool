@@ -79,7 +79,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4.2.1
 
-    - name: Move deps and res to install
+    - name: Move res and res to install
       run: |
         mkdir install
         cp .\res .\install
@@ -94,7 +94,7 @@ jobs:
       with:
         python-version: '3.12.4'
 
-    - name: Copy DLL files to Python directory
+    - name: Copy DLL files to Python directory (Only Windows Need)
       run: |
         cp .\DLLs\msvcp140.dll C:\hostedtoolcache\windows\Python\3.12.4\x64
         cp .\DLLs\vcruntime140.dll C:\hostedtoolcache\windows\Python\3.12.4\x64
@@ -134,15 +134,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.2.1
 
-      - name: Move deps to install
+      - name: Move res to install
         run: |
           mkdir install
-          cp ./res ./install
-          cp ./config ./install
-          cp ./debug ./install
-          cp ./docs ./install
-          cp ./README.md ./install
-          cp ./LICENSE ./install
+          cp -r ./res ./install
+          cp -r ./config ./install
+          cp -r ./debug ./install
+          cp -r ./docs ./install
+          cp -r ./README.md ./install
+          cp -r ./LICENSE ./install
 
       - name: Set up Python
         uses: actions/setup-python@v5.2.0
@@ -188,15 +188,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4.2.1
 
-    - name: Move deps to install
+    - name: Move res to install
       run: |
         mkdir install
-        cp ./res ./install
-        cp ./config ./install
-        cp ./debug ./install
-        cp ./docs ./install
-        cp ./README.md ./install
-        cp ./LICENSE ./install
+        cp -r ./res ./install
+        cp -r ./config ./install
+        cp -r ./debug ./install
+        cp -r ./docs ./install
+        cp -r ./README.md ./install
+        cp -r ./LICENSE ./install
 
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
