@@ -151,13 +151,14 @@ class Fight(CustomAction):
                 if c_list_random == True:
                     shuffle(character_list)
 
-            time_flag  = True
+            #flags
+            time_flag  = bool(limit_time)
+            weekly_flag = bool(up_weekly)
+            reputation_flag = bool(reputation_limit)
+
             stop_time = int(0)
             current_time = int(time())
-            if limit_time == False:
-                limit_time = bool(True)
-                time_flag = False
-            elif isinstance(limit_time,int):
+            if isinstance(limit_time,int):
                 stop_time = int(current_time + limit_time*60)
             elif isinstance(limit_time,float):
                 limit_time = round(limit_time,1)
@@ -168,12 +169,12 @@ class Fight(CustomAction):
             if limit_times == False:
                 limit_times = int(-1) #-1 始终为 true  while 循环不会因此中断
 
-            reputation_flag = bool(reputation_limit)
-
             if reputation_limit == False:
                 reputation_limit == bool(True)
 
+            #while 循环的初始化工作
             weekly = bool(True)
+            limit_time = bool(True)
             fight_times_weekly = int(0)
             fight_times_reputation = int(0)
             while weekly and limit_time and limit_times and reputation_limit:
@@ -211,7 +212,7 @@ class Fight(CustomAction):
                         fight_times_reputation += 1
                         limit_times -= 1
                         
-                        if up_weekly == True and fight_times_weekly == check_weely_rate:
+                        if weekly_flag == True and fight_times_weekly == check_weely_rate:
                             context.run_pipeline("fight_检测周上限_打开骰子")
                             weekly_detail = context.run_recognition("fight_检测周上限",context.tasker.controller.cached_image)
                             if weekly_detail is not None:
