@@ -82,12 +82,12 @@ jobs:
     - name: Move res and res to install
       run: |
         mkdir install
-        cp .\res .\install
-        cp .\config .\install
-        cp .\debug .\install
-        cp .\docs .\install
-        cp .\README.md .\install
-        cp .\LICENSE .\install
+        move .\res .\install
+        move .\config .\install
+        move .\debug .\install
+        move .\docs .\install
+        move .\README.md .\install
+        move .\LICENSE .\install
 
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
@@ -137,12 +137,12 @@ jobs:
       - name: Move res to install
         run: |
           mkdir install
-          cp -r ./res ./install
-          cp -r ./config ./install
-          cp -r ./debug ./install
-          cp -r ./docs ./install
-          cp -r ./README.md ./install
-          cp -r ./LICENSE ./install
+          mv ./res ./install
+          mv ./config ./install
+          mv ./debug ./install
+          mv ./docs ./install
+          mv ./README.md ./install
+          mv ./LICENSE ./install
 
       - name: Set up Python
         uses: actions/setup-python@v5.2.0
@@ -191,12 +191,12 @@ jobs:
     - name: Move res to install
       run: |
         mkdir install
-        cp -r ./res ./install
-        cp -r ./config ./install
-        cp -r ./debug ./install
-        cp -r ./docs ./install
-        cp -r ./README.md ./install
-        cp -r ./LICENSE ./install
+        mv ./res ./install
+        mv ./config ./install
+        mv ./debug ./install
+        mv ./docs ./install
+        mv ./README.md ./install
+        mv ./LICENSE ./install
 
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
