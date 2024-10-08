@@ -79,17 +79,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4.2.1
 
-    - name: Download MaaFramework
-      uses: robinraju/release-downloader@v1.11
-      with:
-        repository: MaaXYZ/MaaFramework
-        fileName: "MAA-win-${{ matrix.arch }}*"
-        tag: "v2.1.0-beta.1"
-        out-file-path: "deps"
-        extract: true
-
-    - name: Move deps to install
+    - name: Move deps and res to install
       run: |
+        mkdir install
+        cp .\res .\install
+        cp .\config .\install
+        cp .\debug .\install
+        cp .\docs .\install
         cp .\README.md .\install
         cp .\LICENSE .\install
 
@@ -98,23 +94,21 @@ jobs:
       with:
         python-version: '3.12.4'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        cd .\install
-        pip install -r requirements.txt
-
     - name: Copy DLL files to Python directory
       run: |
         cp .\DLLs\msvcp140.dll C:\hostedtoolcache\windows\Python\3.12.4\x64
         cp .\DLLs\vcruntime140.dll C:\hostedtoolcache\windows\Python\3.12.4\x64
         cp .\DLLs\vcruntime140_1.dll C:\hostedtoolcache\windows\Python\3.12.4\x64
 
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
     - name: Build executable
       run: |
-        cd .\install\
         python build.py
-        move .\dist\IdentityV_Tool.exe .\
+        move .\dist\IdentityV_Tool.exe .\insatll
 
     - name: Get current commit ID
       run: |
@@ -127,11 +121,6 @@ jobs:
         name: IdentityV_Tool-windows-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
         path: |
           .\install
-          !.\install\deps
-          !.\install\build
-          !.\install\*.spec
-          !.\install\*.py
-          !.\install\requirements.txt
 
   Linux:
       needs: meta
@@ -145,17 +134,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.2.1
 
-      - name: Download MaaFramework
-        uses: robinraju/release-downloader@v1.11
-        with:
-          repository: MaaXYZ/MaaFramework
-          fileName: "MAA-macos-${{ matrix.arch }}*"
-          tag: "v2.1.0-beta.1"
-          out-file-path: "deps"
-          extract: true
-
       - name: Move deps to install
         run: |
+          mkdir install
+          cp ./res ./install
+          cp ./config ./install
+          cp ./debug ./install
+          cp ./docs ./install
           cp ./README.md ./install
           cp ./LICENSE ./install
 
@@ -167,14 +152,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          cd ./install
           pip install -r requirements.txt
 
       - name: Build executable
         run: |
-          cd ./install
           python3 build.py
-          mv ./dist/IdentityV_Tool ./
+          mv ./dist/IdentityV_Tool ./install
 
       - name: Get current commit ID
         run: |
@@ -187,12 +170,6 @@ jobs:
           name: IdentityV_Tool-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
           path: |
             ./install
-            !./install/deps
-            !./install/build
-            !./dist
-            !./install/*.spec
-            !./install/*.py
-            !./install/requirements.txt
 
   Macos:
     needs: meta
@@ -211,17 +188,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4.2.1
 
-    - name: Download MaaFramework
-      uses: robinraju/release-downloader@v1.11
-      with:
-        repository: MaaXYZ/MaaFramework
-        fileName: "MAA-macos-${{ matrix.arch }}*"
-        tag: "v2.1.0-beta.1"
-        out-file-path: "deps"
-        extract: true
-
     - name: Move deps to install
       run: |
+        mkdir install
+        cp ./res ./install
+        cp ./config ./install
+        cp ./debug ./install
+        cp ./docs ./install
         cp ./README.md ./install
         cp ./LICENSE ./install
 
@@ -233,14 +206,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        cd ./install
         pip install -r requirements.txt
 
     - name: Build executable
       run: |
-        cd ./install
         python3 build.py
-        mv ./dist/IdentityV_Tool ./
+        mv ./dist/IdentityV_Tool ./install
 
     - name: Get current commit ID
       run: |
@@ -253,12 +224,6 @@ jobs:
         name: IdentityV_Tool-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
         path: |
           ./install
-          !./install/deps
-          !./install/build
-          !./dist
-          !./install/*.spec
-          !./install/*.py
-          !./install/requirements.txt
 
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
