@@ -8,7 +8,7 @@ on:
       - "v*"
     paths:
       - ".github/**"
-      - "config/***"
+      - "config/**"
       - "deps/**"
       - "res/**"
       - "Dlls"
@@ -18,7 +18,7 @@ on:
       - "**"
     paths:
       - ".github/**"
-      - "config/***"
+      - "config/**"
       - "deps/**"
       - "res/**"
       - "Dlls"
