@@ -183,10 +183,7 @@ jobs:
         run: |
           cd ./install
           python3 build.py
-          ls
-          cd ./dist
-          ls
-          cp IdentityV_Tool.exe ../
+          cp ./dist/IdentityV_Tool ./
 
       - name: Get current commit ID
         run: |
