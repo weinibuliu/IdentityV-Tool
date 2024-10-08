@@ -105,7 +105,6 @@ jobs:
         python -m pip install --upgrade pip
         cd .\install
         pip install -r requirements.txt
-        pip show plyer
 
     - name: Copy DLL files to Python directory
       run: |
@@ -174,7 +173,6 @@ jobs:
           python -m pip install --upgrade pip
           cd ./install
           pip install -r requirements.txt
-          pip show plyer
 
       - name: Build executable
         run: |
@@ -190,7 +188,7 @@ jobs:
       - name: Upload Assets
         uses: actions/upload-artifact@v4.4.1
         with:
-          name: IdentityV_Tool-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
+          name: IdentityV_Tool-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
           path: |
             ./install
             !./install/deps
