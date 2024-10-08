@@ -90,7 +90,7 @@ jobs:
         repository: MaaXYZ/MaaFramework
         fileName: "MAA-win-${{ matrix.arch }}*"
         tag: "v2.1.0-beta.1"
-        out-file-path: "."
+        out-file-path: ".\\"
         extract: true
 
     - name: Move Res and Deps to install
