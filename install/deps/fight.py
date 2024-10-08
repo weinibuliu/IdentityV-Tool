@@ -112,6 +112,7 @@ class Fight(CustomAction):
                 sleep(randint(1,3))
                 context.run_pipeline("捉迷藏移动与跳跃")
                 task_statu = context.run_pipeline("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
+                context.run_pipeline("fight_捉迷藏变身")
 
             sleep(5)
             context.run_pipeline("fight_点赞")

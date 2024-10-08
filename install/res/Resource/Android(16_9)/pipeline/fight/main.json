@@ -209,6 +209,7 @@
             195,
             60
         ],
+        "pre_delay": 300,
         "action": "Click",
         "target": true,
         "next": [
