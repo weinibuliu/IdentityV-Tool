@@ -168,7 +168,7 @@ jobs:
 
           mv ./bin/* ./install/res
           mv ./share/MaaAgentBinary ./install/res
-          del ./install/res/MaaPiCli
+          rm ./install/res/MaaPiCli
 
       - name: Set up Python
         uses: actions/setup-python@v5.2.0
@@ -234,7 +234,7 @@ jobs:
 
         mv ./bin/* ./install/res
         mv ./share/MaaAgentBinary ./install/res
-        del ./install/res/MaaPiCli
+        rm ./install/res/MaaPiCli
 
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
