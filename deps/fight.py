@@ -111,7 +111,7 @@ class Fight(CustomAction):
                 context.run_pipeline("随机视角移动")
                 sleep(randint(1,3))
                 context.run_pipeline("捉迷藏移动与跳跃")
-                task_statu = context.run_pipeline("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
+                task_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
                 if task_statu is None:
                     break
                 context.run_pipeline("fight_捉迷藏变身")

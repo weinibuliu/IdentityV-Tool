@@ -1,5 +1,5 @@
 from time import time,sleep
-from random import randint
+from random import randint,uniform
 
 from maa.context import Context
 from maa.custom_action import CustomAction
@@ -72,8 +72,7 @@ class Hide_Mixed_Move_Jump(CustomAction):
             context.tasker.controller.post_touch_down(click_x,click_y,1,30)
             sleep(0.2)
             context.tasker.controller.post_touch_up(contact=1)
-            sleep(randint(0,2))
-
+            sleep(uniform(0.2,3))
             job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
 
         context.tasker.controller.post_touch_up(contact=0)
