@@ -23,7 +23,7 @@
     },
     "随机视角移动": {
         "action": "Custom",
-        "custom_action": "Vision_move"
+        "custom_action": "Vision_Move"
     },
     "常规模式点赞": {
         "recognition": "TemplateMatch",
