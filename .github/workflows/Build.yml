@@ -183,8 +183,9 @@ jobs:
         run: |
           cd ./install
           python build.py
-          ls -la
-          mv ./dist/IdentityV_Tool.exe ../
+          cd ./install/dist
+          ls
+          mv IdentityV_Tool.exe ../install/ -f
 
       - name: Get current commit ID
         run: |
