@@ -94,7 +94,7 @@ jobs:
 
     - name: Copy DLL Files to Python Directory (Only Windows Need)
       run: |
-        echo ${{ env.PATH }}
+        echo ${{ env.PYTHONPATH }}
         cp .\DLLs\msvcp140.dll C:\hostedtoolcache\windows\Python312\x64
         cp .\DLLs\vcruntime140.dll C:\hostedtoolcache\windows\Python312\x64
         cp .\DLLs\vcruntime140_1.dll C:\hostedtoolcache\windows\Python312\x64
