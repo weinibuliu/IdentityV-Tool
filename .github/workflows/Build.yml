@@ -98,7 +98,7 @@ jobs:
         cp .\README.md .\install
         cp .\LICENSE .\install
 
-        move .\bin .\install\res
+        move .\bin\* .\install\res
         move .\share\MaaAgentBinary .\install\res
         del .\install\res\MaaPiCli.exe
 
