@@ -45,43 +45,38 @@ class Fight(CustomAction):
         with open(f"{main_path}/config/fight_config.json","r",encoding="utf-8") as f:
             data = load(f)
             
-            base_options = data["基础设置"]
-            character_list = list(base_options["角色队列"])
-            character_list_random = bool(base_options["角色队列乱序"])
-            model_list = list(base_options["模式队列"])
-            model_list_random = bool(base_options["模式队列乱序"])
-            thumbs_up = bool(base_options["启用赛后点赞"])
-            desktop_notice = bool(base_options["启用桌面通知"])
-            email_notice = bool(base_options["启用邮件通知"])
+        base_options = data["基础设置"]
+        character_list = list(base_options["角色队列"])
+        character_list_random = bool(base_options["角色队列乱序"])
+        model_list = list(base_options["模式队列"])
+        model_list_random = bool(base_options["模式队列乱序"])
+        thumbs_up = bool(base_options["启用赛后点赞"])
+        desktop_notice = bool(base_options["启用桌面通知"])
+        email_notice = bool(base_options["启用邮件通知"])
 
-            stop_options = data["停止相关设置"]
-            up_weekly = bool(stop_options["启用周上限限制"])
-            reputation_limit = int(stop_options["最低人品值"])
-            limit_time = int or float(stop_options["限制时间"])
-            limit_times = int(stop_options["限制次数"])
-            
-            check_options = data["检测频率设置"]
-            check_reputation_rate = check_options["检测人品值频率"]
-            check_weely_rate = check_options["检测周上限频率"]
-
-            stop_dict = {"周上限限制": up_weekly, "限制时间": limit_time, "限制次数": limit_times}
-            del_list = []
-            for key,value in list(stop_dict.items()):
-                if value == False:
-                    del_list.append(key)
-            for key in del_list:
-                del stop_dict[key]
+        stop_options = data["停止相关设置"]
+        up_weekly = bool(stop_options["启用周上限限制"])
+        reputation_limit = stop_options["最低人品值"] #bool and int
+        limit_time = stop_options["限制时间"] #bool,int,float
+        limit_times = stop_options["限制次数"] #bool and int
+        
+        check_options = data["检测频率设置"]
+        check_reputation_rate = check_options["检测人品值频率"]
+        check_weely_rate = check_options["检测周上限频率"]
 
         context.override_pipeline({"匹配成功":{"post_delay": 7000, "next": []}})
 
         def fight_main(character:str):
             fight_start_time = time()
             time_diff = 0
+            check_fight_statu = None
+            check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image)
             match character:
                 case "歌剧演员":
                     context.run_pipeline("歌剧演员_获取影跃位置")
                     context.run_pipeline("歌剧演员_获取普攻位置")
-                    while time_diff < 235:
+
+                    while time_diff < 235 and check_fight_statu is None:
                         context.run_pipeline("随机移动")
                         context.run_pipeline("随机视角移动")
 
@@ -92,13 +87,11 @@ class Fight(CustomAction):
                             time_diff = fight_now_time - fight_start_time
                             if time_diff >= 235:
                                 break
-
-                        check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image)
-                        if check_fight_statu is not None:
-                            break
                         
                         fight_now_time = time()
                         time_diff = fight_now_time - fight_start_time
+                        if time_diff >= 235:
+                                break
                         context.run_pipeline("随机视角移动")
 
                 case _:
@@ -106,7 +99,8 @@ class Fight(CustomAction):
                 
             if time_diff >= 235:
                 context.run_pipeline("fight_打开设置")
-                context.run_pipeline("fight_赛后_继续")
+
+            context.run_pipeline("fight_赛后_继续")
 
         def hide_main():
             context.run_pipeline("fight_捉迷藏变身")
@@ -147,7 +141,7 @@ class Fight(CustomAction):
                  character_list:list=character_list,character_list_random:bool=character_list_random,
                  thumbs_up:bool=thumbs_up,
                  reputation_limit:int=reputation_limit,up_weekly:bool=up_weekly,
-                 limit_time:int|float=limit_time,limit_times:int=limit_times,
+                 limit_time:bool|int|float=limit_time,limit_times:bool|int=limit_times,
                  check_reputation_rate:int=check_reputation_rate , check_weely_rate:int=check_weely_rate):
 
             def list_ramdon(m_list_random:bool=model_list_random,c_list_random:bool=character_list_random): #模式、角色队列乱序
@@ -156,45 +150,45 @@ class Fight(CustomAction):
                 if c_list_random == True:
                     shuffle(character_list)
 
+            time_flag  = True
             stop_time = int(0)
-            stop_keys = list(stop_dict.keys())
-            if "限制时间" in stop_keys:
-                current_time = int(time())
-                limit_time = int or float(stop_dict["限制时间"])
-                if limit_time == False:
-                    pass
-                elif type(limit_time) == int:
-                    stop_time = int(current_time + limit_time*60)
-                elif type(limit_time) == float:
-                    limit_time = round(limit_time,1)
-                    stop_time = int(current_time + limit_time*60*60)
-
-            if "限制次数" in stop_keys:
-                limit_times = int(stop_dict["限制次数"])
+            current_time = int(time())
+            if limit_time == False:
+                limit_time = bool(True)
+                time_flag = False
+            elif isinstance(limit_time,int):
+                stop_time = int(current_time + limit_time*60)
+            elif isinstance(limit_time,float):
+                limit_time = round(limit_time,1)
+                stop_time = int(current_time + limit_time*60*60)
             else:
-                limit_times = int(-1)
-            
-            weekly = bool(True)
-            limit_time = bool(True)
+                raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
 
-            real_time = int(time())
+            if limit_times == False:
+                limit_times = int(-1) #-1 始终为 true  while 循环不会因此中断
+
+            reputation_flag = bool(reputation_limit)
+
+            if reputation_limit == False:
+                reputation_limit == bool(True)
+
+            weekly = bool(True)
             fight_times_weekly = int(0)
             fight_times_reputation = int(0)
-
-            while weekly and limit_time and limit_times:
+            while weekly and limit_time and limit_times and reputation_limit:
                 list_ramdon()
                 real_time = int(time())
                 for character in character_list:
-                    if stop_time != False and real_time >= stop_time:
+                    if time_flag != False and real_time >= stop_time:
                         limit_time = False
                         break
-                    if weekly == False or limit_time == False or limit_times == False:
+                    if weekly == False or limit_time == False or limit_times == False or reputation_limit == False:
                         break
 
                     for model in model_list:
                         if weekly == False or limit_times == False:
                             break
-                        if stop_time != False and real_time >= stop_time:
+                        if time_flag != False and real_time >= stop_time:
                             limit_time = False
                             break
 
@@ -218,17 +212,22 @@ class Fight(CustomAction):
                         
                         if up_weekly == True and fight_times_weekly == check_weely_rate:
                             context.run_pipeline("fight_检测周上限_打开骰子")
-                            weekly_statu = context.run_recognition("fight_检测周上限",context.tasker.controller.cached_image)
-                            if weekly_statu == "42000" or weekly_statu =="50400":
-                                weekly = False
-                                break
+                            weekly_detail = context.run_recognition("fight_检测周上限",context.tasker.controller.cached_image)
+                            if weekly_detail is not None:
+                                weekly_detail = weekly_detail.best_result.text
+                                if weekly_detail == "42000" or weekly_detail =="50400":
+                                    weekly = bool(False)
+                                    break
                             fight_times_weekly = int(0)
                             
-                        if reputation_limit != False and fight_times_reputation == check_reputation_rate:
+                        if reputation_flag != False and fight_times_reputation == check_reputation_rate:
                             context.run_pipeline("fight_检测人品值_打开个人名片")
-                            reputation_statu = context.run_recognition("fight_检测人品值",context.tasker.controller.cached_image)
-                            if reputation_statu <= reputation_limit:
-                                break
+                            reputation_detail = context.run_recognition("fight_检测人品值",context.tasker.controller.cached_image)
+                            if reputation_detail is not None:
+                                reputation_detail = reputation_detail.best_result.text
+                                if reputation_detail <= reputation_limit:
+                                    reputation_limit = bool(False)
+                                    break
                             fight_times_reputation = int(0)
 
         main()

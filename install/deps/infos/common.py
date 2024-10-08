@@ -77,7 +77,6 @@ class Hide_Mixed_Move_Click(CustomAction):
         job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
 
         while int(time()) <= duration_time and job_statu is None: #循环跳跃
-            1187,321,37,42
             click_x = randint(1125,1195)
             click_y = randint(550,660)
             context.tasker.controller.post_touch_down(click_x,click_y,1,30)
