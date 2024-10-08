@@ -35,17 +35,17 @@ add_data_param2 = f'{maa_bin_path2}{os.pathsep}MaaAgentBinary'
 
     
 # 查找包含 Plyer 的路径
-plyer_path = None
-for path in site_packages_paths:
-    potential_path = os.path.join(path, 'Plyer')
-    if os.path.exists(potential_path):
-        plyer_path = potential_path
-        break
+#plyer_path = None
+#for path in site_packages_paths:
+    #potential_path = os.path.join(path, 'Plyer')
+    #if os.path.exists(potential_path):
+        #plyer_path = potential_path
+        #break
     
-if plyer_path is None:
-    raise FileNotFoundError("未找到包含 Plyer 的路径")
+#if plyer_path is None:
+    #raise FileNotFoundError("未找到包含 Plyer 的路径")
 # 构建 --add-data 参数
-add_data_param3 = f'{plyer_path}{os.pathsep}Plyer'
+#add_data_param3 = f'{plyer_path}{os.pathsep}Plyer'
 
 
 # 运行 PyInstaller
@@ -54,8 +54,8 @@ PyInstaller.__main__.run([
     '--onefile',
     '--name=IdentityV_Tool',
     f'--add-data={add_data_param}',
-    f'--add-data={add_data_param2}',
-    f'--add-data={add_data_param3}',
+    f'--add-data={add_data_param2}'#,
+    #f'--add-data={add_data_param3}',
     '--hidden-import=plyer.platforms.win.notification', #处理 Plyer 在 Windows 平台的实现
     '--clean'
     #'--uac-admin' #为应用申请管理员权限，因主分支迁移至 Android 模拟器，现废弃
