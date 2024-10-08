@@ -90,7 +90,7 @@ jobs:
         repository: MaaXYZ/MaaFramework
         fileName: "MAA-win-${{ matrix.arch }}*"
         tag: "v2.1.0-beta.1"
-        out-file-path: "install"
+        out-file-path: "."
         extract: true
 
     - name: Move Res and Deps to install
@@ -100,10 +100,9 @@ jobs:
         cp .\README.md .\install
         cp .\LICENSE .\install
 
-        cd install
         move .\bin\* .\install\res
         move .\share\MaaAgentBinary\* .\install\res
-        del .\res\MaaPiCli.exe
+        del .install\\res\MaaPiCli.exe
 
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
