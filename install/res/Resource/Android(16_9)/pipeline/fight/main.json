@@ -34,7 +34,8 @@
             60,
             50
         ],
-        "threshold": 0.95
+        "threshold": 0.95,
+        "next": []
     },
     "fight_start": {
         "action": "Custom",

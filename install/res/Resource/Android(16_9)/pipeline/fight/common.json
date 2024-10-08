@@ -25,7 +25,7 @@
         "action": "Custom",
         "custom_action": "Vision_Move"
     },
-    "常规模式点赞": {
+    "标准模式点赞": {
         "recognition": "TemplateMatch",
         "template": "fight//点赞.png",
         "roi": [

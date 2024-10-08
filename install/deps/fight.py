@@ -80,7 +80,7 @@ class Fight(CustomAction):
                         context.run_pipeline("随机移动")
                         context.run_pipeline("随机视角移动")
 
-                        for i in range(randint(10,20)):
+                        for i in range(randint(20,30)):
                             context.run_pipeline("歌剧演员_循环")
                             i += 1
                             fight_now_time = time()
@@ -117,7 +117,7 @@ class Fight(CustomAction):
             context.run_pipeline("fight_点赞")
 
         def ready(model:str,character:str) -> None:
-            context.override_pipeline({"检测是否进入游戏": {"next" :[], "on_error": []}})
+            context.override_pipeline({"检测是否进入游戏": {"next" :[]}})
             context.run_pipeline("fight_点击书")
             sleep(0.5)
             context.run_pipeline(f"fight_{model}")
@@ -237,23 +237,23 @@ class Fight(CustomAction):
  
 class Thumb_Ups(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
-        model = loads[argv.custom_action_param]["model"]
+        model = loads(argv.custom_action_param)["model"]
         if model == "匹配模式" or model == "排位模式":
             gamer_list = list[1,2,3,4]
             shuffle(gamer_list)
             for i in gamer_list:
                 match i:
                     case 1:
-                        context.override_pipeline({"常规模式点赞":{"roi": [300,490,45,45]}})
+                        context.override_pipeline({"标准模式点赞":{"roi": [300,490,45,45]}})
                     case 2:
-                        context.override_pipeline({"常规模式点赞":{"roi": [550,490,45,45]}})
+                        context.override_pipeline({"标准模式点赞":{"roi": [550,490,45,45]}})
                     case 3:
-                        context.override_pipeline({"常规模式点赞":{"roi": [805,490,45,45]}})
+                        context.override_pipeline({"标准模式点赞":{"roi": [805,490,45,45]}})
                     case 4:
-                        context.override_pipeline({"常规模式点赞":{"roi": [1075,490,45,45]}})
+                        context.override_pipeline({"标准模式点赞":{"roi": [1075,490,45,45]}})
                     case _:
                         raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
-                context.run_pipeline("常规模式点赞")   
+                context.run_pipeline("标准模式点赞")   
         elif model == "捉迷藏":
             gamer_list = list[1,2]
             shuffle(gamer_list)
