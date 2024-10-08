@@ -95,9 +95,9 @@ jobs:
     - name: Copy DLL Files to Python Directory (Only Windows Need)
       run: |
         echo "PYTHON_PATH=$(where python)" >> $GITHUB_ENV
-        cp .\DLLs\msvcp140.dll ${{ env.PYTHONPATH }}
-        cp .\DLLs\vcruntime140.dll ${{ env.PYTHONPATH }}
-        cp .\DLLs\vcruntime140_1.dll ${{ env.PYTHONPATH }}
+        cp .\DLLs\msvcp140.dll ${{ env.PYTHONPATH.Python_ROOT_DIR }}
+        cp .\DLLs\vcruntime140.dll ${{ env.PYTHONPATH.Python_ROOT_DIR }}
+        cp .\DLLs\vcruntime140_1.dll ${{ env.PYTHONPATH.Python_ROOT_DIR }}
 
     - name: Install Dependencies
       run: |
