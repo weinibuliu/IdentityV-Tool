@@ -94,7 +94,7 @@ jobs:
 
     - name: Copy DLL Files to Python Directory (Only Windows Need)
       run: |
-        echo powershell where python
+        powershell where python
 
     - name: Install Dependencies
       run: |
