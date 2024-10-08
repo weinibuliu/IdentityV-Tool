@@ -85,7 +85,6 @@ jobs:
         move .\res .\install
         move .\config .\install
         move .\debug .\install
-        move .\docs .\install
         move .\README.md .\install
         move .\LICENSE .\install
 
@@ -140,7 +139,6 @@ jobs:
           mv ./res ./install
           mv ./config ./install
           mv ./debug ./install
-          mv ./docs ./install
           mv ./README.md ./install
           mv ./LICENSE ./install
 
@@ -194,7 +192,6 @@ jobs:
         mv ./res ./install
         mv ./config ./install
         mv ./debug ./install
-        mv ./docs ./install
         mv ./README.md ./install
         mv ./LICENSE ./install
 
