@@ -58,7 +58,7 @@ class Fight(CustomAction):
         up_weekly = bool(stop_options["启用周上限限制"])
         reputation_limit = stop_options["最低人品值"] #bool and int
         limit_time = stop_options["限制时间"] #bool,int,float
-        limit_times = stop_options["限制次数"] #bool and int
+        limit_times = stop_options["限制对局次数"] #bool and int
         
         check_options = data["检测频率设置"]
         check_reputation_rate = check_options["检测人品值频率"]
@@ -106,12 +106,12 @@ class Fight(CustomAction):
         def hide_main():
             context.run_pipeline("fight_捉迷藏变身")
             task_statu = None
-            task_statu = context.run_pipeline("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
             
             while task_statu is None:
                 context.run_pipeline("随机视角移动")
                 sleep(randint(1,3))
                 context.run_pipeline("捉迷藏移动与跳跃")
+                task_statu = context.run_pipeline("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
 
             sleep(5)
             context.run_pipeline("fight_点赞")
