@@ -107,7 +107,7 @@ jobs:
     - name: Build Executable
       run: |
         python build.py
-        cp .\dist\IdentityV_Tool.exe .\install\
+        move .\dist\IdentityV_Tool.exe .\install\
 
     - name: Get Current Commit ID
       run: |
