@@ -78,9 +78,6 @@ jobs:
       fail-fast: false
     
     steps:
-    - run: |
-        mkdir install
-
     - name: Checkout Code
       uses: actions/checkout@v4.2.1
 
@@ -95,13 +92,14 @@ jobs:
 
     - name: Move Res and Deps to install
       run: |
+        mkdir install
         move .\res .\install
         move .\config .\install
         cp .\README.md .\install
         cp .\LICENSE .\install
 
-        move .\bin\* .\install\res
-        move .\share\MaaAgentBinary\* .\install\res
+        move .\bin .\install\res
+        move .\share\MaaAgentBinary .\install\res
         del .install\\res\MaaPiCli.exe
 
     - name: Set up Python
