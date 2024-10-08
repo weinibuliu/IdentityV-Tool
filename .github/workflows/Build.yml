@@ -199,6 +199,7 @@ jobs:
             ./install
             !./install/deps
             !./install/build
+            !./dist
             !./install/*.spec
             !./install/*.py
             !./install/requirements.txt
