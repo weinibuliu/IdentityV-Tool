@@ -25,7 +25,7 @@ jobs:
   meta:
     runs-on: ubuntu-latest
     steps:
-        - uses: actions/checkout@v4
+        - uses: actions/checkout@v4.2.1
           with:
               fetch-depth: 0
         - id: set
@@ -77,7 +77,7 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v4.2.1
 
     - name: Download MaaFramework
       uses: robinraju/release-downloader@v1.11
@@ -96,7 +96,7 @@ jobs:
         cp .\LICENSE .\install
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v5.2.0
       with:
         python-version: '3.12.4'
 
@@ -124,7 +124,7 @@ jobs:
       shell: pwsh
 
     - name: Upload Assets
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4.4.1
       with:
         name: IdentityV_Tool-windows-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
         path: |
@@ -135,22 +135,18 @@ jobs:
           !.\install\*.py
           !.\install\requirements.txt
 
-  Macos:
+  Linux:
       needs: meta
+      runs-on: ubuntu-latest
+      container: archlinux:base-devel
       strategy:
-        matrix:
-            include:
-                - os: Macos-13
-                  arch: x86_64
-                - os: Macos-14
-                  arch: aarch64
-        fail-fast: false
-      runs-on: ${{ matrix.os }}
+          matrix:
+              arch: [aarch64, x86_64]
+          fail-fast: false
 
-      
       steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.1
 
       - name: Download MaaFramework
         uses: robinraju/release-downloader@v1.11
@@ -169,7 +165,7 @@ jobs:
           cp ./LICENSE ./install
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.2.0
         with:
           python-version: '3.12.4'
 
@@ -191,7 +187,7 @@ jobs:
         shell: pwsh
     
       - name: Upload Assets
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.4.1
         with:
           name: IdentityV_Tool-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
           path: |
@@ -203,13 +199,80 @@ jobs:
             !./install/*.py
             !./install/requirements.txt
 
+  Macos:
+    needs: meta
+    strategy:
+      matrix:
+          include:
+              - os: Macos-13
+                arch: x86_64
+              - os: Macos-14
+                arch: aarch64
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.2.1
+
+    - name: Download MaaFramework
+      uses: robinraju/release-downloader@v1.11
+      with:
+        repository: MaaXYZ/MaaFramework
+        fileName: "MAA-macos-${{ matrix.arch }}*"
+        tag: "v2.1.0-beta.1"
+        out-file-path: "deps"
+        extract: true
+
+    - name: Move deps to install
+      run: |
+        mv ./deps/bin/* ./install/res
+        mv ./deps/share/MaaAgentBinary ./install/res
+        cp ./README.md ./install
+        cp ./LICENSE ./install
+
+    - name: Set up Python
+      uses: actions/setup-python@v5.2.0
+      with:
+        python-version: '3.12.4'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        cd ./install
+        pip install -r requirements.txt
+
+    - name: Build executable
+      run: |
+        cd ./install
+        python3 build.py
+        mv ./dist/IdentityV_Tool ./
+
+    - name: Get current commit ID
+      run: |
+        echo $env:GITHUB_SHA > version
+      shell: pwsh
+  
+    - name: Upload Assets
+      uses: actions/upload-artifact@v4.4.1
+      with:
+        name: IdentityV_Tool-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
+        path: |
+          ./install
+          !./install/deps
+          !./install/build
+          !./dist
+          !./install/*.spec
+          !./install/*.py
+          !./install/requirements.txt
 
   release:
     if: ${{ needs.meta.outputs.is_release == 'true' }}
     needs: [meta, windows]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v4.4.1
         with:
           path: assets
           
@@ -219,7 +282,7 @@ jobs:
           for f in *; do
             (cd $f && zip -r ../$f.zip .)
           done
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v2.0.8
         with:
           files: assets/*
           tag_name: ${{ needs.meta.outputs.tag }}
