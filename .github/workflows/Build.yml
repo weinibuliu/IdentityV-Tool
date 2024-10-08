@@ -94,10 +94,7 @@ jobs:
 
     - name: Copy DLL Files to Python Directory (Only Windows Need)
       run: |
-        echo: where python
-        cp .\DLLs\msvcp140.dll C:\hostedtoolcache\windows\Python\3.12.4\x64
-        cp .\DLLs\vcruntime140.dll C:\hostedtoolcache\windows\Python\3.12.4\x64
-        cp .\DLLs\vcruntime140_1.dll C:\hostedtoolcache\windows\Python\3.12.4\x64
+        echo where python
 
     - name: Install Dependencies
       run: |
