@@ -93,6 +93,7 @@ jobs:
     - name: Move Res and Deps to install
       run: |
         mkdir install
+  
         move .\res .\install
         move .\config .\install
         cp .\README.md .\install
@@ -147,13 +148,27 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4.2.1
 
-      - name: Move Res to install
+      - name: Download MaaFramework
+        uses: robinraju/release-downloader@v1.11
+        with:
+          repository: MaaXYZ/MaaFramework
+          fileName: "MAA-linux-${{ matrix.arch }}*"
+          tag: "v2.1.0-beta.1"
+          out-file-path: "./"
+          extract: true
+
+      - name: Move Res and Deps to install
         run: |
           mkdir install
+
           mv ./res ./install
           mv ./config ./install
-          mv ./README.md ./install
-          mv ./LICENSE ./install
+          cp ./README.md ./install
+          cp ./LICENSE ./install
+
+          mv ./bin/* ./install/res
+          mv ./share/MaaAgentBinary ./install/res
+          del ./install/res/MaaPiCli
 
       - name: Set up Python
         uses: actions/setup-python@v5.2.0
@@ -199,13 +214,27 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4.2.1
 
-    - name: Move Res to install
+    - name: Download MaaFramework
+      uses: robinraju/release-downloader@v1.11
+      with:
+        repository: MaaXYZ/MaaFramework
+        fileName: "MAA-macos-${{ matrix.arch }}*"
+        tag: "v2.1.0-beta.1"
+        out-file-path: "./"
+        extract: true
+
+    - name: Move Res and Deps to install
       run: |
         mkdir install
+
         mv ./res ./install
         mv ./config ./install
-        mv ./README.md ./install
-        mv ./LICENSE ./install
+        cp ./README.md ./install
+        cp ./LICENSE ./install
+
+        mv ./bin/* ./install/res
+        mv ./share/MaaAgentBinary ./install/res
+        del ./install/res/MaaPiCli
 
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
