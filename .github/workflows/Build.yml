@@ -95,13 +95,13 @@ jobs:
 
     - name: Move Res and Deps to install
       run: |
-        move .\deps\bin\* .\install\res
-        move .\deps\share\MaaAgentBinary .\install\res
-
         move .\res .\install
         move .\config .\install
-        cp .\README.md .\install
-        cp .\LICENSE .\install
+        move .\README.md .\install
+        move .\LICENSE .\install
+
+        move .\deps\bin\* .\install\res
+        move .\deps\share\MaaAgentBinary .\install\res
 
     - name: Set up Python
       uses: actions/setup-python@v5.2.0
