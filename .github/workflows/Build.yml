@@ -92,9 +92,8 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name: Copy DLL Files to Python Directory (Only Windows Need)
+    - name: Copy DLL to Python Directory (Only Windows Need)
       run: |
-        echo "PYTHON_PATH=$(where python)" >> $GITHUB_ENV
         cp .\DLLs\msvcp140.dll ${{ env.Python_ROOT_DIR }}
         cp .\DLLs\vcruntime140.dll ${{ env.Python_ROOT_DIR }}
         cp .\DLLs\vcruntime140_1.dll ${{ env.Python_ROOT_DIR }}
