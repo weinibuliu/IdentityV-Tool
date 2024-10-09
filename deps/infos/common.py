@@ -66,7 +66,7 @@ class Hide_Mixed_Move_Jump(CustomAction):
         job_statu = None
         job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
 
-        while int(time()) <= duration_time and job_statu is None: #循环跳跃
+        while int(time()) <= duration_time and job_statu != "继续": #循环跳跃
             click_x = randint(1125,1195)
             click_y = randint(550,660)
             context.tasker.controller.post_touch_down(click_x,click_y,1,30)
@@ -74,6 +74,8 @@ class Hide_Mixed_Move_Jump(CustomAction):
             context.tasker.controller.post_touch_up(contact=1)
             sleep(uniform(0.2,3))
             job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
+            if job_statu is not None:
+                job_statu = job_statu.best_result.text
 
         context.tasker.controller.post_touch_up(contact=0)
 

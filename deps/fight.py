@@ -79,7 +79,7 @@ class Fight(CustomAction):
                     context.run_pipeline("歌剧演员_获取影跃位置")
                     context.run_pipeline("歌剧演员_获取普攻位置")
 
-                    while time_diff < 235 and check_fight_statu is None:
+                    while time_diff < 235 and check_fight_statu != "继续":
                         context.run_pipeline("随机移动")
                         context.run_pipeline("随机视角移动")
 
@@ -92,6 +92,8 @@ class Fight(CustomAction):
                                 break
 
                         check_fight_statu = context.run_recognition("fight_赛后_继续_仅识别",image=context.tasker.controller.cached_image)
+                        if check_fight_statu is not None:
+                            check_fight_statu = check_fight_statu.best_result.text
                         fight_now_time = time()
                         time_diff = fight_now_time - fight_start_time
                         if time_diff >= 235:
@@ -110,13 +112,15 @@ class Fight(CustomAction):
             context.run_pipeline("fight_捉迷藏变身")
             task_statu = None
             
-            while task_statu is None:
+            while task_statu != "继续":
                 context.run_pipeline("随机视角移动")
                 sleep(randint(1,3))
                 context.run_pipeline("捉迷藏移动与跳跃")
                 task_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
-                if task_statu is None:
-                    break
+                if task_statu is not None:
+                    task_statu = task_statu.best_result.text
+                    if task_statu == "继续":
+                        break
                 context.run_pipeline("fight_捉迷藏变身")
 
             sleep(5)
