@@ -9,7 +9,7 @@ on:
     paths:
       - ".github/**"
       - "config/**"
-      - "deps/**"
+      - "src/**"
       - "res/**"
       - "DLLs"
 
@@ -19,7 +19,7 @@ on:
     paths:
       - ".github/**"
       - "config/**"
-      - "deps/**"
+      - "src/**"
       - "res/**"
       - "DLLs"
 
