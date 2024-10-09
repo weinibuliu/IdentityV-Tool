@@ -348,7 +348,7 @@
         ]
     },
     "fight_等待全体玩家准备": {
-        "timeout": 50000,
+        "timeout": 70000,
         "rate_limit": 2000,
         "recognition": "OCR",
         "expected": [
