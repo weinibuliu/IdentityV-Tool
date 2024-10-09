@@ -327,6 +327,7 @@
         ]
     },
     "fight_准备开始": {
+        "timeout": 60000,
         "recognition": "OCR",
         "expected": [
             "准备开始",
@@ -348,7 +349,7 @@
         ]
     },
     "fight_等待全体玩家准备": {
-        "timeout": 70000,
+        "timeout": 25000,
         "rate_limit": 2000,
         "recognition": "OCR",
         "expected": [

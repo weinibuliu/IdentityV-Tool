@@ -67,6 +67,8 @@ class Hide_Mixed_Move_Jump(CustomAction):
         current_time = int(time())
         duration_time = current_time + randint(8,12)
         
+        i = 0
+        ti = 0
         click_x = randint(1125,1195)
         click_y = randint(550,660)
         if stop_x != 175:
