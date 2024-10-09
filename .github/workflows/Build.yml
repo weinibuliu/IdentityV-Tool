@@ -106,6 +106,10 @@ jobs:
       with:
         python-version: '3.12'
 
+    - name: Copy DLL to Python Directory (Only Windows Need)
+      run: |
+        cp .\DLLs\msvcp140.dll ${{ env.Python_ROOT_DIR }}
+
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
