@@ -50,7 +50,7 @@ add_data_param3 = f'{plyer_path}{os.pathsep}plyer'
 
 # 运行 PyInstaller
 PyInstaller.__main__.run([
-    'main.py',
+    './src/main.py',
     '--onefile',
     '--name=IdentityV_Tool',
     f'--add-data={add_data_param}',

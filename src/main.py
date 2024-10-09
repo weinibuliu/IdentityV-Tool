@@ -1,9 +1,9 @@
 from pathlib import Path
 from maa.toolkit import Toolkit
 
-import src.ban as ban
-import src.notice as notice
-import src.fight as fight
+import ban
+import notice
+import fight
 
 #获取路径
 main_path = Path.cwd()
