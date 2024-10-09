@@ -132,7 +132,7 @@ jobs:
     - name: Upload Assets
       uses: actions/upload-artifact@v4.4.1
       with:
-        name: IdentityV_Tool-windows-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
+        name: IVT-windows-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
         path: |
           .\install
 
@@ -193,7 +193,7 @@ jobs:
       - name: Upload Assets
         uses: actions/upload-artifact@v4.4.1
         with:
-          name: IdentityV_Tool-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
+          name: IVT-linux-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
           path: |
             ./install
 
@@ -259,7 +259,7 @@ jobs:
     - name: Upload Assets
       uses: actions/upload-artifact@v4.4.1
       with:
-        name: IdentityV_Tool-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
+        name: IVT-macos-${{ matrix.arch }}-${{ needs.meta.outputs.tag }}
         path: |
           ./install
 

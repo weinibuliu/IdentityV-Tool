@@ -66,6 +66,9 @@ class Fight(CustomAction):
 
         context.override_pipeline({"匹配成功":{"post_delay": 7000, "next": []}})
 
+        if reputation_limit < 0 or reputation_limit > 100:
+            reputation_limit = int(100)
+ 
         def fight_main(character:str):
             fight_start_time = time()
             time_diff = 0
@@ -155,8 +158,8 @@ class Fight(CustomAction):
                     shuffle(character_list)
 
             #flags
-            time_flag  = bool(limit_time)
             weekly_flag = bool(up_weekly)
+            time_flag  = bool(limit_time)
             reputation_flag = bool(reputation_limit)
 
             stop_time = int(0)
