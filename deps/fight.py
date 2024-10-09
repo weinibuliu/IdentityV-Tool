@@ -1,7 +1,7 @@
 from json import load,loads
 from time import sleep,time
 from pathlib import Path
-from random import randint,shuffle
+from random import randint,uniform,shuffle
 
 from maa.context import Context
 from maa.custom_action import CustomAction
@@ -114,7 +114,7 @@ class Fight(CustomAction):
             
             while task_statu != "继续":
                 context.run_pipeline("随机视角移动")
-                sleep(randint(1,3))
+                sleep(uniform(0.2,2))
                 context.run_pipeline("捉迷藏移动与跳跃")
                 task_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
                 if task_statu is not None:
@@ -198,7 +198,7 @@ class Fight(CustomAction):
                         break
 
                     for model in model_list:
-                        if weekly == False or limit_times == False:
+                        if weekly == False or limit_time == False or limit_times == False or reputation_limit == False:
                             break
                         if time_flag != False and real_time >= stop_time:
                             limit_time = False
@@ -213,6 +213,7 @@ class Fight(CustomAction):
                         if model == "匹配模式" or model == "排位模式":
                             fight_main(character)
                         elif model == "捉迷藏":
+                            sleep(2)
                             hide_main()
                         else:
                             raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")

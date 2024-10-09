@@ -354,7 +354,6 @@
         "recognition": "OCR",
         "expected": [
             "准备开始",
-            "准备",
             "开始"
         ],
         "roi": [
