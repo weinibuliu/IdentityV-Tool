@@ -9,8 +9,9 @@ on:
     paths:
       - ".github/**"
       - "config/**"
-      - "src/**"
+      - "deps/**"
       - "res/**"
+      - "Dlls"
 
   pull_request:
     branches:
@@ -18,8 +19,9 @@ on:
     paths:
       - ".github/**"
       - "config/**"
-      - "src/**"
+      - "deps/**"
       - "res/**"
+      - "Dlls"
 
 jobs:
   meta:
