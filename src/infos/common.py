@@ -120,7 +120,8 @@ class Hide_Mixed_Move_Jump(CustomAction):
                         job_statu = job_statu.best_result.text
                         if job_statu == "继续":
                             break
-                if ti == duration_time*10:
+                if ti >= duration_time*10:
+                    ti = 0
                     break
 
         if ti <= duration_time*10:
