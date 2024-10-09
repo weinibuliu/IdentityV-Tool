@@ -46,39 +46,81 @@ class Vision_Move(CustomAction):
 class Hide_Mixed_Move_Jump(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         direction = randint(0,3)
-        context.tasker.controller.post_touch_down(175,515,0,50).wait()
+        context.tasker.controller.post_touch_down(175,515,0,50)
         sleep(0.05)
         match direction:
             case 0:
-                context.tasker.controller.post_touch_move(175,315,0,50).wait()
+                stop_x = 175
+                stop_y = 415
             case 1:
-                context.tasker.controller.post_touch_move(375,515,0,50).wait()
+                stop_x = 275
+                stop_y = 515
             case 2:
-                context.tasker.controller.post_touch_move(175,715,0,50).wait()
+                stop_x = 175
+                stop_y - 615
             case 3:
-                context.tasker.controller.post_touch_move(25,515,0,50).wait()
+                stop_x = 75
+                stop_y = 515
             case _:
                 raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
 
         current_time = int(time())
-        duration_time = current_time + randint(7,10)
+        duration_time = current_time + randint(8,12)
+        
+        click_x = randint(1125,1195)
+        click_y = randint(550,660)
+        if stop_x != 175:
+            if stop_x > 175:
+                stop_x = list(range(175,stop_x))
+            elif stop_x < 175:
+                stop_x = list(range(stop_x,175))
 
-        job_statu = None
-        job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
-        if job_statu is not None:
-            job_statu = job_statu.best_result.text
+            for x in stop_x:
+                context.tasker.controller.post_touch_move(x,515,0,50)
+                i += 1
+                ti += 1
+                sleep(0.1)
+                if i == 20:
+                    context.tasker.controller.post_swipe
+                    context.tasker.controller.post_touch_down(click_x,click_y,1,30)
+                    sleep(0.1)
+                    context.tasker.controller.post_touch_up(contact=1)
+                    i = 0
+                    job_statu = None
+                    job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
+                    if job_statu is not None:
+                        job_statu = job_statu.best_result.text
+                        if job_statu == "继续":
+                            break
+                if ti == duration_time*10:
+                    break
 
-        while int(time()) <= duration_time and job_statu != "继续": #循环跳跃
-            click_x = randint(1125,1195)
-            click_y = randint(550,660)
-            context.tasker.controller.post_touch_down(click_x,click_y,1,30)
-            sleep(0.2)
-            context.tasker.controller.post_touch_up(contact=1)
-            sleep(uniform(0.2,3))
-            job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
-            if job_statu is not None:
-                job_statu = job_statu.best_result.text
+        if stop_y != 515:
+            if stop_y > 515:
+                stop_y = list(range(515,stop_y))
+            elif stop_y < 515:
+                stop_y = list(range(stop_y,515))
 
-        context.tasker.controller.post_touch_up(contact=0).wait()
+            for y in stop_y:
+                context.tasker.controller.post_touch_move(175,y,0,50)
+                i += 1
+                ti += 1
+                sleep(0.1)
+                if i == 20:
+                    context.tasker.controller.post_swipe
+                    context.tasker.controller.post_touch_down(click_x,click_y,1,30)
+                    sleep(0.1)
+                    context.tasker.controller.post_touch_up(contact=1)
+                    i = 0
+                    job_statu = None
+                    job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
+                    if job_statu is not None:
+                        job_statu = job_statu.best_result.text
+                        if job_statu == "继续":
+                            break
+                if ti == duration_time*10:
+                    break
+
+        context.tasker.controller.post_touch_up(contact=0)
 
         return True
