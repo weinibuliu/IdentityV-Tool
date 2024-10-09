@@ -47,7 +47,7 @@ class Hide_Mixed_Move_Jump(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         direction = randint(0,3)
         context.tasker.controller.post_touch_down(175,515,0,50).wait()
-
+        sleep(0.05)
         match direction:
             case 0:
                 context.tasker.controller.post_touch_move(175,315,0,50).wait()

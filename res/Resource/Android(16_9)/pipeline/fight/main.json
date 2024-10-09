@@ -216,30 +216,6 @@
             "获取匹配时间位置"
         ]
     },
-    "fight_捉迷藏变身": {
-        "recognition": "ColorMatch",
-        "lower": [
-            175,
-            180,
-            190
-        ],
-        "upper": [
-            190,
-            200,
-            200
-        ],
-        "conut": 10,
-        "order_by": "Random",
-        "roi": [
-            1180,
-            310,
-            60,
-            60
-        ],
-        "action": "Click",
-        "target": true,
-        "post_delay": 1500
-    },
     "fight_点击监管者": {
         "recognition": "TemplateMatch",
         "template": "fight//点击监管者.png",

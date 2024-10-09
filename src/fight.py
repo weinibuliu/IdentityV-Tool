@@ -109,7 +109,7 @@ class Fight(CustomAction):
             context.run_pipeline("fight_赛后_继续")
 
         def hide_main():
-            context.run_pipeline("fight_捉迷藏变身")
+            context.run_pipeline("捉迷藏变身")
             task_statu = None
             
             while task_statu != "继续":
@@ -121,7 +121,7 @@ class Fight(CustomAction):
                     task_statu = task_statu.best_result.text
                     if task_statu == "继续":
                         break
-                context.run_pipeline("fight_捉迷藏变身")
+                context.run_pipeline("捉迷藏变身")
 
             sleep(5)
             context.run_pipeline("fight_点赞")
