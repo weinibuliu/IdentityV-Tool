@@ -111,8 +111,6 @@ jobs:
     - name: Copy DLL to Python Directory (Only Windows Need)
       run: |
         cp .\DLLs\msvcp140.dll ${{ env.Python_ROOT_DIR }}
-        cp .\DLLs\vcruntime140.dll ${{ env.Python_ROOT_DIR }}
-        cp .\DLLs\vcruntime140_1.dll ${{ env.Python_ROOT_DIR }}
 
     - name: Install Dependencies
       run: |
