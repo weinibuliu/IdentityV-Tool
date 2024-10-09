@@ -50,13 +50,13 @@ class Hide_Mixed_Move_Jump(CustomAction):
 
         match direction:
             case 0:
-                context.tasker.controller.post_touch_move(175,415,0,50)
+                context.tasker.controller.post_touch_move(175,315,0,50)
             case 1:
-                context.tasker.controller.post_touch_move(275,515,0,50)
+                context.tasker.controller.post_touch_move(375,515,0,50)
             case 2:
-                context.tasker.controller.post_touch_move(175,615,0,50)
+                context.tasker.controller.post_touch_move(175,715,0,50)
             case 3:
-                context.tasker.controller.post_touch_move(75,515,0,50)
+                context.tasker.controller.post_touch_move(25,515,0,50)
             case _:
                 raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
 
