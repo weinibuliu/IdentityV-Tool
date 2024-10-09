@@ -46,17 +46,17 @@ class Vision_Move(CustomAction):
 class Hide_Mixed_Move_Jump(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         direction = randint(0,3)
-        context.tasker.controller.post_touch_down(175,515,0,50)
+        context.tasker.controller.post_touch_down(175,515,0,50).wait()
 
         match direction:
             case 0:
-                context.tasker.controller.post_touch_move(175,315,0,50)
+                context.tasker.controller.post_touch_move(175,315,0,50).wait()
             case 1:
-                context.tasker.controller.post_touch_move(375,515,0,50)
+                context.tasker.controller.post_touch_move(375,515,0,50).wait()
             case 2:
-                context.tasker.controller.post_touch_move(175,715,0,50)
+                context.tasker.controller.post_touch_move(175,715,0,50).wait()
             case 3:
-                context.tasker.controller.post_touch_move(25,515,0,50)
+                context.tasker.controller.post_touch_move(25,515,0,50).wait()
             case _:
                 raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
 
@@ -65,6 +65,8 @@ class Hide_Mixed_Move_Jump(CustomAction):
 
         job_statu = None
         job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
+        if job_statu is not None:
+            job_statu = job_statu.best_result.text
 
         while int(time()) <= duration_time and job_statu != "继续": #循环跳跃
             click_x = randint(1125,1195)
@@ -77,6 +79,6 @@ class Hide_Mixed_Move_Jump(CustomAction):
             if job_statu is not None:
                 job_statu = job_statu.best_result.text
 
-        context.tasker.controller.post_touch_up(contact=0)
+        context.tasker.controller.post_touch_up(contact=0).wait()
 
         return True
