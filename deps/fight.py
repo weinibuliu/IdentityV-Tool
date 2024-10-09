@@ -242,6 +242,12 @@ class Fight(CustomAction):
                                     break
                             fight_times_reputation = int(0)
 
+            #notice
+            if desktop_notice == True:
+                context.run_pipeline("桌面通知",pipeline_override={"桌面通知": {"custom_action_param": {"Title": "任务结束提醒","Message": "本次任务已运行结束。"}}})
+            if email_notice == True:
+                context.run_pipeline("邮件通知",pipeline_override={"邮件通知": {"custom_action_param": {"Title": "任务结束提醒","Body": "<p><b>本次任务已运行结束。</b></p>"}}})
+
         main()
         
         return True
