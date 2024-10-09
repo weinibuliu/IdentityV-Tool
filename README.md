@@ -1,6 +1,6 @@
 <div align="center">
 
-# IdentityV-Tools (IVT)
+# IdentityV-Tool (IVT)
 
 **[快速开始](docs/zh-cn/Start/快速开始.md) | [常见问题](docs/zh-cn/Questions/常见问题.md) | [开发文档](docs/zh-cn/Bulid/开发文档.md)**
 
