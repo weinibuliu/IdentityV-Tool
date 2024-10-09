@@ -123,6 +123,9 @@ class Hide_Mixed_Move_Jump(CustomAction):
                 if ti == duration_time*10:
                     break
 
+        if ti <= duration_time*10:
+            sleep(duration_time - ti/10)
+
         context.tasker.controller.post_touch_up(contact=0)
 
         return True
