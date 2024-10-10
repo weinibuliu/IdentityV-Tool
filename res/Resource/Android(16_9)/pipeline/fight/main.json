@@ -7,6 +7,8 @@
         "interrupt": [
             "退出活动公告",
             "退出首充活动",
+            "退出推理之径",
+            "退出个人名片",
             "退出灯火",
             "退出新手活动"
         ]
@@ -81,6 +83,54 @@
         ],
         "action": "Click",
         "target": true
+    },
+    "退出推理之径": {
+        "recognition": "ColorMatch",
+        "lower": [
+            100,
+            110,
+            120
+        ],
+        "upper": [
+            120,
+            130,
+            140
+        ],
+        "order_by": "Random",
+        "roi": [
+            30,
+            25,
+            60,
+            60
+        ],
+        "action": "Click",
+        "target": true,
+        "post_delay": 1000,
+        "next": []
+    },
+    "退出个人名片": {
+        "recognition": "ColorMatch",
+        "lower": [
+            170,
+            150,
+            130
+        ],
+        "upper": [
+            190,
+            170,
+            150
+        ],
+        "roi": [
+            30,
+            20,
+            55,
+            65
+        ],
+        "order_by": "Random",
+        "action": "Click",
+        "target": true,
+        "post_delay": 1000,
+        "next": []
     },
     "退出新手活动": {
         "recognition": "TemplateMatch",
@@ -594,32 +644,8 @@
         "only_rec": true,
         "post_delay": 800,
         "next": [
-            "fight_退出推理之径"
+            "退出推理之径"
         ]
-    },
-    "fight_退出推理之径": {
-        "recognition": "ColorMatch",
-        "lower": [
-            100,
-            110,
-            120
-        ],
-        "upper": [
-            120,
-            130,
-            140
-        ],
-        "order_by": "Random",
-        "roi": [
-            30,
-            25,
-            60,
-            60
-        ],
-        "action": "Click",
-        "target": true,
-        "post_delay": 1000,
-        "next": []
     },
     "fight_检测人品值_打开个人名片": {
         "recognition": "ColorMatch",
@@ -675,32 +701,8 @@
         ],
         "only_rec": true,
         "next": [
-            "fight_退出个人名片"
+            "退出个人名片"
         ]
-    },
-    "fight_退出个人名片": {
-        "recognition": "ColorMatch",
-        "lower": [
-            170,
-            150,
-            130
-        ],
-        "upper": [
-            190,
-            170,
-            150
-        ],
-        "roi": [
-            30,
-            20,
-            55,
-            65
-        ],
-        "order_by": "Random",
-        "action": "Click",
-        "target": true,
-        "post_delay": 1000,
-        "next": []
     },
     "fight_歌剧演员战斗测试": {
         "action": "Custom",
