@@ -618,7 +618,8 @@
         ],
         "action": "Click",
         "target": true,
-        "post_delay": 1000
+        "post_delay": 1000,
+        "next": []
     },
     "fight_检测人品值_打开个人名片": {
         "recognition": "ColorMatch",
@@ -672,7 +673,34 @@
             75,
             35
         ],
-        "only_rec": true
+        "only_rec": true,
+        "next": [
+            "fight_退出个人名片"
+        ]
+    },
+    "fight_退出个人名片": {
+        "recognition": "ColorMatch",
+        "lower": [
+            170,
+            150,
+            130
+        ],
+        "upper": [
+            190,
+            170,
+            150
+        ],
+        "roi": [
+            30,
+            20,
+            55,
+            65
+        ],
+        "order_by": "Random",
+        "action": "Click",
+        "target": true,
+        "post_delay": 1000,
+        "next": []
     },
     "fight_歌剧演员战斗测试": {
         "action": "Custom",
