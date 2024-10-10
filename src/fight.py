@@ -204,14 +204,19 @@ class Fight(CustomAction):
                         if time_flag != False and real_time >= stop_time:
                             limit_time = False
                             break
+                        
+                        if model == "匹配模式" or model == "排位模式":
+                            model = "标准模式"
 
+                        context.override_pipeline({"fight_等待全体玩家准备": {"next":[f"fight_{model}_等待加载"]}})
+                        
                         if thumbs_up == False:
                             context.override_pipeline({"fight_赛后_继续": {"next": ["fight_赛后_返回大厅"]}})
                         else:
                             context.override_pipeline({"fight_点赞": {"custom_action_param": {"model": model}}})
 
                         ready(model,character)
-                        if model == "匹配模式" or model == "排位模式":
+                        if model == "标准模式":
                             fight_main(character)
                         elif model == "捉迷藏":
                             sleep(2)
@@ -257,19 +262,19 @@ class Fight(CustomAction):
 class Thumb_Ups(CustomAction):
     def run(self, context: Context, argv: CustomAction.RunArg) -> bool:
         model = loads(argv.custom_action_param)["model"]
-        if model == "匹配模式" or model == "排位模式":
+        if model == "标准模式":
             gamer_list = [1,2,3,4]
             shuffle(gamer_list)
             for i in gamer_list:
                 match i:
                     case 1:
-                        context.override_pipeline({"标准模式点赞":{"roi": [300,490,45,45]}})
+                        context.override_pipeline({f"{model}点赞":{"roi": [300,490,45,45]}})
                     case 2:
-                        context.override_pipeline({"标准模式点赞":{"roi": [550,490,45,45]}})
+                        context.override_pipeline({f"{model}点赞":{"roi": [550,490,45,45]}})
                     case 3:
-                        context.override_pipeline({"标准模式点赞":{"roi": [805,490,45,45]}})
+                        context.override_pipeline({f"{model}点赞":{"roi": [805,490,45,45]}})
                     case 4:
-                        context.override_pipeline({"标准模式点赞":{"roi": [1075,490,45,45]}})
+                        context.override_pipeline({f"{model}点赞":{"roi": [1075,490,45,45]}})
                     case _:
                         raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
                 context.run_pipeline("标准模式点赞")   
@@ -279,9 +284,9 @@ class Thumb_Ups(CustomAction):
             for i in gamer_list:
                 match i:
                     case 1:
-                        context.override_pipeline({"捉迷藏点赞":{"roi": [235,170,30,35]}})
+                        context.override_pipeline({f"{model}点赞":{"roi": [235,170,30,35]}})
                     case 2:
-                        context.override_pipeline({"捉迷藏点赞":{"roi": [965,170,30,35]}})
+                        context.override_pipeline({f"{model}点赞":{"roi": [965,170,30,35]}})
                     case _:
                         raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
                 context.run_pipeline("捉迷藏点赞") 
