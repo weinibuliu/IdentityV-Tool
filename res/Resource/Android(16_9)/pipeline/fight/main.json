@@ -327,7 +327,7 @@
         ]
     },
     "fight_准备开始": {
-        "timeout": 60000,
+        "timeout": 65000,
         "recognition": "OCR",
         "expected": [
             "准备开始",
@@ -349,7 +349,7 @@
         ]
     },
     "fight_等待全体玩家准备": {
-        "timeout": 40000,
+        "timeout": 45000,
         "rate_limit": 2000,
         "recognition": "OCR",
         "expected": [
@@ -474,7 +474,7 @@
         ]
     },
     "fight_赛后_返回大厅": {
-        "timeout": 25000,
+        "timeout": 30000,
         "recognition": "OCR",
         "expected": [
             "返回",
@@ -493,7 +493,6 @@
         ]
     },
     "fight_赛后_等待加载": {
-        "timeout": 15000,
         "recognition": "TemplateMatch",
         "template": "fight//等待加载.png",
         "roi": [
