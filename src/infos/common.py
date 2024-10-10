@@ -64,8 +64,7 @@ class Hide_Mixed_Move_Jump(CustomAction):
             case _:
                 raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
 
-        current_time = int(time())
-        duration_time = current_time + randint(8,12)
+        duration_time = randint(8,12)
         
         i = 0
         ti = 0
@@ -121,7 +120,6 @@ class Hide_Mixed_Move_Jump(CustomAction):
                         if job_statu == "继续":
                             break
                 if ti >= duration_time*10:
-                    ti = 0
                     break
 
         context.tasker.controller.post_touch_up(contact=0)
