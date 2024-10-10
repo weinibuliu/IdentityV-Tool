@@ -5,7 +5,7 @@
 **[快速开始](docs/zh-cn/Start/快速开始.md) | [常见问题](docs/zh-cn/Questions/常见问题.md) | [开发文档](docs/zh-cn/Bulid/开发文档.md)**
 
 **✨一款包含自动战斗、匹配自动准备的第五人格小工具。✨**\
-由 **[MaaFramework](https://github.com/MaaXYZ/MaaFramework)** 驱动
+**由 [MaaFramework](https://github.com/MaaXYZ/MaaFramework)驱动**
 
 </div>
 
