@@ -548,7 +548,7 @@
         "action": "Click",
         "target": true
     },
-    "fight_检测周上限_打开骰子": {
+    "fight_检测周上限_打开推理之径": {
         "recognition": "ColorMatch",
         "lower": [
             120,
@@ -570,6 +570,7 @@
             55
         ],
         "action": "Click",
+        "post_delay": 800,
         "target": true
     },
     "fight_检测周上限": {
@@ -580,7 +581,34 @@
             70,
             35
         ],
-        "only_rec": true
+        "only_rec": true,
+        "post_delay": 800,
+        "next": [
+            "fight_退出推理之径"
+        ]
+    },
+    "fight_退出推理之径": {
+        "recognition": "ColorMatch",
+        "lower": [
+            100,
+            110,
+            120
+        ],
+        "upper": [
+            120,
+            130,
+            140
+        ],
+        "order_by": "Random",
+        "roi": [
+            30,
+            25,
+            60,
+            60
+        ],
+        "action": "Click",
+        "target": true,
+        "post_delay": 1000
     },
     "fight_检测人品值_打开个人名片": {
         "recognition": "ColorMatch",
@@ -605,6 +633,7 @@
         ],
         "action": "Click",
         "target": true,
+        "post_delay": 800,
         "next": [
             "fight_检测人品值_点击我的战斗"
         ]
@@ -622,7 +651,18 @@
             35
         ],
         "action": "Click",
-        "target": true
+        "target": true,
+        "post_delay": 800
+    },
+    "fight_检测人品值": {
+        "recognition": "OCR",
+        "roi": [
+            540,
+            440,
+            75,
+            35
+        ],
+        "only_rec": true
     },
     "fight_歌剧演员战斗测试": {
         "action": "Custom",

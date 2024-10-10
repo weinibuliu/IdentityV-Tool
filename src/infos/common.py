@@ -64,7 +64,7 @@ class Hide_Mixed_Move_Jump(CustomAction):
             case _:
                 raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
 
-        duration_time = randint(8,12)
+        duration_time = randint(5,8)
         
         i = 0
         ti = 0

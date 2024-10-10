@@ -225,7 +225,7 @@ class Fight(CustomAction):
                         limit_times -= 1
                         
                         if weekly_flag == True and fight_times_weekly == check_weely_rate:
-                            context.run_pipeline("fight_检测周上限_打开骰子")
+                            context.run_pipeline("fight_检测周上限_打开推理之径")
                             weekly_detail = context.run_recognition("fight_检测周上限",context.tasker.controller.cached_image)
                             if weekly_detail is not None:
                                 weekly_detail = weekly_detail.best_result.text
