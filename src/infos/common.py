@@ -57,7 +57,7 @@ class Hide_Mixed_Move_Jump(CustomAction):
                 stop_y = 515
             case 2:
                 stop_x = 175
-                stop_y - 615
+                stop_y = 615
             case 3:
                 stop_x = 75
                 stop_y = 515

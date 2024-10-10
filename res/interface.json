@@ -1,6 +1,6 @@
 {
-    "version": "0.0.1",
-    "message": "\nIVT 是一个免费的开源软件，感谢所有贡献者的付出。\n访问项目地址以获取源码与最新版本。\n\nIVT is a FREE software.Thanks for all contributors.\nVisit the project url to get source code or lateset releases.\n\n项目地址/Project url: www.github.com/weinibuliu/IdentityV_Tool\n",
+    "version": "0.1",
+    "message": "\nIVT 是一个免费的开源软件，感谢所有贡献者的付出。\n访问项目地址以获取源码与最新版本。\n\nIVT is a FREE software.Thanks for all contributors.\nVisit the project url to get source code or lateset releases.\n\n项目地址/Project url: www.github.com/weinibuliu/IdentityV-Tool\n",
     "controller": [
         {
             "name": "PC 端",
