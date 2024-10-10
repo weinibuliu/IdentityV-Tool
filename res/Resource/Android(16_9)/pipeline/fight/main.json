@@ -461,16 +461,16 @@
             55
         ],
         "action": "Click",
-        "target": true,
-        "next": [
-            "fight_点赞"
-        ]
+        "target": true
     },
     "fight_点赞": {
         "action": "Custom",
         "custom_action": "Thumb_Ups",
         "next": [
             "fight_赛后_返回大厅"
+        ],
+        "interrupt": [
+            "fight_赛后_继续"
         ]
     },
     "fight_赛后_返回大厅": {

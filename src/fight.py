@@ -107,21 +107,21 @@ class Fight(CustomAction):
                 context.run_pipeline("fight_打开设置")
 
             context.run_pipeline("fight_赛后_继续")
+            context.run_pipeline("fight_点赞")
 
         def hide_main():
             context.run_pipeline("捉迷藏变身")
             task_statu = None
             
-            while task_statu != "继续":
+            while task_statu is None and task_statu != "继续":
                 context.run_pipeline("随机视角移动")
-                sleep(uniform(0.2,2))
                 context.run_pipeline("捉迷藏移动与跳跃")
                 task_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
-                context.run_pipeline("随机视角移动")
                 if task_statu is not None:
                     task_statu = task_statu.best_result.text
                     if task_statu == "继续":
                         break
+                context.run_pipeline("随机视角移动")
                 context.run_pipeline("捉迷藏变身")
 
             sleep(5)
