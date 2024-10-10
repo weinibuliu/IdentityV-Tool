@@ -7,7 +7,7 @@ on:
     tags:
       - "v*"
     paths:
-      - ".github/**"
+      - ".github/workflows/**"
       - "config/**"
       - "src/**"
       - "res/**"
@@ -17,7 +17,7 @@ on:
     branches:
       - "**"
     paths:
-      - ".github/**"
+      - ".github/workflows/**"
       - "config/**"
       - "src/**"
       - "res/**"
