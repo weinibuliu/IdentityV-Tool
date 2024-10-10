@@ -230,24 +230,24 @@ class Fight(CustomAction):
                         limit_times -= 1
                         
                         if weekly_flag == True and fight_times_weekly == check_weely_rate:
+                            fight_times_weekly = int(0)
                             context.run_pipeline("fight_检测周上限_打开推理之径")
                             weekly_detail = context.run_recognition("fight_检测周上限",context.tasker.controller.cached_image)
-                            if weekly_detail is not None:
-                                weekly_detail = weekly_detail.best_result.text
-                                if weekly_detail == "42000" or weekly_detail == "50400":
-                                    weekly = bool(False)
-                                    break
-                            fight_times_weekly = int(0)
-                            
+                            context.run_pipeline("退出推理之径")
+                            if weekly_detail is not None and int(weekly_detail.best_result.text) == 42000 or int(weekly_detail.best_result.text) == 50400:
+                                sleep(0.5)
+                                weekly = bool(False)
+                                break
+
                         if reputation_flag != False and fight_times_reputation == check_reputation_rate:
+                            fight_times_reputation = int(0)
                             context.run_pipeline("fight_检测人品值_打开个人名片")
                             reputation_detail = context.run_recognition("fight_检测人品值",context.tasker.controller.cached_image)
-                            if reputation_detail is not None:
-                                reputation_detail = int(reputation_detail.best_result.text)
-                                if reputation_detail <= reputation_limit:
-                                    reputation_limit = bool(False)
-                                    break
-                            fight_times_reputation = int(0)
+                            context.run_pipeline("退出个人名片")
+                            if reputation_detail is not None and int(reputation_detail.best_result.text) <= reputation_limit:
+                                sleep(0.5)
+                                reputation_limit = bool(False)
+                                break
 
             #notice
             if desktop_notice == True:

@@ -630,7 +630,7 @@
             55
         ],
         "action": "Click",
-        "post_delay": 800,
+        "post_delay": 400,
         "target": true
     },
     "fight_检测周上限": {
@@ -641,11 +641,7 @@
             70,
             35
         ],
-        "only_rec": true,
-        "post_delay": 800,
-        "next": [
-            "退出推理之径"
-        ]
+        "only_rec": true
     },
     "fight_检测人品值_打开个人名片": {
         "recognition": "ColorMatch",
@@ -670,7 +666,7 @@
         ],
         "action": "Click",
         "target": true,
-        "post_delay": 800,
+        "post_delay": 400,
         "next": [
             "fight_检测人品值_点击我的战斗"
         ]
@@ -689,7 +685,7 @@
         ],
         "action": "Click",
         "target": true,
-        "post_delay": 800
+        "post_delay": 400
     },
     "fight_检测人品值": {
         "recognition": "OCR",
@@ -699,11 +695,7 @@
             75,
             35
         ],
-        "only_rec": true,
-        "post_delay": 800,
-        "next": [
-            "退出个人名片"
-        ]
+        "only_rec": true
     },
     "fight_歌剧演员战斗测试": {
         "action": "Custom",
