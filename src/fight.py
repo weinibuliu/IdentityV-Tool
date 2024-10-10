@@ -234,7 +234,7 @@ class Fight(CustomAction):
                             weekly_detail = context.run_recognition("fight_检测周上限",context.tasker.controller.cached_image)
                             if weekly_detail is not None:
                                 weekly_detail = weekly_detail.best_result.text
-                                if weekly_detail == "42000" or weekly_detail =="50400":
+                                if weekly_detail == "42000" or weekly_detail == "50400":
                                     weekly = bool(False)
                                     break
                             fight_times_weekly = int(0)
@@ -243,7 +243,7 @@ class Fight(CustomAction):
                             context.run_pipeline("fight_检测人品值_打开个人名片")
                             reputation_detail = context.run_recognition("fight_检测人品值",context.tasker.controller.cached_image)
                             if reputation_detail is not None:
-                                reputation_detail = reputation_detail.best_result.text
+                                reputation_detail = int(reputation_detail.best_result.text)
                                 if reputation_detail <= reputation_limit:
                                     reputation_limit = bool(False)
                                     break

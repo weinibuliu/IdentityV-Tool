@@ -31,15 +31,15 @@ class Vision_Move(CustomAction):
         def move(direction:int,duration:int):
             match direction:
                 case 0: #向左移动视角
-                    context.override_pipeline({"基础视角移动":{"end": [470,255,10,10], "duration": duration}})
+                    context.override_pipeline({"基础视角移动":{"end": [370,255,10,10], "duration": duration}})
                 case 1 : #向右移动视角
-                    context.override_pipeline({"基础视角移动":{"end": [870,255,10,10], "duration": duration}})
+                    context.override_pipeline({"基础视角移动":{"end": [970,255,10,10], "duration": duration}})
                 case _:
                     raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
             context.run_pipeline("基础视角移动")
 
         direction = randint(0,1)
-        move(direction,1500)
+        move(direction,1000)
         
         return True
 
@@ -82,18 +82,17 @@ class Hide_Mixed_Move_Jump(CustomAction):
                 ti += 1
                 sleep(0.1)
                 if i == 20:
-                    context.tasker.controller.post_swipe
-                    context.tasker.controller.post_touch_down(click_x,click_y,1,30)
-                    sleep(0.1)
-                    context.tasker.controller.post_touch_up(contact=1)
-                    i = 0
-                    job_statu = None
                     job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
                     if job_statu is not None:
                         job_statu = job_statu.best_result.text
                         if job_statu == "继续":
                             break
-                if ti == duration_time*10:
+                    context.tasker.controller.post_touch_down(click_x,click_y,1,30)
+                    sleep(0.1)
+                    context.tasker.controller.post_touch_up(contact=1)
+                    i = 0
+                    job_statu = None
+                if ti >= duration_time*10:
                     break
 
         if stop_y != 515:
@@ -108,17 +107,16 @@ class Hide_Mixed_Move_Jump(CustomAction):
                 ti += 1
                 sleep(0.1)
                 if i == 20:
-                    context.tasker.controller.post_swipe
-                    context.tasker.controller.post_touch_down(click_x,click_y,1,30)
-                    sleep(0.1)
-                    context.tasker.controller.post_touch_up(contact=1)
-                    i = 0
                     job_statu = None
                     job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
                     if job_statu is not None:
                         job_statu = job_statu.best_result.text
                         if job_statu == "继续":
                             break
+                    context.tasker.controller.post_touch_down(click_x,click_y,1,30)
+                    sleep(0.1)
+                    context.tasker.controller.post_touch_up(contact=1)
+                    i = 0
                 if ti >= duration_time*10:
                     break
 
