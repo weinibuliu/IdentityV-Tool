@@ -121,7 +121,7 @@ class Fight(CustomAction):
                     task_statu = task_statu.best_result.text
                     if task_statu == "继续":
                         break
-                context.run_pipeline("随机视角移动")
+                context.run_pipeline("捉迷藏移动与跳跃")
                 context.run_pipeline("捉迷藏变身")
 
             sleep(5)
