@@ -229,7 +229,7 @@ class Fight(CustomAction):
                         fight_times_reputation += 1
                         limit_times -= 1
                         
-                        if weekly_flag == True and fight_times_weekly == check_weely_rate:
+                        if weekly_flag != False and fight_times_weekly == check_weely_rate:
                             fight_times_weekly = int(0)
                             context.run_pipeline("fight_检测周上限_打开推理之径")
                             sleep(0.5)

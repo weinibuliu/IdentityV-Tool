@@ -83,10 +83,8 @@ class Hide_Mixed_Move_Jump(CustomAction):
                 sleep(0.1)
                 if i == 20:
                     job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
-                    if job_statu is not None:
-                        job_statu = job_statu.best_result.text
-                        if job_statu == "继续":
-                            break
+                    if job_statu is not None and job_statu.best_result.text == "继续":
+                        break
                     context.tasker.controller.post_touch_down(click_x,click_y,1,30)
                     sleep(0.1)
                     context.tasker.controller.post_touch_up(contact=1)
@@ -109,10 +107,8 @@ class Hide_Mixed_Move_Jump(CustomAction):
                 if i == 20:
                     job_statu = None
                     job_statu = context.run_recognition("fight_赛后_继续_仅识别",context.tasker.controller.cached_image)
-                    if job_statu is not None:
-                        job_statu = job_statu.best_result.text
-                        if job_statu == "继续":
-                            break
+                    if job_statu is not None and job_statu.best_result.text == "继续":
+                        break
                     context.tasker.controller.post_touch_down(click_x,click_y,1,30)
                     sleep(0.1)
                     context.tasker.controller.post_touch_up(contact=1)
