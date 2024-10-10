@@ -581,33 +581,6 @@
         "target": true,
         "post_delay": 1500
     },
-    "fight_点击个人名片": {
-        "recognition": "TemplateMatch",
-        "template": "fight//个人名片.png",
-        "roi": [
-            990,
-            20,
-            70,
-            55
-        ],
-        "action": "Click",
-        "target": true
-    },
-    "fight_点击我的战斗": {
-        "recognition": "OCR",
-        "expected": [
-            "我的战斗",
-            "战斗"
-        ],
-        "roi": [
-            0,
-            190,
-            140,
-            50
-        ],
-        "action": "Click",
-        "target": true
-    },
     "fight_检测周上限_打开推理之径": {
         "recognition": "ColorMatch",
         "lower": [
@@ -631,7 +604,8 @@
         ],
         "action": "Click",
         "post_delay": 400,
-        "target": true
+        "target": true,
+        "next": []
     },
     "fight_检测周上限": {
         "recognition": "OCR",
