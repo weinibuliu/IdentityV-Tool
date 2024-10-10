@@ -425,7 +425,7 @@
             100,
             100
         ],
-        "post_delay": 6500,
+        "post_delay": 7000,
         "inverse": true
     },
     "fight_捉迷藏_等待加载": {
@@ -438,7 +438,7 @@
             100,
             100
         ],
-        "post_delay": 3000,
+        "post_delay": 4000,
         "inverse": true
     },
     "fight_打开设置": {

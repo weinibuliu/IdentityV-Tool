@@ -133,18 +133,15 @@ class Fight(CustomAction):
             sleep(0.5)
             context.run_pipeline(f"fight_{model}")
             sleep(0.5)
-            if model == "匹配模式" or model == "排位模式":
+            if model == "标准模式":
                 context.run_pipeline("fight_点击监管者")
                 sleep(0.5)
                 context.run_pipeline("fight_开始匹配")
-                if model == "排位模式":
-                    context.run_pipeline("确认禁用")
+                context.run_pipeline("确认禁用",pipeline_override={"确认禁用": {"timeout": 3000}})
                 context.override_pipeline({"fight_选择角色":{"template":f"characters//{character}.png"}})
                 context.run_pipeline("fight_切换角色")
-
             elif model == "捉迷藏":
                 context.run_pipeline("fight_准备开始")
-
             else:
                 raise ValueError(f"Class Error:{__class__.__name__},please contact to the developers.")
 

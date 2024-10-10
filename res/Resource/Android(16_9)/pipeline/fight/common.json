@@ -40,8 +40,25 @@
         "next": [],
         "on_error": []
     },
+    "捉迷藏点赞": {
+        "recognition": "ColorMatch",
+        "lower": [
+            105,
+            105,
+            105
+        ],
+        "upper": [
+            135,
+            135,
+            145
+        ],
+        "conut": 10,
+        "order_by": "Random",
+        "action": "Click",
+        "target": true
+    },
     "捉迷藏变身": {
-        "timeout": 7000,
+        "timeout": 4000,
         "recognition": "ColorMatch",
         "lower": [
             175,
@@ -62,27 +79,12 @@
         ],
         "action": "Click",
         "target": true,
-        "post_delay": 1500
+        "post_delay": 200,
+        "ion_error": [],
+        "next": []
     },
     "捉迷藏移动与跳跃": {
         "action": "Custom",
         "custom_action": "Hide_Mixed_Move_Jump"
-    },
-    "捉迷藏点赞": {
-        "recognition": "ColorMatch",
-        "lower": [
-            105,
-            105,
-            105
-        ],
-        "upper": [
-            135,
-            135,
-            145
-        ],
-        "conut": 10,
-        "order_by": "Random",
-        "action": "Click",
-        "target": true
     }
 }
